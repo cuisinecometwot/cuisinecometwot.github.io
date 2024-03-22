@@ -76,6 +76,7 @@ li img {
 
 /* =========================================================
  * default settings      　   /*デフォルトセッティング
+ #f34334 #fcefe8
 ========================================================= */
 html {
   font-size: 62.5%; }
@@ -363,13 +364,13 @@ main {
                 margin-top: 0; }
               .header--inner--gnav ul li.navtrigger.senior .largemenu--inner--wrap--box:nth-of-type(n+5) {
                 margin-top: 20px; }
-          .header--inner--gnav ul li:last-child {
+          /*.header--inner--gnav ul li:last-child {
             border-left: none;
             max-width: 130px; }
             .header--inner--gnav ul li:last-child a {
               padding: 0; }
             .header--inner--gnav ul li:last-child.soon {
-              opacity: .5; }
+              opacity: .5; }*/
           .header--inner--gnav ul li.soon a {
             color: #c8cacb;
             pointer-events: none; }
@@ -388,7 +389,7 @@ main {
   .page main .main--inner--commontri {
     width: 505px;
     height: 239px;
-    background: url("../images/common/img-tri-under.png") no-repeat 0 0;
+    /*background: url("../images/common/img-tri-under.png") no-repeat 0 0;*/
     position: absolute;
     right: 2%;
     bottom: -30px; }
@@ -440,7 +441,7 @@ main {
 
 .footer--upper {
   padding: 120px 0 88px 0;
-  background: url("../images/common/img-footer-pic.png") no-repeat center center/cover;
+  /*background: url("../images/common/img-footer-pic.png") no-repeat center center/cover;*/
   text-align: center; }
   .footer--upper h2 {
     line-height: 1.0;
@@ -523,10 +524,11 @@ main {
           display: block;
           width: 100%;
           height: 100%;
+          flex-direction: column;
           text-decoration: none;
           color: #f34334;
           display: flex;
-          align-items: center;
+          align-items: left;
           justify-content: space-between; }
           .footer--under--inner--left--logo a h1 {
             max-width: 113px;
@@ -1099,7 +1101,7 @@ main {
         background-size: cover; }
         .top main #main .slideshow li img {
           display: none; }
-        .top main #main .slideshow li:nth-of-type(1) {
+        /*.top main #main .slideshow li:nth-of-type(1) {
           background-image: url("../images/top/img-slide01_pc.png"); }
         .top main #main .slideshow li:nth-of-type(2) {
           background-image: url("../images/top/img-slide02_pc.png"); }
@@ -1108,7 +1110,7 @@ main {
         .top main #main .slideshow li:nth-of-type(4) {
           background-image: url("../images/top/img-slide04_pc.png"); }
         .top main #main .slideshow li:nth-of-type(5) {
-          background-image: url("../images/top/img-slide05_pc.png"); }
+          background-image: url("../images/top/img-slide05_pc.png"); }*/
   .top main .news {
     width: 100%;
     bottom: 0;
@@ -1147,7 +1149,7 @@ main {
   .top main .message {
     margin-top: 20px;
     padding: 80px 0 140px 0;
-    background: url("../images/top/img_top01.png") no-repeat center bottom/cover; }
+    /*background: url("../images/top/img_top01.png") no-repeat center bottom/cover;*/ }
     .top main .message--inner {
       text-align: center;
       color: #fff; }
@@ -1277,7 +1279,7 @@ main {
           pointer-events: none;
           opacity: .4; }
     .top main .contents.topmessage {
-      background-image: url("../images/top/img_top02.png"); }
+      /*background-image: url("../images/top/img_top02.png"); */}
       .top main .contents.topmessage .contents--inner {
         color: #f34334; }
         .top main .contents.topmessage .contents--inner h3 {
@@ -1292,7 +1294,7 @@ main {
           color: #f34334; }
           .top main .contents.topmessage .contents--inner--more a:hover {
             color: #fff; }
-    .top main .contents.company {
+    /*.top main .contents.company {
       background-image: url("../images/top/img_top03.png"); }
     .top main .contents.business {
       background-image: url("../images/top/img_top04.png"); }
@@ -1303,7 +1305,7 @@ main {
     .top main .contents.special {
       background-image: url("../images/top/img_top07.png"); }
     .top main .contents.recruit {
-      background-image: url("../images/top/img_top08.png"); }
+      background-image: url("../images/top/img_top08.png"); }*/
   .top main .footer {
     margin-top: 140px; }
 
@@ -1456,7 +1458,7 @@ main {
             background-size: cover; }
             .top main #main .slideshow li img {
               display: none; }
-            .top main #main .slideshow li:nth-of-type(1) {
+            /*.top main #main .slideshow li:nth-of-type(1) {
               background-image: url("../images/top/img-slide01_sp.png"); }
             .top main #main .slideshow li:nth-of-type(2) {
               background-image: url("../images/top/img-slide02_sp.png"); }
@@ -1465,7 +1467,7 @@ main {
             .top main #main .slideshow li:nth-of-type(4) {
               background-image: url("../images/top/img-slide04_sp.png"); }
             .top main #main .slideshow li:nth-of-type(5) {
-              background-image: url("../images/top/img-slide05_sp.png"); }
+              background-image: url("../images/top/img-slide05_sp.png"); }*/
       .top main .news {
         padding: 15px 0; }
         .top main .news--inner--text {
@@ -1582,7 +1584,7 @@ main {
     min-width: 1010px; }
     .i00 main .main--inner {
       position: relative;
-      background: url("../images/interview/00/img-main.png") no-repeat center center/cover; }
+      /*background: url("../images/interview/00/img-main.png") no-repeat center center/cover; */}
       .i00 main .main--inner:before {
         content: '';
         display: block;
@@ -1679,7 +1681,7 @@ main {
           position: absolute;
           width: 193px;
           height: 92px;
-          background: url("../images/interview/00/img-tri-under.png") no-repeat 0 0;
+          /*background: url("../images/interview/00/img-tri-under.png") no-repeat 0 0;*/
           right: 0;
           bottom: -1px; }
           .i00 main .box--inner--commontri--wrap {
@@ -1749,7 +1751,7 @@ main {
         .interview main .main--inner--profile--contents .tri {
           width: 505px;
           height: 239px;
-          background: url("../images/interview/common/img-tri-under.png") no-repeat 0 0;
+          /*background: url("../images/interview/common/img-tri-under.png") no-repeat 0 0;*/
           position: relative; }
           .interview main .main--inner--profile--contents .tri dl {
             color: #fff;
@@ -1878,7 +1880,7 @@ main {
     .interview main .under-image img {
       width: 100%; }
   .interview main .schedule {
-    background-color: #f1faff;
+    background-color: #fcefe8;
     margin-top: 98px;
     position: relative;
     padding: 35px 0 80px 0; }
@@ -1888,7 +1890,7 @@ main {
       z-index: 1;
       width: 94px;
       height: 44px;
-      background: url("../images/interview/common/img-tri-upper.png") no-repeat 0 0;
+      /*background: url("../images/interview/common/img-tri-upper.png") no-repeat 0 0;*/
       left: 30px;
       top: -13px; }
     .interview main .schedule--inner {
@@ -2296,7 +2298,7 @@ main {
       position: absolute;
       width: 150px;
       height: 92px;
-      background: url("../images/interview/00/img-tri-under.png") no-repeat 0 0;
+      /*background: url("../images/interview/00/img-tri-under.png") no-repeat 0 0;*/
       right: 0;
       bottom: -1px; }
       .i00 main .box--inner--commontri--wrap {
@@ -2331,7 +2333,7 @@ main {
       .interview main .main--inner--profile--contents .tri {
         width: 252px;
         height: 119px;
-        background: url("../images/interview/common/img-tri-under.png") no-repeat 0 0/cover; }
+        /*background: url("../images/interview/common/img-tri-under.png") no-repeat 0 0/cover; */}
         .interview main .main--inner--profile--contents .tri dl {
           bottom: 12%;
           right: 3%; }
@@ -2539,20 +2541,20 @@ main {
     .value main .main:before {
       width: 210px;
       height: 99px;
-      background: url("../images/value/img-tri01.png") no-repeat 0 0;
+      /*background: url("../images/value/img-tri01.png") no-repeat 0 0;*/
       top: 11.28%;
       left: 10.17%;
       mix-blend-mode: soft-light; }
     .value main .main:after {
       width: 336px;
       height: 159px;
-      background: url("../images/value/img-tri02.png") no-repeat 0 0;
+      /*background: url("../images/value/img-tri02.png") no-repeat 0 0;*/
       right: 28px;
       bottom: -28px; }
     .value main .main--inner {
       position: relative;
       width: 100%;
-      background: url("../images/value/img-main.png") no-repeat center center/cover; }
+      /*background: url("../images/value/img-main.png") no-repeat center center/cover;*/ }
       .value main .main--inner:before {
         content: '';
         display: block;
@@ -2796,10 +2798,10 @@ main {
           transition: all .8s ease-out;
           overflow: hidden; }
         .value main .number--contents.num05 .number--contents--inner--groupwrap:before {
-          background: url("../images/value/img-town-left.png") no-repeat 0 90px;
+          /*background: url("../images/value/img-town-left.png") no-repeat 0 90px;*/
           left: -1px; }
         .value main .number--contents.num05 .number--contents--inner--groupwrap:after {
-          background: url("../images/value/img-town-right.png") no-repeat 0 90px;
+          /*background: url("../images/value/img-town-right.png") no-repeat 0 90px;*/
           right: -1px; }
         .value main .number--contents.num05 .number--contents--inner--groupwrap .num {
           line-height: 1.0;
@@ -2832,9 +2834,9 @@ main {
             .value main .number--contents.num05 .number--contents--inner--groupwrap ul li.active {
               opacity: 1; }
         .value main .number--contents.num05 .number--contents--inner--groupwrap.active:before {
-          background: url("../images/value/img-town-left.png") no-repeat 0 0; }
+          /*background: url("../images/value/img-town-left.png") no-repeat 0 0; */}
         .value main .number--contents.num05 .number--contents--inner--groupwrap.active:after {
-          background: url("../images/value/img-town-right.png") no-repeat 0 0; }
+          /*background: url("../images/value/img-town-right.png") no-repeat 0 0; */}
       .value main .number--contents.num05 .number--contents--inner--worldgroup {
         margin-top: 55px;
         text-align: center; }
@@ -2944,10 +2946,10 @@ main {
     .value main .number--contents.num05 .number--contents--inner--groupwrap:before, .value main .number--contents.num05 .number--contents--inner--groupwrap:after {
       width: 213px; }
     .value main .number--contents.num05 .number--contents--inner--groupwrap:before {
-      background: url("../images/value/img-town-left.png") no-repeat left 90px/cover;
+      /*background: url("../images/value/img-town-left.png") no-repeat left 90px/cover;*/
       left: -1px; }
     .value main .number--contents.num05 .number--contents--inner--groupwrap:after {
-      background: url("../images/value/img-town-right.png") no-repeat right 90px/cover;
+      /*background: url("../images/value/img-town-right.png") no-repeat right 90px/cover;*/
       right: -1px; }
     .value main .number--contents.num05 .number--contents--inner--groupwrap .num {
       font-size: 10.6rem; }
@@ -2955,9 +2957,9 @@ main {
       padding: 0 5%;
       line-height: 1.4; }
     .value main .number--contents.num05 .number--contents--inner--groupwrap.active:before {
-      background: url("../images/value/img-town-left.png") no-repeat left 0/cover; }
+      /*background: url("../images/value/img-town-left.png") no-repeat left 0/cover; */}
     .value main .number--contents.num05 .number--contents--inner--groupwrap.active:after {
-      background: url("../images/value/img-town-right.png") no-repeat right 0/cover; }
+      /*background: url("../images/value/img-town-right.png") no-repeat right 0/cover; */}
     .value main .number--contents.num05 .number--contents--inner--worldgroup--wrap .text {
       line-height: 1.4;
       font-size: 2.4rem;
@@ -2979,13 +2981,13 @@ main {
     .value main .main:before {
       width: 105px;
       height: 50px;
-      background: url("../images/value/img-tri01.png") no-repeat 0 0/cover;
+      /*background: url("../images/value/img-tri01.png") no-repeat 0 0/cover;*/
       top: 11.28%;
       left: 5.17%; }
     .value main .main:after {
       width: 168px;
       height: 80px;
-      background: url("../images/value/img-tri02.png") no-repeat 0 0/cover;
+      /*background: url("../images/value/img-tri02.png") no-repeat 0 0/cover;*/
       right: 14px;
       bottom: -14px; }
     .value main .main--inner:before {
@@ -3125,10 +3127,10 @@ main {
           height: 45px;
           top: -45px; }
         .value main .number--contents.num05 .number--contents--inner--groupwrap:before {
-          background: url("../images/value/img-town-left.png") no-repeat left 45px/cover;
+          /*background: url("../images/value/img-town-left.png") no-repeat left 45px/cover;*/
           left: -1px; }
         .value main .number--contents.num05 .number--contents--inner--groupwrap:after {
-          background: url("../images/value/img-town-right.png") no-repeat right 45px/cover;
+          /*background: url("../images/value/img-town-right.png") no-repeat right 45px/cover;*/
           right: -1px; }
         .value main .number--contents.num05 .number--contents--inner--groupwrap .num {
           font-size: 20vw;
@@ -3151,9 +3153,9 @@ main {
           .value main .number--contents.num05 .number--contents--inner--groupwrap ul li:nth-of-type(n+4) {
             margin-top: 10px; }
         .value main .number--contents.num05 .number--contents--inner--groupwrap.active:before {
-          background: url("../images/value/img-town-left.png") no-repeat left 0/cover; }
+          /*background: url("../images/value/img-town-left.png") no-repeat left 0/cover; */}
         .value main .number--contents.num05 .number--contents--inner--groupwrap.active:after {
-          background: url("../images/value/img-town-right.png") no-repeat right 0/cover; }
+          /*background: url("../images/value/img-town-right.png") no-repeat right 0/cover; */}
       .value main .number--contents.num05 .number--contents--inner--worldgroup {
         margin-top: 25px; }
         .value main .number--contents.num05 .number--contents--inner--worldgroup--wrap {
@@ -3192,7 +3194,7 @@ main {
   position: relative;
   width: 100%;
   min-height: 320px;
-  background: url("../images/message/img-main01.jpg") no-repeat center center/cover; }
+  /*background: url("../images/message/img-main01.jpg") no-repeat center center/cover;*/ }
   .message main .main--inner:before {
     content: '';
     display: block;
@@ -3322,7 +3324,7 @@ main {
       margin-top: 40px; } }
 .crosstalk main .main--inner {
   position: relative;
-  background: url("../images/crosstalk/img_crosstalk_main@2x.png") no-repeat center center/cover; }
+  /*background: url("../images/crosstalk/img_crosstalk_main@2x.png") no-repeat center center/cover; */}
   .crosstalk main .main--inner:before {
     content: '';
     display: block;
@@ -3521,20 +3523,20 @@ main {
   .special main .main:before {
     width: 210px;
     height: 99px;
-    background: url("../images/special/img_special_tri.png") no-repeat 0 0;
+    /*background: url("../images/special/img_special_tri.png") no-repeat 0 0;*/
     top: 11.28%;
     left: 10.17%;
     mix-blend-mode: soft-light; }
   .special main .main:after {
     width: 336px;
     height: 159px;
-    background: url("../images/value/img-tri02.png") no-repeat 0 0;
+    /*background: url("../images/value/img-tri02.png") no-repeat 0 0;*/
     right: 28px;
     bottom: -28px; }
   .special main .main--inner {
     position: relative;
     width: 100%;
-    background: url("../images/special/img_main@2x.png") no-repeat center center/cover; }
+    /*background: url("../images/special/img_main@2x.png") no-repeat center center/cover; */}
     .special main .main--inner:before {
       content: '';
       display: block;
@@ -3719,7 +3721,7 @@ main {
       margin-top: 20px; }
   .special main .contents--special:not(:nth-of-type(1)) {
     margin-top: 70px; }
-  .special main .contents--special:nth-of-type(1) .contents--special--main {
+  /*.special main .contents--special:nth-of-type(1) .contents--special--main {
     background-image: url("../images/special/img_special01.png"); }
   .special main .contents--special:nth-of-type(2) .contents--special--main {
     background-image: url("../images/special/img_special02.png"); }
@@ -3728,7 +3730,7 @@ main {
   .special main .contents--special:nth-of-type(4) .contents--special--main {
     background-image: url("../images/special/img_special04.png"); }
   .special main .contents--special:nth-of-type(5) .contents--special--main {
-    background-image: url("../images/special/img_special05.png"); }
+    background-image: url("../images/special/img_special05.png"); }*/
 
 .fade,
 .fadein,
@@ -3767,13 +3769,13 @@ main {
     .special main .main:before {
       width: 105px;
       height: 50px;
-      background: url("../images/special/img_special_tri.png") no-repeat 0 0/cover;
+      /*background: url("../images/special/img_special_tri.png") no-repeat 0 0/cover;*/
       top: 11.28%;
       left: 5.17%; }
     .special main .main:after {
       width: 168px;
       height: 80px;
-      background: url("../images/value/img-tri02.png") no-repeat 0 0/cover;
+      /*background: url("../images/value/img-tri02.png") no-repeat 0 0/cover;*/
       right: 14px;
       bottom: -14px; }
     .special main .main--inner:before {
@@ -4009,7 +4011,7 @@ main {
     margin-top: 130px; }
     .project main .contents--session--lastimage img {
       width: 100%; }
-
+/*
 .p01 main .main--inner {
   background: url("../images/project/01/img_project_main@2x.png") no-repeat center center/cover; }
 
@@ -4017,7 +4019,7 @@ main {
   background: url("../images/project/02/img_project_main@2x.png") no-repeat center center/cover; }
 
 .p03 main .main--inner {
-  background: url("../images/project/03/img_project_main@2x.png") no-repeat center center/cover; }
+  background: url("../images/project/03/img_project_main@2x.png") no-repeat center center/cover; }*/
 .p03 main .members {
   max-width: 1080px;
   min-width: 980px;
@@ -4131,20 +4133,20 @@ main {
     .business main .main:before {
       width: 210px;
       height: 99px;
-      background: url("../images/value/img-tri01.png") no-repeat 0 0;
+      /*background: url("../images/value/img-tri01.png") no-repeat 0 0;*/
       top: 11.28%;
       left: 10.17%;
       mix-blend-mode: soft-light; }
     .business main .main:after {
       width: 336px;
       height: 159px;
-      background: url("../images/value/img-tri02.png") no-repeat 0 0;
+      /*background: url("../images/value/img-tri02.png") no-repeat 0 0;*/
       right: 28px;
       bottom: -28px; }
     .business main .main--inner {
       position: relative;
       width: 100%;
-      background: url("../images/business/img-main.png") no-repeat center center/cover; }
+      /*background: url("../images/business/img-main.png") no-repeat center center/cover;*/ }
       .business main .main--inner:before {
         content: '';
         display: block;
@@ -4298,10 +4300,10 @@ main {
           color: #403f41; }
         .business main .contents--text--wrap--box:not(:nth-of-type(1)) {
           margin-top: 40px; }
-    .business main .contents#business01 .contents--main {
+    /*.business main .contents#business01 .contents--main {
       background-image: url("../images/business/img-back01.png"); }
     .business main .contents#business02 .contents--main {
-      background-image: url("../images/business/img-back02.png"); }
+      background-image: url("../images/business/img-back02.png"); }*/
     .business main .contents#business02 .contents--text--wrap {
       display: -webkit-flex;
       display: -moz-flex;
@@ -4318,8 +4320,8 @@ main {
         margin-top: 0; }
         .business main .contents#business02 .contents--text--wrap--box:nth-of-type(2) .image {
           min-width: 218px; }
-    .business main .contents#business03 .contents--main {
-      background-image: url("../images/business/img-back03.png"); }
+    /*.business main .contents#business03 .contents--main {
+      background-image: url("../images/business/img-back03.png"); }*/
 
 @media screen and (max-width: 768px) {
   .business main .main--inner--title h3 {
@@ -4347,13 +4349,13 @@ main {
     .business main .main:before {
       width: 105px;
       height: 50px;
-      background: url("../images/value/img-tri01.png") no-repeat 0 0/cover;
+      /*background: url("../images/value/img-tri01.png") no-repeat 0 0/cover;*/
       top: 11.28%;
       left: 5.17%; }
     .business main .main:after {
       width: 168px;
       height: 80px;
-      background: url("../images/value/img-tri02.png") no-repeat 0 0/cover;
+      /*background: url("../images/value/img-tri02.png") no-repeat 0 0/cover;*/
       right: 14px;
       bottom: -14px; }
     .business main .main--inner:before {
@@ -4477,20 +4479,20 @@ main {
     .info main .main:before {
       width: 210px;
       height: 99px;
-      background: url("../images/info/img_special_tri.png") no-repeat 0 0;
+      /*background: url("../images/info/img_special_tri.png") no-repeat 0 0;*/
       top: 11.28%;
       left: 10.17%;
       mix-blend-mode: soft-light; }
     .info main .main:after {
       width: 336px;
       height: 159px;
-      background: url("../images/value/img-tri02.png") no-repeat 0 0;
+      /*background: url("../images/value/img-tri02.png") no-repeat 0 0;*/
       right: 28px;
       bottom: -28px; }
     .info main .main--inner {
       position: relative;
       width: 100%;
-      background: url("../images/info/img_main@2x.png") no-repeat center center/cover; }
+      /*background: url("../images/info/img_main@2x.png") no-repeat center center/cover;*/ }
       .info main .main--inner:before {
         content: '';
         display: block;
@@ -4581,13 +4583,13 @@ main {
     .info main .main:before {
       width: 105px;
       height: 50px;
-      background: url("../images/special/img_special_tri.png") no-repeat 0 0/cover;
+      /*background: url("../images/special/img_special_tri.png") no-repeat 0 0/cover;*/
       top: 11.28%;
       left: 5.17%; }
     .info main .main:after {
       width: 168px;
       height: 80px;
-      background: url("../images/value/img-tri02.png") no-repeat 0 0/cover;
+      /*background: url("../images/value/img-tri02.png") no-repeat 0 0/cover;*/
       right: 14px;
       bottom: -14px; }
     .info main .main--inner:before {
