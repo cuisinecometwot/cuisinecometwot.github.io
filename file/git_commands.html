@@ -1,0 +1,52 @@
+
+<html>
+<head>
+<style>
+table {
+  width: 75%;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
+
+tr:nth-child(odd) {
+  background-color: #dddddd;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+</style>
+</head>
+<body>
+<h2>git - the stupid content tracker</h2>
+<table>
+	<tr>
+	<th>Common Git commands</th><th>Description</th></tr>
+	<tr><td>git init |repo-name|</td><td>Create a new local repo</td></tr>
+	<tr><td>git config --global user.name "YOUR_USERNAME"</td><td>Set username. For identifying who made specific changes.</td></tr>
+	<tr><td>git config --global user.email "YOUR_EMAIL"</td><td>Set email. Same as above.</td></tr>
+	<tr><td>git diff</td><td>Show changes not yet staged</td></tr>
+	<tr><td>git status</td><td>List new or unmodified files</td></tr>
+	<tr><td>git add .</td><td>Stage all changed files</td></tr>
+	<tr><td>git add |filename1| |filename2| ...</td><td>Stage file(s)</td></tr>
+	<tr><td>git commit</td><td>Commit previously staged changes</td></tr>
+	<tr><td>git commit -a</td><td>Commit all local changes in tracked files</td></tr>
+	<tr><td>git commit -m "Message"</td><td>Commit with message</td></tr>
+	<tr><td>git commit --amend</td><td>Change the last commit</td></tr>
+	<tr><td>git clone |repo-url|</td><td>Create a local copy of a remote repo</td></tr>
+	<tr><td>git log</td><td>Show change history</td></tr>
+	<tr><td>git checkout |branch|</td><td>Switch to a branch and update working directory</td></tr>
+	<tr><td>git branch |new-branch|</td><td>Create a new branch</td></tr>
+	<tr><td>git branch -d |branch|</td><td>Delete a branch</td></tr>
+	<tr><td>git fetch |remote|</td><td>Fetch all branches from remote repo</td></tr>
+	<tr><td>git pull |remote| |branch|</td><td>Fetch remote version of a branch and update local branch</td></tr>
+	<tr><td>git push |remote| |branch|</td><td>Push the committed changes to a remote repo</td></tr>
+	<tr><td>git merge |branch|</td><td>Merge the specified branch into the current branch</td></tr>
+	<tr><td>git rebase |branch|</td><td>Rebase your current HEAD onto the specified branch</td></tr>
+	<tr><td>git revert |commit|</td><td>Create a new commit to revert the specified commit</td></tr>
+	</tr>
+</table>
+</body>
+</html>
