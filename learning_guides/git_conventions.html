@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git CLI Hướng Dẫn - Yutoku Tech</title>
+    <meta name="description" content="Hướng dẫn sử dụng Git CLI cho người mới học. Các trường hợp thường gặp, xử lý lỗi và câu lệnh mẫu.">
+    <meta name="keywords" content="Git, CLI, hướng dẫn, lệnh, lỗi, xử lý, người mới học">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            color: #555;
+            margin: 25px 0 15px 0;
+        }
+        
+        .command-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .command-input {
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+        }
+        
+        .command-input::placeholder {
+            color: #a0aec0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .copy-btn.copied {
+            background: #48bb78;
+        }
+        
+        .warning {
+            background: #fed7d7;
+            border-left: 4px solid #e53e3e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip {
+            background: #c6f6d5;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .error {
+            background: #fed7d7;
+            border-left: 4px solid #e53e3e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .success {
+            background: #c6f6d5;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .code {
+            background: #f7fafc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e53e3e;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🐙 Git CLI Hướng Dẫn</h1>
+            <p>Hướng dẫn sử dụng Git Command Line Interface cho người mới học</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#basics">Cơ Bản</a></li>
+                <li><a href="#workflow">Workflow</a></li>
+                <li><a href="#branches">Quản Lý Branch</a></li>
+                <li><a href="#merge">Merge & Conflict</a></li>
+                <li><a href="#errors">Xử Lý Lỗi</a></li>
+                <li><a href="#advanced">Nâng Cao</a></li>
+            </ul>
+        </nav>
+
+        <section id="basics" class="section">
+            <h2>🚀 Cơ Bản</h2>
+            
+            <h3>Khởi tạo Repository</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git init" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Khởi tạo một Git repository mới trong thư mục hiện tại.</p>
+
+            <h3>Clone Repository</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git clone <repository-url>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Clone một repository từ remote về máy local.</p>
+
+            <h3>Kiểm tra trạng thái</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git status" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xem trạng thái của working directory và staging area.</p>
+
+            <h3>Thêm file vào staging</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git add <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Thêm file cụ thể vào staging area.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git add ." readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Thêm tất cả file đã thay đổi vào staging area.</p>
+
+            <h3>Commit thay đổi</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git commit -m 'Your commit message'" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Commit các thay đổi đã được staged với message.</p>
+        </section>
+
+        <section id="workflow" class="section">
+            <h2>🔄 Workflow Cơ Bản</h2>
+            
+            <h3>Xem lịch sử commit</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git log" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xem lịch sử commit của repository.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git log --oneline" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xem lịch sử commit dạng rút gọn (mỗi commit một dòng).</p>
+
+            <h3>Push và Pull</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git push origin <branch-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Đẩy commit lên remote repository.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git pull origin <branch-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Kéo thay đổi từ remote repository về local.</p>
+
+            <div class="tip">
+                <strong>💡 Tip:</strong> Sử dụng <code>git pull</code> trước khi <code>git push</code> để tránh conflict.
+            </div>
+        </section>
+
+        <section id="branches" class="section">
+            <h2>🌿 Quản Lý Branch</h2>
+            
+            <h3>Tạo và chuyển branch</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git branch <branch-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Tạo branch mới.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git checkout <branch-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Chuyển sang branch khác.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git checkout -b <branch-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Tạo và chuyển sang branch mới trong một lệnh.</p>
+
+            <h3>Xem danh sách branch</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git branch" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xem danh sách branch local.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git branch -a" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xem tất cả branch (local và remote).</p>
+
+            <h3>Xóa branch</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git branch -d <branch-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xóa branch local (chỉ khi đã merge).</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git branch -D <branch-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xóa branch local (force delete, kể cả chưa merge).</p>
+        </section>
+
+        <section id="merge" class="section">
+            <h2>🔀 Merge và Conflict</h2>
+            
+            <h3>Merge branch</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git merge <branch-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Merge branch khác vào branch hiện tại.</p>
+
+            <h3>Xử lý conflict</h3>
+            <div class="warning">
+                <strong>⚠️ Lưu ý:</strong> Khi có conflict, Git sẽ đánh dấu các vùng conflict trong file. Bạn cần sửa thủ công.
+            </div>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git status" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Kiểm tra file nào đang có conflict.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git add <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Sau khi sửa conflict, add file để đánh dấu đã resolve.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git commit" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Commit để hoàn thành merge.</p>
+
+            <h3>Abort merge</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git merge --abort" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Hủy bỏ merge và quay về trạng thái trước khi merge.</p>
+        </section>
+
+        <section id="errors" class="section">
+            <h2>❌ Xử Lý Lỗi Thường Gặp</h2>
+            
+            <h3>Lỗi "fatal: not a git repository"</h3>
+            <div class="error">
+                <strong>Lỗi:</strong> Bạn đang ở thư mục không phải Git repository.
+            </div>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git init" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Giải pháp: Khởi tạo Git repository hoặc chuyển đến thư mục có Git.</p>
+
+            <h3>Lỗi "fatal: refusing to merge unrelated histories"</h3>
+            <div class="error">
+                <strong>Lỗi:</strong> Git không thể merge vì hai repository không có lịch sử chung.
+            </div>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git pull origin <branch> --allow-unrelated-histories" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Giải pháp: Sử dụng flag --allow-unrelated-histories.</p>
+
+            <h3>Lỗi "fatal: remote origin already exists"</h3>
+            <div class="error">
+                <strong>Lỗi:</strong> Remote origin đã tồn tại.
+            </div>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git remote remove origin" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Giải pháp: Xóa remote origin cũ trước khi thêm mới.</p>
+
+            <h3>Lỗi "fatal: bad object"</h3>
+            <div class="error">
+                <strong>Lỗi:</strong> Repository bị corrupt hoặc có vấn đề.
+            </div>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git fsck" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Giải pháp: Kiểm tra repository integrity.</p>
+
+            <h3>Lỗi "fatal: cannot lock ref"</h3>
+            <div class="error">
+                <strong>Lỗi:</strong> Không thể lock reference, có thể do process khác đang chạy.
+            </div>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git gc" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Giải pháp: Dọn dẹp repository và thử lại.</p>
+        </section>
+
+        <section id="advanced" class="section">
+            <h2>🚀 Tính Năng Nâng Cao</h2>
+            
+            <h3>Stash - Lưu tạm thay đổi</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git stash" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Lưu tạm thời các thay đổi chưa commit.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git stash list" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xem danh sách stash.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git stash pop" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Áp dụng stash gần nhất và xóa khỏi danh sách.</p>
+
+            <h3>Reset - Quay lại commit trước</h3>
+            <div class="warning">
+                <strong>⚠️ Cẩn thận:</strong> Reset có thể mất dữ liệu. Hãy backup trước khi sử dụng.
+            </div>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git reset --soft HEAD~1" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Quay lại commit trước, giữ thay đổi trong staging area.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git reset --hard HEAD~1" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Quay lại commit trước, xóa tất cả thay đổi.</p>
+
+            <h3>Rebase - Sắp xếp lại lịch sử</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git rebase <base-branch>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Rebase branch hiện tại lên base branch.</p>
+
+            <div class="tip">
+                <strong>💡 Tip:</strong> Rebase giúp tạo lịch sử commit sạch sẽ hơn merge, nhưng cần cẩn thận khi sử dụng.
+            </div>
+
+            <h3>Cherry-pick - Chọn commit cụ thể</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git cherry-pick <commit-hash>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Áp dụng một commit cụ thể vào branch hiện tại.</p>
+
+            <h3>Submodules - Quản lý repository con</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="git submodule add <repository-url> <path>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Thêm submodule vào repository.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="git submodule update --init --recursive" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Cập nhật và khởi tạo tất cả submodules.</p>
+        </section>
+
+        <div class="tip">
+            <strong>💡 Lời khuyên:</strong> Luôn backup dữ liệu quan trọng trước khi thực hiện các lệnh Git phức tạp. Sử dụng <code>git log</code> để kiểm tra lịch sử trước khi thực hiện thay đổi.
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        function copyCommand(button) {
+            const commandInput = button.previousElementSibling;
+            const textToCopy = commandInput.value;
+            
+            // Tạo temporary input để copy
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            // Hiển thị feedback
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+
+        // Smooth scrolling cho navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section in navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.borderColor = '#667eea';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#667eea';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = 'transparent';
+                    link.style.color = '#667eea';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

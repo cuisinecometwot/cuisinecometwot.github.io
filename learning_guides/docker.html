@@ -1,0 +1,22 @@
+<html>
+<head>
+<style>
+table {
+  width: 75%;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
+
+tr:nth-child(odd) {
+  background-color: #dddddd;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+</style>
+</head>
+<body>
+<h2>Docker</h2><table><tr><th>Command</th><th>Description</th></tr><tr><td>docker images</td><td>Lists all local Docker images.</td></tr><tr><td>docker image inspect [image_name]</td><td>Provides detailed information about a specific image.</td></tr><tr><td>docker pull [image_name]</td><td>Downloads an image from Docker Hub.</td></tr><tr><td>docker rmi [image_name]</td><td>Deletes an image from your local system (use with caution).</td></tr><tr><td>docker search [term]</td><td>Searches for images on Docker Hub.</td></tr><tr><td>docker run [options] [image_name]</td><td>Creates and starts a container from an image. (e.g., docker run -it ubuntu bash for an interactive Ubuntu container)</td></tr><tr><td>docker ps</td><td>Shows all running containers.</td></tr><tr><td>docker ps -a</td><td>Lists all containers, including stopped ones.</td></tr><tr><td>docker stop [container_id]</td><td>Stops a running container.</td></tr><tr><td>docker start [container_id]</td><td>Starts a stopped container.</td></tr><tr><td>docker rm [container_id]</td><td>Deletes a container (use with caution, data is lost).</td></tr><tr><td>docker inspect [container_id]</td><td>Provides detailed information about a specific container.</td></tr><tr><td>docker attach [container_id]</td><td>Attaches your terminal to a running container.</td></tr><tr><td>docker exec -it [container_id] bash</td><td>Runs a command inside a running container (interactive).</td></tr><tr><td>docker build -t [image_name] .</td><td>Builds an image from a Dockerfile in the current directory.</td></tr><tr><td>docker network ls</td><td>Shows all Docker networks.</td></tr><tr><td>docker network connect [network_name] [container_id]</td><td>Connects a container to a specific network.</td></tr><tr><td>docker volume create [volume_name]</td><td>Creates a named volume for persistent data storage.</td></tr><tr><td>docker volume ls</td><td>Shows all Docker volumes.</td></tr><tr><td>docker volume inspect [volume_name]</td><td>Provides detailed information about a specific volume.</td></tr><tr><td>docker run -v [volume_name]:[container_path] [image_name]</td><td>Mounts a volume to a specific path inside a container.</td></tr><tr><td>docker help [command]</td><td>Detailed information on a specific command.</td></tr><tr></tr><tr><td>docker-compose up -d</td><td>Builds, (re)creates, starts and attaches to containers for all services in docker-compose.yml file. Option -d for detached mode (run in the background).</td></tr><tr><td>docker-compose down</td><td>Stops all running containers created by docker-compose up and removes networks used by them.</td></tr><tr><td>docker-compose ps</td><td>Lists all services defined in your docker-compose.yml file with their current states (running, stopped, etc.).</td></tr><tr><td>docker-compose logs</td><td>Shows logs from all the containers managed by docker-compose in real time. You can specify a service name to see logs only for that service.</td></tr><tr><td>docker-compose build</td><td>Builds images for all services defined in your docker-compose.yml file.</td></tr><tr><td>docker-compose run [service_name]</td><td>Runs a container for a specific service in detached mode. Useful for running one-off commands or processes within a service container.</td></tr><tr><td>docker-compose exec [service_name] [command]</td><td>Executes a command within a running service container.</td></tr></tr></table></body></html>

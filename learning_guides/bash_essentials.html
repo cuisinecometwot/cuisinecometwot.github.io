@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bash Essentials - Yutoku Tech</title>
+    <meta name="description" content="Hướng dẫn cơ bản về Bash shell cho người mới học. Các lệnh cơ bản, scripting và automation.">
+    <meta name="keywords" content="Bash, Shell, Linux, Command Line, Terminal, Scripting">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: #48bb78;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #48bb78;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #48bb78;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            color: #555;
+            margin: 25px 0 15px 0;
+        }
+        
+        .command-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .command-input {
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .copy-btn.copied {
+            background: #e53e3e;
+        }
+        
+        .warning {
+            background: #fed7d7;
+            border-left: 4px solid #e53e3e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip {
+            background: #c6f6d5;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .code {
+            background: #f7fafc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e53e3e;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🐚 Bash Essentials</h1>
+            <p>Hướng dẫn cơ bản về Bash shell cho người mới học</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#basics">Cơ Bản</a></li>
+                <li><a href="#navigation">Điều Hướng</a></li>
+                <li><a href="#files">Quản Lý File</a></li>
+                <li><a href="#text">Xử Lý Text</a></li>
+                <li><a href="#scripting">Scripting</a></li>
+                <li><a href="#advanced">Nâng Cao</a></li>
+            </ul>
+        </nav>
+
+        <section id="basics" class="section">
+            <h2>🚀 Cơ Bản</h2>
+            
+            <h3>Mở Terminal</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="Ctrl + Alt + T" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Phím tắt để mở terminal trên Ubuntu/Linux.</p>
+
+            <h3>Kiểm tra shell hiện tại</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="echo $SHELL" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Hiển thị đường dẫn đến shell hiện tại.</p>
+
+            <h3>Xem phiên bản Bash</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="bash --version" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Kiểm tra phiên bản Bash đang sử dụng.</p>
+
+            <h3>Xem thư mục hiện tại</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="pwd" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Print Working Directory - hiển thị đường dẫn thư mục hiện tại.</p>
+        </section>
+
+        <section id="navigation" class="section">
+            <h2>📁 Điều Hướng</h2>
+            
+            <h3>Liệt kê file và thư mục</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="ls" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Liệt kê nội dung thư mục hiện tại.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="ls -la" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Liệt kê chi tiết bao gồm file ẩn và quyền truy cập.</p>
+
+            <h3>Thay đổi thư mục</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="cd <directory-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Chuyển đến thư mục được chỉ định.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="cd .." readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Chuyển lên thư mục cha.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="cd ~" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Chuyển về thư mục home của user.</p>
+
+            <h3>Xem lịch sử lệnh</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="history" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Hiển thị lịch sử các lệnh đã sử dụng.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="!<number>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Thực thi lại lệnh theo số thứ tự trong history.</p>
+        </section>
+
+        <section id="files" class="section">
+            <h2>📄 Quản Lý File</h2>
+            
+            <h3>Tạo thư mục</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="mkdir <directory-name>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Tạo thư mục mới.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="mkdir -p <path/to/directory>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Tạo thư mục và các thư mục cha nếu chưa tồn tại.</p>
+
+            <h3>Tạo file</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="touch <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Tạo file mới hoặc cập nhật timestamp nếu file đã tồn tại.</p>
+
+            <h3>Copy file và thư mục</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="cp <source> <destination>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Copy file từ nguồn đến đích.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="cp -r <source> <destination>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Copy thư mục và nội dung bên trong (recursive).</p>
+
+            <h3>Di chuyển file và thư mục</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="mv <source> <destination>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Di chuyển file/thư mục từ nguồn đến đích.</p>
+
+            <h3>Xóa file và thư mục</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="rm <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xóa file.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="rm -rf <directory>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xóa thư mục và tất cả nội dung bên trong (force, recursive).</p>
+
+            <div class="warning">
+                <strong>⚠️ Cẩn thận:</strong> Lệnh <code>rm -rf</code> rất nguy hiểm, có thể xóa toàn bộ hệ thống nếu sử dụng sai.
+            </div>
+        </section>
+
+        <section id="text" class="section">
+            <h2>📝 Xử Lý Text</h2>
+            
+            <h3>Xem nội dung file</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="cat <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Hiển thị toàn bộ nội dung file.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="less <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xem file theo trang, có thể cuộn và tìm kiếm.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="head -n 10 <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Hiển thị 10 dòng đầu tiên của file.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="tail -n 10 <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Hiển thị 10 dòng cuối cùng của file.</p>
+
+            <h3>Tìm kiếm trong file</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="grep 'search-term' <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Tìm kiếm từ khóa trong file.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="grep -i 'search-term' <filename>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Tìm kiếm không phân biệt chữ hoa/thường.</p>
+
+            <h3>So sánh file</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="diff <file1> <file2>" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>So sánh nội dung hai file và hiển thị sự khác biệt.</p>
+        </section>
+
+        <section id="scripting" class="section">
+            <h2>📜 Scripting</h2>
+            
+            <h3>Tạo script Bash</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="#!/bin/bash" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Shebang - dòng đầu tiên của script Bash.</p>
+
+            <h3>Biến trong Bash</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="variable_name='value'" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Khai báo biến trong Bash.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="echo $variable_name" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Hiển thị giá trị của biến.</p>
+
+            <h3>Vòng lặp</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="for i in {1..5}; do echo $i; done" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Vòng lặp for từ 1 đến 5.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="while [ $i -lt 5 ]; do echo $i; i=$((i+1)); done" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Vòng lặp while với điều kiện.</p>
+
+            <h3>Điều kiện</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="if [ $1 -eq 0 ]; then echo 'Zero'; else echo 'Non-zero'; fi" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Câu lệnh if-else cơ bản.</p>
+
+            <h3>Thực thi script</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="chmod +x script.sh" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Cấp quyền thực thi cho script.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="./script.sh" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Thực thi script trong thư mục hiện tại.</p>
+        </section>
+
+        <section id="advanced" class="section">
+            <h2>🚀 Tính Năng Nâng Cao</h2>
+            
+            <h3>Pipe và Redirection</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="command1 | command2" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Pipe output của command1 làm input cho command2.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="command > output.txt" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Redirect output vào file (ghi đè).</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="command >> output.txt" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Redirect output vào file (thêm vào cuối).</p>
+
+            <h3>Background và Foreground</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="command &" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Chạy lệnh trong background.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="jobs" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Xem danh sách các job đang chạy.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="fg %1" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Đưa job số 1 về foreground.</p>
+
+            <h3>Alias và Functions</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="alias ll='ls -la'" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Tạo alias cho lệnh ls -la.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="function_name() { echo 'Hello World'; }" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Định nghĩa function trong Bash.</p>
+
+            <h3>Environment Variables</h3>
+            <div class="command-block">
+                <input type="text" class="command-input" value="export PATH=$PATH:/new/path" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Thêm đường dẫn mới vào PATH.</p>
+
+            <div class="command-block">
+                <input type="text" class="command-input" value="env" readonly>
+                <button class="copy-btn" onclick="copyCommand(this)">Copy</button>
+            </div>
+            <p>Hiển thị tất cả environment variables.</p>
+        </section>
+
+        <div class="tip">
+            <strong>💡 Lời khuyên:</strong> Luôn kiểm tra lệnh trước khi thực thi, đặc biệt là các lệnh xóa. Sử dụng <code>man command</code> để xem hướng dẫn chi tiết về lệnh.
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        function copyCommand(button) {
+            const commandInput = button.previousElementSibling;
+            const textToCopy = commandInput.value;
+            
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.borderColor = '#48bb78';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#48bb78';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = 'transparent';
+                    link.style.color = '#48bb78';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

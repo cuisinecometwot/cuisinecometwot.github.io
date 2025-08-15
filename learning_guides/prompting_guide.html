@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting Guide - Yutoku Tech</title>
+    <meta name="description" content="Hướng dẫn prompting cho AI models. Best practices, techniques và examples để tối ưu hóa tương tác với AI.">
+    <meta name="keywords" content="Prompting, AI, Gemini, ChatGPT, Best Practices, Techniques, Examples">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: #4285f4;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #4285f4;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #4285f4;
+            color: white;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #4285f4;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            color: #555;
+            margin: 25px 0 15px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .code-input {
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+            white-space: pre;
+            line-height: 1.4;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #3367d6;
+        }
+        
+        .copy-btn.copied {
+            background: #e53e3e;
+        }
+        
+        .warning {
+            background: #fed7d7;
+            border-left: 4px solid #e53e3e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip {
+            background: #c6f6d5;
+            border-left: 4px solid #34a853;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .example {
+            background: #e6f3ff;
+            border-left: 4px solid #4285f4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .code {
+            background: #f7fafc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e53e3e;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🤖 Prompting Guide</h1>
+            <p>Hướng dẫn prompting cho AI models - Best practices và techniques</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#basics">Cơ Bản</a></li>
+                <li><a href="#structure">Cấu Trúc Prompt</a></li>
+                <li><a href="#techniques">Kỹ Thuật</a></li>
+                <li><a href="#examples">Ví Dụ</a></li>
+                <li><a href="#best-practices">Best Practices</a></li>
+                <li><a href="#troubleshooting">Xử Lý Lỗi</a></li>
+            </ul>
+        </nav>
+
+        <section id="basics" class="section">
+            <h2>🚀 Cơ Bản về Prompting</h2>
+            
+            <h3>Prompt là gì?</h3>
+            <p>Prompt là hướng dẫn hoặc yêu cầu bạn đưa ra cho AI model để nhận được kết quả mong muốn. Một prompt tốt sẽ giúp AI hiểu rõ yêu cầu và đưa ra câu trả lời chính xác, hữu ích.</p>
+
+            <h3>Nguyên tắc cơ bản</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15"># 4 nguyên tắc cơ bản:
+
+1. RÕ RÀNG (Clear): Mô tả chính xác những gì bạn muốn
+2. CỤ THỂ (Specific): Đưa ra chi tiết và context
+3. CÓ CẤU TRÚC (Structured): Sử dụng format rõ ràng
+4. CÓ MỤC ĐÍCH (Purposeful): Xác định rõ mục tiêu cuối cùng
+
+# Ví dụ:
+❌ "Viết code Python"
+✅ "Viết function Python để tính tổng các số trong list, xử lý trường hợp list rỗng và trả về 0"</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Nguyên tắc cơ bản để tạo prompt hiệu quả.</p>
+
+            <h3>Vai trò của Context</h3>
+            <div class="example">
+                <strong>💡 Context quan trọng:</strong> AI cần hiểu bối cảnh để đưa ra câu trả lời phù hợp. Cung cấp thông tin về mục tiêu, đối tượng người dùng, và ràng buộc sẽ giúp AI tạo ra nội dung tốt hơn.
+            </div>
+        </section>
+
+        <section id="structure" class="section">
+            <h2>🏗️ Cấu Trúc Prompt Hiệu Quả</h2>
+            
+            <h3>Template cơ bản</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Template cơ bản:
+
+[ROLE] + [TASK] + [CONTEXT] + [FORMAT] + [CONSTRAINTS]
+
+# Ví dụ:
+"Bạn là một data scientist có 5 năm kinh nghiệm. 
+Hãy viết code Python để phân tích dữ liệu sales, 
+bao gồm data cleaning, visualization và insights. 
+Trả về dưới dạng code blocks với comments tiếng Việt. 
+Giới hạn trong 50 dòng code."
+
+# Phân tích:
+ROLE: "data scientist có 5 năm kinh nghiệm"
+TASK: "viết code Python để phân tích dữ liệu sales"
+CONTEXT: "bao gồm data cleaning, visualization và insights"
+FORMAT: "code blocks với comments tiếng Việt"
+CONSTRAINTS: "giới hạn trong 50 dòng code"</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Template cơ bản để cấu trúc prompt rõ ràng.</p>
+
+            <h3>Cấu trúc nâng cao</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25"># Cấu trúc nâng cao:
+
+[SYSTEM CONTEXT]
+[USER CONTEXT]
+[TASK DESCRIPTION]
+[EXPECTED OUTPUT]
+[CONSTRAINTS & LIMITATIONS]
+[EXAMPLES (nếu có)]
+
+# Ví dụ:
+SYSTEM: "Bạn là AI assistant chuyên về web development"
+USER: "Tôi là developer mới học React"
+TASK: "Giải thích useState hook với ví dụ thực tế"
+OUTPUT: "Giải thích + code example + best practices"
+CONSTRAINTS: "Sử dụng tiếng Việt, code đơn giản"
+EXAMPLES: "Counter component, form handling"</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Cấu trúc nâng cao cho các prompt phức tạp.</p>
+        </section>
+
+        <section id="techniques" class="section">
+            <h2>🔧 Kỹ Thuật Prompting</h2>
+            
+            <h3>Few-Shot Learning</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25"># Few-Shot Learning - Cung cấp ví dụ:
+
+"Viết email xin nghỉ phép theo format sau:
+
+Email 1:
+Chủ đề: Xin nghỉ phép ngày 15/12
+Nội dung: Kính gửi quản lý, tôi xin phép nghỉ làm ngày 15/12 vì lý do cá nhân.
+
+Email 2:
+Chủ đề: Xin nghỉ phép 2 ngày
+Nội dung: Kính gửi quản lý, tôi xin phép nghỉ làm ngày 20-21/12 để đi khám bệnh.
+
+Bây giờ hãy viết email xin nghỉ phép ngày 25/12 vì đám cưới em gái."</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Few-shot learning giúp AI hiểu rõ format và style mong muốn.</p>
+
+            <h3>Chain of Thought</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Chain of Thought - Yêu cầu AI suy luận từng bước:
+
+"Giải thích cách tính lãi suất kép theo từng bước:
+
+1. Đầu tiên, hãy giải thích công thức cơ bản
+2. Sau đó, đưa ra ví dụ cụ thể với số liệu
+3. Cuối cùng, giải thích tại sao lãi suất kép lại mạnh mẽ
+
+Hãy trình bày từng bước một cách rõ ràng."</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Chain of thought giúp AI đưa ra câu trả lời có logic và dễ hiểu.</p>
+
+            <h3>Role Playing</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Role Playing - Gán vai trò cụ thể:
+
+"Bạn là một senior developer có 10 năm kinh nghiệm về Python. 
+Bạn đang review code của một junior developer.
+
+Hãy review đoạn code sau và đưa ra feedback:
+- Những điểm tốt
+- Những điểm cần cải thiện
+- Code refactoring suggestions
+- Best practices recommendations
+
+Đưa ra feedback theo phong cách mentoring, khuyến khích và xây dựng."</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Role playing giúp AI đưa ra câu trả lời phù hợp với vai trò được gán.</p>
+        </section>
+
+        <section id="examples" class="section">
+            <h2>📝 Ví Dụ Prompt Hiệu Quả</h2>
+            
+            <h3>Prompt cho Code Review</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25"># Code Review Prompt:
+
+"Bạn là senior developer chuyên về Python. 
+Hãy review đoạn code sau và đưa ra feedback chi tiết:
+
+[PASTE CODE HERE]
+
+Yêu cầu:
+1. Phân tích logic và algorithm
+2. Kiểm tra performance và memory usage
+3. Đánh giá code style và readability
+4. Đề xuất improvements và best practices
+5. Đưa ra code examples cho các suggestions
+
+Format output:
+- Summary (2-3 câu)
+- Detailed Analysis (bullet points)
+- Code Improvements (với examples)
+- Best Practices Recommendations
+- Overall Score (1-10)"</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Prompt chi tiết cho code review.</p>
+
+            <h3>Prompt cho Data Analysis</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25"># Data Analysis Prompt:
+
+"Bạn là data analyst chuyên về business intelligence.
+Hãy phân tích dataset sales data và đưa ra insights:
+
+Dataset: [DESCRIBE YOUR DATA]
+Business Question: [WHAT DO YOU WANT TO KNOW]
+
+Yêu cầu:
+1. Data exploration và summary statistics
+2. Key findings và patterns
+3. Business insights và recommendations
+4. Visualization suggestions
+5. Next steps cho analysis
+
+Format:
+- Executive Summary (3-4 bullet points)
+- Detailed Analysis
+- Key Insights
+- Recommendations
+- Code/Query examples (nếu cần)"</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Prompt cho data analysis projects.</p>
+
+            <h3>Prompt cho Content Creation</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25"># Content Creation Prompt:
+
+"Bạn là content writer chuyên về technology.
+Hãy viết bài blog về [TOPIC] với yêu cầu sau:
+
+Target Audience: [WHO ARE YOU WRITING FOR]
+Tone: [FORMAL/INFORMAL/FRIENDLY]
+Length: [WORD COUNT]
+Key Points: [MAIN TOPICS TO COVER]
+
+Yêu cầu:
+1. Hook mạnh mẽ ở đầu bài
+2. Structure rõ ràng với headings
+3. Practical examples và use cases
+4. Actionable takeaways
+5. SEO-friendly với keywords
+
+Format:
+- Title (3 options)
+- Introduction
+- Main Content (với subheadings)
+- Conclusion
+- Call-to-Action"</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Prompt cho content creation.</p>
+        </section>
+
+        <section id="best-practices" class="section">
+            <h2>⭐ Best Practices</h2>
+            
+            <h3>Dos và Don'ts</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="30"># ✅ DOs:
+
+1. Be specific và clear
+2. Provide context và examples
+3. Use structured format
+4. Set clear expectations
+5. Iterate và refine
+6. Use appropriate tone
+7. Include constraints
+8. Ask for step-by-step reasoning
+
+# ❌ DON'Ts:
+
+1. Be vague hoặc ambiguous
+2. Ask multiple questions cùng lúc
+3. Use complex language
+4. Forget to specify format
+5. Ignore context
+6. Be too casual với serious topics
+7. Ask for impossible tasks
+8. Forget to review output</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Best practices và common mistakes cần tránh.</p>
+
+            <h3>Prompt Optimization</h3>
+            <div class="tip">
+                <strong>💡 Lời khuyên:</strong> Luôn test và refine prompt của bạn. Nếu kết quả không như mong đợi, hãy thử:
+                <ul>
+                    <li>Thêm context hoặc examples</li>
+                    <li>Làm rõ yêu cầu</li>
+                    <li>Thay đổi format output</li>
+                    <li>Sử dụng few-shot learning</li>
+                    <li>Break down task thành các bước nhỏ hơn</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="troubleshooting" class="section">
+            <h2>🔧 Xử Lý Lỗi Thường Gặp</h2>
+            
+            <h3>AI không hiểu yêu cầu</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Vấn đề: AI không hiểu yêu cầu
+
+# Giải pháp:
+1. Thêm context và background
+2. Sử dụng examples cụ thể
+3. Break down task thành steps
+4. Sử dụng simple language
+5. Specify expected format
+
+# Ví dụ cải thiện:
+❌ "Viết code cho website"
+✅ "Viết HTML và CSS cho landing page đơn giản, bao gồm header, hero section, và contact form. Sử dụng modern design với responsive layout."</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Giải pháp khi AI không hiểu yêu cầu.</p>
+
+            <h3>Output không đúng format</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Vấn đề: Output không đúng format
+
+# Giải pháp:
+1. Specify exact format requirements
+2. Provide format examples
+3. Use clear structure markers
+4. Set output constraints
+5. Ask for confirmation
+
+# Ví dụ:
+"Trả về kết quả theo format sau:
+---
+TITLE: [Title here]
+SUMMARY: [2-3 sentences]
+KEY POINTS:
+- Point 1
+- Point 2
+- Point 3
+RECOMMENDATIONS: [List format]
+---"</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Giải pháp khi output không đúng format mong muốn.</p>
+
+            <h3>AI đưa ra thông tin sai</h3>
+            <div class="warning">
+                <strong>⚠️ Lưu ý:</strong> AI có thể đưa ra thông tin không chính xác. Luôn verify và fact-check kết quả, đặc biệt là với:
+                <ul>
+                    <li>Thông tin kỹ thuật mới nhất</li>
+                    <li>Dữ liệu số liệu</li>
+                    <li>Facts và statistics</li>
+                    <li>Code syntax và APIs</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="tip">
+            <strong>💡 Lời khuyên cuối:</strong> Prompting là một kỹ năng cần practice và refinement. Bắt đầu với các prompt đơn giản, sau đó dần dần phức tạp hóa. Luôn lưu lại các prompt hiệu quả để tái sử dụng và chia sẻ với team.
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        function copyCode(button) {
+            const codeInput = button.previousElementSibling;
+            const textToCopy = codeInput.value;
+            
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.borderColor = '#4285f4';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#4285f4';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = 'transparent';
+                    link.style.color = '#4285f4';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

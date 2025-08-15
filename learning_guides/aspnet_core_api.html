@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP.NET Core API + SQL Server - Yutoku Tech</title>
+    <meta name="description" content="Hướng dẫn xây dựng REST API với ASP.NET Core và SQL Server. Entity Framework, Dependency Injection và best practices.">
+    <meta name="keywords" content="ASP.NET Core, API, SQL Server, Entity Framework, C#, REST, Web API">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #512bd4 0%, #7c3aed 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: #512bd4;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #512bd4;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #512bd4;
+            color: white;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #512bd4;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            color: #555;
+            margin: 25px 0 15px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .code-input {
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+            white-space: pre;
+            line-height: 1.4;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #512bd4;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #7c3aed;
+        }
+        
+        .copy-btn.copied {
+            background: #e53e3e;
+        }
+        
+        .warning {
+            background: #fed7d7;
+            border-left: 4px solid #e53e3e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip {
+            background: #c6f6d5;
+            border-left: 4px solid #512bd4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .code {
+            background: #f7fafc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e53e3e;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🚀 ASP.NET Core API + SQL Server</h1>
+            <p>Hướng dẫn xây dựng REST API với ASP.NET Core và SQL Server</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#setup">Thiết Lập</a></li>
+                <li><a href="#models">Models & DbContext</a></li>
+                <li><a href="#controllers">Controllers</a></li>
+                <li><a href="#services">Services & DI</a></li>
+                <li><a href="#migrations">Migrations</a></li>
+                <li><a href="#testing">Testing</a></li>
+            </ul>
+        </nav>
+
+        <section id="setup" class="section">
+            <h2>⚙️ Thiết Lập Dự Án</h2>
+            
+            <h3>Tạo dự án ASP.NET Core Web API</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="3">dotnet new webapi -n MyApi
+cd MyApi
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Tạo dự án Web API mới và cài đặt Entity Framework Core cho SQL Server.</p>
+
+            <h3>Cấu hình Connection String</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="10">// appsettings.json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=MyApiDb;Trusted_Connection=true;TrustServerCertificate=true;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Cấu hình connection string cho SQL Server trong appsettings.json.</p>
+
+            <h3>Cấu hình Program.cs</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Add DbContext
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Cấu hình cơ bản cho ứng dụng ASP.NET Core.</p>
+        </section>
+
+        <section id="models" class="section">
+            <h2>📊 Models & DbContext</h2>
+            
+            <h3>Tạo Entity Model</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">// Models/Product.cs
+using System.ComponentModel.DataAnnotations;
+
+namespace MyApi.Models
+{
+    public class Product
+    {
+        public int Id { get; set; }
+        
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; } = string.Empty;
+        
+        [StringLength(500)]
+        public string? Description { get; set; }
+        
+        [Range(0, double.MaxValue)]
+        public decimal Price { get; set; }
+        
+        public int StockQuantity { get; set; }
+        
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        
+        public DateTime? UpdatedAt { get; set; }
+    }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Entity model với data annotations cho validation.</p>
+
+            <h3>Tạo DbContext</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">// Data/ApplicationDbContext.cs
+using Microsoft.EntityFrameworkCore;
+using MyApi.Models;
+
+namespace MyApi.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+            // Seed data
+            modelBuilder.Entity<Product>().HasData(
+                new Product { Id = 1, Name = "Sample Product", Price = 29.99m, StockQuantity = 100 }
+            );
+        }
+    }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>DbContext với DbSet và seed data.</p>
+
+            <h3>DTO (Data Transfer Object)</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">// DTOs/ProductDto.cs
+namespace MyApi.DTOs
+{
+    public class CreateProductDto
+    {
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public decimal Price { get; set; }
+        public int StockQuantity { get; set; }
+    }
+
+    public class UpdateProductDto
+    {
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public decimal? Price { get; set; }
+        public int? StockQuantity { get; set; }
+    }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>DTOs để tách biệt API contract và internal models.</p>
+        </section>
+
+        <section id="controllers" class="section">
+            <h2>🎮 Controllers</h2>
+            
+            <h3>Controller cơ bản</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="30">// Controllers/ProductsController.cs
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyApi.Data;
+using MyApi.Models;
+using MyApi.DTOs;
+
+namespace MyApi.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ProductsController : ControllerBase
+    {
+        private readonly ApplicationDbContext _context;
+
+        public ProductsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/products
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        {
+            return await _context.Products.ToListAsync();
+        }
+
+        // GET: api/products/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProduct(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return product;
+        }
+    }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Controller cơ bản với GET methods.</p>
+
+            <h3>POST Method để tạo mới</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">// POST: api/products
+[HttpPost]
+public async Task<ActionResult<Product>> CreateProduct(CreateProductDto createDto)
+{
+    var product = new Product
+    {
+        Name = createDto.Name,
+        Description = createDto.Description,
+        Price = createDto.Price,
+        StockQuantity = createDto.StockQuantity,
+        CreatedAt = DateTime.UtcNow
+    };
+
+    _context.Products.Add(product);
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>POST method để tạo product mới.</p>
+
+            <h3>PUT Method để cập nhật</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="30">// PUT: api/products/5
+[HttpPut("{id}")]
+public async Task<IActionResult> UpdateProduct(int id, UpdateProductDto updateDto)
+{
+    var product = await _context.Products.FindAsync(id);
+    if (product == null)
+    {
+        return NotFound();
+    }
+
+    // Update only provided fields
+    if (updateDto.Name != null)
+        product.Name = updateDto.Name;
+    if (updateDto.Description != null)
+        product.Description = updateDto.Description;
+    if (updateDto.Price.HasValue)
+        product.Price = updateDto.Price.Value;
+    if (updateDto.StockQuantity.HasValue)
+        product.StockQuantity = updateDto.StockQuantity.Value;
+
+    product.UpdatedAt = DateTime.UtcNow;
+
+    try
+    {
+        await _context.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        if (!ProductExists(id))
+        {
+            return NotFound();
+        }
+        throw;
+    }
+
+    return NoContent();
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>PUT method để cập nhật product với partial update.</p>
+
+            <h3>DELETE Method</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">// DELETE: api/products/5
+[HttpDelete("{id}")]
+public async Task<IActionResult> DeleteProduct(int id)
+{
+    var product = await _context.Products.FindAsync(id);
+    if (product == null)
+    {
+        return NotFound();
+    }
+
+    _context.Products.Remove(product);
+    await _context.SaveChangesAsync();
+
+    return NoContent();
+}
+
+private bool ProductExists(int id)
+{
+    return _context.Products.Any(e => e.Id == id);
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>DELETE method và helper method để kiểm tra product tồn tại.</p>
+        </section>
+
+        <section id="services" class="section">
+            <h2>🔧 Services & Dependency Injection</h2>
+            
+            <h3>Tạo Interface cho Service</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15">// Services/IProductService.cs
+namespace MyApi.Services
+{
+    public interface IProductService
+    {
+        Task<IEnumerable<Product>> GetAllProductsAsync();
+        Task<Product?> GetProductByIdAsync(int id);
+        Task<Product> CreateProductAsync(CreateProductDto createDto);
+        Task<bool> UpdateProductAsync(int id, UpdateProductDto updateDto);
+        Task<bool> DeleteProductAsync(int id);
+    }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Interface định nghĩa contract cho Product service.</p>
+
+            <h3>Implement Service</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="35">// Services/ProductService.cs
+using MyApi.Data;
+using MyApi.Models;
+using MyApi.DTOs;
+using Microsoft.EntityFrameworkCore;
+
+namespace MyApi.Services
+{
+    public class ProductService : IProductService
+    {
+        private readonly ApplicationDbContext _context;
+
+        public ProductService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        {
+            return await _context.Products.ToListAsync();
+        }
+
+        public async Task<Product?> GetProductByIdAsync(int id)
+        {
+            return await _context.Products.FindAsync(id);
+        }
+
+        public async Task<Product> CreateProductAsync(CreateProductDto createDto)
+        {
+            var product = new Product
+            {
+                Name = createDto.Name,
+                Description = createDto.Description,
+                Price = createDto.Price,
+                StockQuantity = createDto.StockQuantity,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return product;
+        }
+
+        public async Task<bool> UpdateProductAsync(int id, UpdateProductDto updateDto)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return false;
+
+            if (updateDto.Name != null)
+                product.Name = updateDto.Name;
+            if (updateDto.Description != null)
+                product.Description = updateDto.Description;
+            if (updateDto.Price.HasValue)
+                product.Price = updateDto.Price.Value;
+            if (updateDto.StockQuantity.HasValue)
+                product.StockQuantity = updateDto.StockQuantity.Value;
+
+            product.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteProductAsync(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return false;
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+    }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Service implementation với business logic.</p>
+
+            <h3>Đăng ký Service trong DI Container</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="8">// Program.cs
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+// Hoặc sử dụng AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Đăng ký services trong dependency injection container.</p>
+        </section>
+
+        <section id="migrations" class="section">
+            <h2>🗄️ Database Migrations</h2>
+            
+            <h3>Tạo Migration đầu tiên</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="3">dotnet ef migrations add InitialCreate
+dotnet ef database update</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Tạo và áp dụng migration đầu tiên.</p>
+
+            <h3>Thêm Migration khi thay đổi model</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="3">dotnet ef migrations add AddProductCategory
+dotnet ef database update</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Tạo migration mới khi thay đổi database schema.</p>
+
+            <h3>Rollback Migration</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="2">dotnet ef database update PreviousMigrationName
+dotnet ef migrations remove</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Rollback về migration trước đó và xóa migration không mong muốn.</p>
+
+            <h3>Xem danh sách Migrations</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="2">dotnet ef migrations list
+dotnet ef migrations script</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Xem danh sách migrations và tạo SQL script.</p>
+        </section>
+
+        <section id="testing" class="section">
+            <h2>🧪 Testing</h2>
+            
+            <h3>Tạo Unit Test Project</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="4">dotnet new xunit -n MyApi.Tests
+cd MyApi.Tests
+dotnet add reference ../MyApi/MyApi.csproj
+dotnet add package Microsoft.EntityFrameworkCore.InMemory</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Tạo project test với xUnit và Entity Framework In-Memory.</p>
+
+            <h3>Unit Test cho ProductService</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="35">// Tests/ProductServiceTests.cs
+using Xunit;
+using Microsoft.EntityFrameworkCore;
+using MyApi.Data;
+using MyApi.Services;
+using MyApi.DTOs;
+
+namespace MyApi.Tests
+{
+    public class ProductServiceTests
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly ProductService _service;
+
+        public ProductServiceTests()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+
+            _context = new ApplicationDbContext(options);
+            _service = new ProductService(_context);
+        }
+
+        [Fact]
+        public async Task CreateProduct_ShouldAddProductToDatabase()
+        {
+            // Arrange
+            var createDto = new CreateProductDto
+            {
+                Name = "Test Product",
+                Price = 29.99m,
+                StockQuantity = 100
+            };
+
+            // Act
+            var result = await _service.CreateProductAsync(createDto);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("Test Product", result.Name);
+            Assert.Equal(29.99m, result.Price);
+            Assert.Equal(100, result.StockQuantity);
+        }
+
+        [Fact]
+        public async Task GetProductById_WithValidId_ShouldReturnProduct()
+        {
+            // Arrange
+            var product = new Product { Name = "Test", Price = 10.0m, StockQuantity = 5 };
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            // Act
+            var result = await _service.GetProductByIdAsync(product.Id);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("Test", result.Name);
+        }
+    }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Unit test sử dụng In-Memory database.</p>
+
+            <h3>Integration Test</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">// Tests/ProductsControllerTests.cs
+using Microsoft.AspNetCore.Mvc.Testing;
+using System.Net;
+using System.Text;
+using System.Text.Json;
+
+namespace MyApi.Tests
+{
+    public class ProductsControllerTests : IClassFixture<WebApplicationFactory<Program>>
+    {
+        private readonly WebApplicationFactory<Program> _factory;
+
+        public ProductsControllerTests(WebApplicationFactory<Program> factory)
+        {
+            _factory = factory;
+        }
+
+        [Fact]
+        public async Task GetProducts_ShouldReturnOkResult()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            // Act
+            var response = await client.GetAsync("/api/products");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+    }
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Integration test cho API endpoints.</p>
+        </section>
+
+        <div class="tip">
+            <strong>💡 Lời khuyên:</strong> Luôn sử dụng async/await cho database operations. Implement proper error handling và logging. Sử dụng DTOs để tách biệt API contract và internal models. Test coverage nên đạt ít nhất 80%.
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        function copyCode(button) {
+            const codeInput = button.previousElementSibling;
+            const textToCopy = codeInput.value;
+            
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.borderColor = '#512bd4';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#512bd4';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = 'transparent';
+                    link.style.color = '#512bd4';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

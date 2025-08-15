@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Resources - Yutoku Tech</title>
+    <meta name="description" content="Tổng hợp tất cả các tài liệu học tập và hướng dẫn kỹ thuật. Bash, Vue.js, ASP.NET Core, Python, Excel, Prompting và AI Models.">
+    <meta name="keywords" content="Learning Resources, Tutorials, Guides, Programming, Development, Data Engineering">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .search-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-box:focus {
+            border-color: #667eea;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            padding: 25px 25px 20px;
+            background: linear-gradient(135deg, var(--card-color), var(--card-color-dark));
+            color: white;
+        }
+        
+        .card-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        
+        .card-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .card-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .card-features li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .card-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--card-color);
+            font-weight: bold;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-primary {
+            background: var(--card-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .btn-primary:hover {
+            background: var(--card-color-dark);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--card-color);
+            padding: 12px 24px;
+            border: 2px solid var(--card-color);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--card-color);
+            color: white;
+        }
+        
+        .category-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: transparent;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .stats {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-filter {
+                justify-content: center;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>📚 Learning Resources</h1>
+            <p>Tổng hợp tất cả các tài liệu học tập và hướng dẫn kỹ thuật</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="search-section">
+            <h2>🔍 Tìm Kiếm Tài Liệu</h2>
+            <input type="text" class="search-box" id="searchBox" placeholder="Tìm kiếm theo tên, chủ đề hoặc từ khóa...">
+            
+            <div class="category-filter">
+                <button class="filter-btn active" data-category="all">Tất Cả</button>
+                <button class="filter-btn" data-category="programming">Lập Trình</button>
+                <button class="filter-btn" data-category="tools">Công Cụ</button>
+                <button class="filter-btn" data-category="ai">AI & ML</button>
+                <button class="filter-btn" data-category="data">Dữ Liệu</button>
+                <button class="filter-btn" data-category="language">Ngôn Ngữ</button>
+            </div>
+        </div>
+
+        <div class="resources-grid" id="resourcesGrid">
+            <!-- Git CLI Guide -->
+            <div class="resource-card" data-category="tools" data-search="git cli command line terminal">
+                <div class="card-header" style="--card-color: #f05032; --card-color-dark: #d73a24;">
+                    <h3>🐙 Git CLI Guide</h3>
+                    <p>Hướng dẫn sử dụng Git Command Line Interface</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn chi tiết về Git CLI cho người mới học, bao gồm các lệnh cơ bản, workflow, quản lý branch, merge conflict và xử lý lỗi.</p>
+                    <ul class="card-features">
+                        <li>Lệnh cơ bản và nâng cao</li>
+                        <li>Workflow thực tế</li>
+                        <li>Xử lý conflict</li>
+                        <li>Best practices</li>
+                        <li>Copyable commands</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="git_conventions.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bash Essentials -->
+            <div class="resource-card" data-category="programming" data-search="bash shell linux command line terminal">
+                <div class="card-header" style="--card-color: #48bb78; --card-color-dark: #38a169;">
+                    <h3>🐚 Bash Essentials</h3>
+                    <p>Hướng dẫn cơ bản về Bash shell</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn toàn diện về Bash shell cho người mới học, bao gồm navigation, file management, text processing, scripting và automation.</p>
+                    <ul class="card-features">
+                        <li>Lệnh cơ bản</li>
+                        <li>File management</li>
+                        <li>Text processing</li>
+                        <li>Scripting cơ bản</li>
+                        <li>Automation</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="bash_essentials.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vue.js Guide -->
+            <div class="resource-card" data-category="programming" data-search="vue.js javascript frontend framework">
+                <div class="card-header" style="--card-color: #42b883; --card-color-dark: #369870;">
+                    <h3>⚡ Vue.js Guide</h3>
+                    <p>Hướng dẫn Vue.js cho người mới học</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn chi tiết về Vue.js framework, bao gồm components, reactivity, lifecycle hooks, routing và state management với Pinia.</p>
+                    <ul class="card-features">
+                        <li>Components & Props</li>
+                        <li>Reactivity system</li>
+                        <li>Lifecycle hooks</li>
+                        <li>Vue Router</li>
+                        <li>State management</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="vuejs_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ASP.NET Core API -->
+            <div class="resource-card" data-category="programming" data-search="asp.net core api sql server c#">
+                <div class="card-header" style="--card-color: #512bd4; --card-color-dark: #7c3aed;">
+                    <h3>🚀 ASP.NET Core API</h3>
+                    <p>Xây dựng REST API với ASP.NET Core & SQL Server</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn xây dựng REST API hoàn chỉnh với ASP.NET Core, Entity Framework, SQL Server, dependency injection và testing.</p>
+                    <ul class="card-features">
+                        <li>Project setup</li>
+                        <li>Entity Framework</li>
+                        <li>Controllers & Services</li>
+                        <li>Database migrations</li>
+                        <li>Unit testing</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="aspnet_core_api.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Python Data Engineering -->
+            <div class="resource-card" data-category="data" data-search="python data engineering pandas numpy etl">
+                <div class="card-header" style="--card-color: #3776ab; --card-color-dark: #2d5a87;">
+                    <h3>🐍 Python Data Engineering</h3>
+                    <p>Python cho kỹ sư dữ liệu</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn Python cho data engineering, bao gồm Pandas, NumPy, SQL operations, ETL pipelines và automation với Airflow.</p>
+                    <ul class="card-features">
+                        <li>Pandas & NumPy</li>
+                        <li>Database operations</li>
+                        <li>ETL pipelines</li>
+                        <li>Data validation</li>
+                        <li>Automation</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="python_data_engineering.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Excel Guide -->
+            <div class="resource-card" data-category="tools" data-search="excel spreadsheet data analysis vba">
+                <div class="card-header" style="--card-color: #217346; --card-color-dark: #1e6b3a;">
+                    <h3>📊 Excel Guide</h3>
+                    <p>Hướng dẫn Excel cho phân tích dữ liệu</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn toàn diện về Excel, bao gồm công thức nâng cao, Pivot Tables, biểu đồ, VBA automation và Power Query.</p>
+                    <ul class="card-features">
+                        <li>Formulas & Functions</li>
+                        <li>Pivot Tables</li>
+                        <li>Charts & Visualization</li>
+                        <li>VBA & Macros</li>
+                        <li>Power Query</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="excel_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompting Guide -->
+            <div class="resource-card" data-category="ai" data-search="prompting ai models best practices">
+                <div class="card-header" style="--card-color: #4285f4; --card-color-dark: #3367d6;">
+                    <h3>🤖 Prompting Guide</h3>
+                    <p>Hướng dẫn prompting cho AI models</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn chi tiết về prompting techniques, best practices và examples để tối ưu hóa tương tác với AI models.</p>
+                    <ul class="card-features">
+                        <li>Prompt structure</li>
+                        <li>Few-shot learning</li>
+                        <li>Chain of thought</li>
+                        <li>Role playing</li>
+                        <li>Best practices</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="prompting_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Models Guide -->
+            <div class="resource-card" data-category="ai" data-search="ai models gemini deepseek openrouter">
+                <div class="card-header" style="--card-color: #ff6b6b; --card-color-dark: #e55555;">
+                    <h3>🤖 AI Models Guide</h3>
+                    <p>Hướng dẫn sử dụng các mô hình AI miễn phí</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn sử dụng các mô hình AI miễn phí như Gemini, Deepseek và OpenRouter API cho chat interfaces và programmatic access.</p>
+                    <ul class="card-features">
+                        <li>Google Gemini</li>
+                        <li>Deepseek</li>
+                        <li>OpenRouter API</li>
+                        <li>Model comparison</li>
+                        <li>Best practices</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="ai_models_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHP MySQL Guide -->
+            <div class="resource-card" data-category="programming" data-search="php mysql web development database">
+                <div class="card-header" style="--card-color: #777bb4; --card-color-dark: #5a5f8a;">
+                    <h3>🐘 PHP MySQL Guide</h3>
+                    <p>Lập trình web với PHP và MySQL</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn xây dựng ứng dụng web hoàn chỉnh với PHP và MySQL, bao gồm CRUD operations, authentication và security.</p>
+                    <ul class="card-features">
+                        <li>PHP basics</li>
+                        <li>MySQL database</li>
+                        <li>Web applications</li>
+                        <li>Security practices</li>
+                        <li>Deployment</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="php_mysql_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docker Guide -->
+            <div class="resource-card" data-category="tools" data-search="docker containers virtualization devops">
+                <div class="card-header" style="--card-color: #2496ed; --card-color-dark: #1e7fd6;">
+                    <h3>🐳 Docker Guide</h3>
+                    <p>Hướng dẫn sử dụng Docker cho containerization</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn toàn diện về Docker, bao gồm containers, images, Dockerfile, Docker Compose và best practices cho development và deployment.</p>
+                    <ul class="card-features">
+                        <li>Container concepts</li>
+                        <li>Docker commands</li>
+                        <li>Dockerfile creation</li>
+                        <li>Docker Compose</li>
+                        <li>Best practices</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="docker_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competitive Programming -->
+            <div class="resource-card" data-category="programming" data-search="competitive programming algorithms data structures">
+                <div class="card-header" style="--card-color: #ff6b35; --card-color-dark: #e55a2b;">
+                    <h3>🏆 Competitive Programming</h3>
+                    <p>Thuật toán và cấu trúc dữ liệu cho competitive programming</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn các thuật toán cơ bản và nâng cao, cấu trúc dữ liệu và kỹ thuật giải quyết vấn đề trong competitive programming.</p>
+                    <ul class="card-features">
+                        <li>Problem types</li>
+                        <li>Basic algorithms</li>
+                        <li>Data structures</li>
+                        <li>Code examples</li>
+                        <li>Problem solving</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="competitive_programming.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- English Grammar Guide -->
+            <div class="resource-card" data-category="language" data-search="english grammar tenses structures technical">
+                <div class="card-header" style="--card-color: #9c27b0; --card-color-dark: #7b1fa2;">
+                    <h3>📚 English Grammar Guide</h3>
+                    <p>Hướng dẫn ngữ pháp tiếng Anh với ví dụ kỹ thuật</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn toàn diện về các thì và cấu trúc ngữ pháp tiếng Anh, kèm theo ví dụ kỹ thuật và bài tập thực hành.</p>
+                    <ul class="card-features">
+                        <li>All tenses</li>
+                        <li>Grammar structures</li>
+                        <li>Technical examples</li>
+                        <li>Practice exercises</li>
+                        <li>Copyable code</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="english_grammar_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photoshop CS6 Guide -->
+            <div class="resource-card" data-category="tools" data-search="photoshop cs6 image editing adobe">
+                <div class="card-header" style="--card-color: #2c3e50; --card-color-dark: #34495e;">
+                    <h3>🎨 Photoshop CS6 Guide</h3>
+                    <p>Hướng dẫn chỉnh sửa ảnh chuyên nghiệp</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn chi tiết Photoshop CS6 để chỉnh sửa ảnh chuyên nghiệp, bao gồm công cụ, kỹ thuật và thực hành.</p>
+                    <ul class="card-features">
+                        <li>Giao diện & workspace</li>
+                        <li>Công cụ chọn & vẽ</li>
+                        <li>Layers & masks</li>
+                        <li>Filters & effects</li>
+                        <li>Retouching & color correction</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="photoshop_cs6_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GIMP & Inkscape Guide -->
+            <div class="resource-card" data-category="tools" data-search="gimp inkscape graphic design free open source">
+                <div class="card-header" style="--card-color: #e74c3c; --card-color-dark: #c0392b;">
+                    <h3>🎨 GIMP & Inkscape</h3>
+                    <p>Thiết kế đồ họa chuyên nghiệp với công cụ miễn phí</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn sử dụng GIMP và Inkscape để thiết kế đồ họa chuyên nghiệp. Công cụ miễn phí thay thế Photoshop và Illustrator.</p>
+                    <ul class="card-features">
+                        <li>GIMP cho raster graphics</li>
+                        <li>Inkscape cho vector graphics</li>
+                        <li>Thiết kế logo & icon</li>
+                        <li>Photo manipulation</li>
+                        <li>Workflow tích hợp</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="gimp_inkscape_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chinese Phonetics Guide -->
+            <div class="resource-card" data-category="language" data-search="chinese phonetics pinyin web speech api pronunciation">
+                <div class="card-header" style="--card-color: #e74c3c; --card-color-dark: #c0392b;">
+                    <h3>🇨🇳 Chinese Phonetics</h3>
+                    <p>Học phiên âm tiếng Trung với Web Speech API</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn học phiên âm tiếng Trung (Pinyin) với Web Speech API. Nghe phát âm mẫu và kiểm tra phát âm của bạn.</p>
+                    <ul class="card-features">
+                        <li>Thanh mẫu & vận mẫu</li>
+                        <li>Thanh điệu tiếng Trung</li>
+                        <li>Web Speech API</li>
+                        <li>Phát âm mẫu</li>
+                        <li>Kiểm tra phát âm</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="chinese_phonetics_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Korean Language Guide -->
+            <div class="resource-card" data-category="language" data-search="korean hangul alphabet grammar web speech api pronunciation">
+                <div class="card-header" style="--card-color: #0066cc; --card-color-dark: #0052a3;">
+                    <h3>🇰🇷 Korean Language Guide</h3>
+                    <p>Học tiếng Hàn với bảng chữ cái Hangul và ngữ pháp cơ bản</p>
+                </div>
+                <div class="card-content">
+                    <p>Hướng dẫn học tiếng Hàn với bảng chữ cái Hangul, ngữ pháp cơ bản và câu giao tiếp. Có phiên âm Latin và Web Speech API để nghe phát âm.</p>
+                    <ul class="card-features">
+                        <li>Bảng chữ cái Hangul</li>
+                        <li>Phụ âm & nguyên âm</li>
+                        <li>Ngữ pháp cơ bản</li>
+                        <li>Câu giao tiếp</li>
+                        <li>Web Speech API</li>
+                    </ul>
+                    <div class="card-actions">
+                        <a href="korean_language_guide.html" class="btn-primary">Xem Hướng Dẫn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        // Search functionality
+        const searchBox = document.getElementById('searchBox');
+        const resourcesGrid = document.getElementById('resourcesGrid');
+        const resourceCards = document.querySelectorAll('.resource-card');
+
+        searchBox.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            resourceCards.forEach(card => {
+                const searchData = card.getAttribute('data-search').toLowerCase();
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (searchData.includes(searchTerm) || 
+                    title.includes(searchTerm) || 
+                    description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Category filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                resourceCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Clear search box when filtering
+                searchBox.value = '';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover effects
+        resourceCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python cho Kỹ sư Dữ liệu - Yutoku Tech</title>
+    <meta name="description" content="Hướng dẫn Python cho kỹ sư dữ liệu. Pandas, NumPy, SQL, ETL pipelines và data processing.">
+    <meta name="keywords" content="Python, Data Engineering, Pandas, NumPy, SQL, ETL, Data Processing">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: #3776ab;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #3776ab;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #3776ab;
+            color: white;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #3776ab;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            color: #555;
+            margin: 25px 0 15px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .code-input {
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+            white-space: pre;
+            line-height: 1.4;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #3776ab;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #2d5a87;
+        }
+        
+        .copy-btn.copied {
+            background: #e53e3e;
+        }
+        
+        .warning {
+            background: #fed7d7;
+            border-left: 4px solid #e53e3e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip {
+            background: #c6f6d5;
+            border-left: 4px solid #3776ab;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .code {
+            background: #f7fafc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e53e3e;
+;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🐍 Python cho Kỹ sư Dữ liệu</h1>
+            <p>Hướng dẫn Python cho xử lý dữ liệu, ETL pipelines và data engineering</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#setup">Thiết Lập</a></li>
+                <li><a href="#pandas">Pandas</a></li>
+                <li><a href="#numpy">NumPy</a></li>
+                <li><a href="#sql">SQL & Database</a></li>
+                <li><a href="#etl">ETL Pipelines</a></li>
+                <li><a href="#automation">Automation</a></li>
+            </ul>
+        </nav>
+
+        <section id="setup" class="section">
+            <h2>⚙️ Thiết Lập Môi Trường</h2>
+            
+            <h3>Cài đặt Python và packages</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="5"># Cài đặt packages cần thiết
+pip install pandas numpy sqlalchemy psycopg2-binary
+pip install jupyter matplotlib seaborn
+pip install apache-airflow python-dotenv</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Cài đặt các packages cơ bản cho data engineering.</p>
+
+            <h3>Tạo virtual environment</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="6"># Tạo virtual environment
+python -m venv data_eng_env
+
+# Kích hoạt trên Windows
+data_eng_env\Scripts\activate
+
+# Kích hoạt trên Linux/Mac
+source data_eng_env/bin/activate</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Tạo và kích hoạt virtual environment để quản lý dependencies.</p>
+
+            <h3>Requirements.txt</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15"># requirements.txt
+pandas==2.1.0
+numpy==1.24.3
+sqlalchemy==2.0.20
+psycopg2-binary==2.9.7
+jupyter==1.0.0
+matplotlib==3.7.2
+seaborn==0.12.2
+apache-airflow==2.7.1
+python-dotenv==1.0.0
+requests==2.31.0
+pydantic==2.1.1
+fastapi==0.101.1</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>File requirements.txt để quản lý versions của packages.</p>
+        </section>
+
+        <section id="pandas" class="section">
+            <h2>🐼 Pandas - Data Manipulation</h2>
+            
+            <h3>Đọc và ghi dữ liệu</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">import pandas as pd
+
+# Đọc CSV file
+df = pd.read_csv('data.csv')
+
+# Đọc Excel file
+df_excel = pd.read_excel('data.xlsx', sheet_name='Sheet1')
+
+# Đọc từ SQL database
+from sqlalchemy import create_engine
+engine = create_engine('postgresql://user:pass@localhost/db')
+df_sql = pd.read_sql('SELECT * FROM table_name', engine)
+
+# Ghi dữ liệu
+df.to_csv('output.csv', index=False)
+df.to_excel('output.xlsx', index=False)
+df.to_sql('table_name', engine, if_exists='replace', index=False)</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Đọc và ghi dữ liệu từ nhiều nguồn khác nhau.</p>
+
+            <h3>Data Cleaning và Preprocessing</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25"># Xử lý missing values
+df.dropna(subset=['important_column'], inplace=True)
+df['column'].fillna(df['column'].mean(), inplace=True)
+
+# Xử lý duplicates
+df.drop_duplicates(subset=['id'], keep='first', inplace=True)
+
+# Chuyển đổi data types
+df['date_column'] = pd.to_datetime(df['date_column'])
+df['numeric_column'] = pd.to_numeric(df['numeric_column'], errors='coerce')
+
+# Xử lý outliers với IQR method
+Q1 = df['column'].quantile(0.25)
+Q3 = df['column'].quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+df_clean = df[(df['column'] >= lower_bound) & (df['column'] <= upper_bound)]</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Data cleaning và preprocessing cơ bản.</p>
+
+            <h3>Data Aggregation và Grouping</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Group by và aggregation
+grouped = df.groupby('category').agg({
+    'sales': ['sum', 'mean', 'count'],
+    'profit': ['sum', 'mean']
+}).round(2)
+
+# Pivot table
+pivot_table = df.pivot_table(
+    values='sales',
+    index='category',
+    columns='region',
+    aggfunc='sum',
+    fill_value=0
+)
+
+# Cross tabulation
+cross_tab = pd.crosstab(df['category'], df['region'], values=df['sales'], aggfunc='sum')</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Data aggregation và grouping với Pandas.</p>
+        </section>
+
+        <section id="numpy" class="section">
+            <h2>🔢 NumPy - Numerical Computing</h2>
+            
+            <h3>Array Operations</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">import numpy as np
+
+# Tạo arrays
+arr = np.array([1, 2, 3, 4, 5])
+arr_2d = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Array operations
+arr_squared = arr ** 2
+arr_log = np.log(arr)
+arr_sqrt = np.sqrt(arr)
+
+# Statistical operations
+mean_val = np.mean(arr)
+std_val = np.std(arr)
+median_val = np.median(arr)
+
+# Random arrays
+random_arr = np.random.normal(0, 1, 1000)
+uniform_arr = np.random.uniform(0, 1, 100)</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>NumPy arrays và các operations cơ bản.</p>
+
+            <h3>Matrix Operations</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Matrix creation
+matrix = np.array([[1, 2], [3, 4]])
+identity = np.eye(3)
+zeros = np.zeros((3, 3))
+ones = np.ones((2, 4))
+
+# Matrix operations
+matrix_transpose = matrix.T
+matrix_det = np.linalg.det(matrix)
+matrix_inv = np.linalg.inv(matrix)
+
+# Linear algebra
+eigenvalues, eigenvectors = np.linalg.eig(matrix)
+
+# Broadcasting
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([[1], [2], [3]])
+result = arr1 + arr2  # Broadcasting</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Matrix operations và linear algebra với NumPy.</p>
+        </section>
+
+        <section id="sql" class="section">
+            <h2>🗄️ SQL & Database Operations</h2>
+            
+            <h3>Kết nối Database</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">import pandas as pd
+from sqlalchemy import create_engine, text
+import psycopg2
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+
+# Kết nối PostgreSQL
+def get_database_connection():
+    engine = create_engine(
+        f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@"
+        f"{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+    )
+    return engine
+
+# Kết nối SQLite
+def get_sqlite_connection():
+    engine = create_engine('sqlite:///data.db')
+    return engine
+
+# Test connection
+def test_connection(engine):
+    try:
+        with engine.connect() as conn:
+            result = conn.execute(text("SELECT 1"))
+            print("Database connection successful!")
+            return True
+    except Exception as e:
+        print(f"Database connection failed: {e}")
+        return False</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Kết nối database với SQLAlchemy và environment variables.</p>
+
+            <h3>SQL Operations</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="30"># Execute SQL queries
+def execute_query(engine, query, params=None):
+    with engine.connect() as conn:
+        if params:
+            result = conn.execute(text(query), params)
+        else:
+            result = conn.execute(text(query))
+        return result
+
+# Complex SQL query
+complex_query = """
+SELECT 
+    c.category_name,
+    COUNT(p.product_id) as product_count,
+    AVG(p.price) as avg_price,
+    SUM(p.stock_quantity) as total_stock
+FROM products p
+JOIN categories c ON p.category_id = c.category_id
+WHERE p.price > :min_price
+GROUP BY c.category_name
+HAVING COUNT(p.product_id) > :min_products
+ORDER BY avg_price DESC
+"""
+
+# Execute với parameters
+params = {'min_price': 10.0, 'min_products': 5}
+result = execute_query(engine, complex_query, params)
+
+# Convert to DataFrame
+df_result = pd.DataFrame(result.fetchall(), columns=result.keys())</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Execute SQL queries với parameters và convert kết quả thành DataFrame.</p>
+
+            <h3>Data Validation</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25"># Data validation functions
+def validate_data_quality(df):
+    """Validate data quality và return report"""
+    report = {
+        'total_rows': len(df),
+        'missing_values': df.isnull().sum().to_dict(),
+        'duplicates': df.duplicated().sum(),
+        'data_types': df.dtypes.to_dict(),
+        'unique_counts': df.nunique().to_dict()
+    }
+    
+    # Check for anomalies
+    numeric_columns = df.select_dtypes(include=[np.number]).columns
+    for col in numeric_columns:
+        Q1 = df[col].quantile(0.25)
+        Q3 = df[col].quantile(0.75)
+        IQR = Q3 - Q1
+        outliers = df[(df[col] < Q1 - 1.5*IQR) | (df[col] > Q3 + 1.5*IQR)]
+        report[f'{col}_outliers'] = len(outliers)
+    
+    return report
+
+# Usage
+quality_report = validate_data_quality(df)
+print("Data Quality Report:")
+for key, value in quality_report.items():
+    print(f"{key}: {value}")</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Data validation và quality checking.</p>
+        </section>
+
+        <section id="etl" class="section">
+            <h2>🔄 ETL Pipelines</h2>
+            
+            <h3>ETL Pipeline cơ bản</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="35">import pandas as pd
+from sqlalchemy import create_engine
+import logging
+from datetime import datetime
+import os
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+class ETLPipeline:
+    def __init__(self, source_path, target_engine):
+        self.source_path = source_path
+        self.target_engine = target_engine
+        
+    def extract(self):
+        """Extract data from source"""
+        try:
+            logger.info("Starting data extraction...")
+            if self.source_path.endswith('.csv'):
+                df = pd.read_csv(self.source_path)
+            elif self.source_path.endswith('.xlsx'):
+                df = pd.read_excel(self.source_path)
+            else:
+                raise ValueError("Unsupported file format")
+            
+            logger.info(f"Extracted {len(df)} rows from {self.source_path}")
+            return df
+        except Exception as e:
+            logger.error(f"Extraction failed: {e}")
+            raise
+    
+    def transform(self, df):
+        """Transform data"""
+        try:
+            logger.info("Starting data transformation...")
+            
+            # Data cleaning
+            df_clean = df.dropna(subset=['id'])
+            df_clean = df_clean.drop_duplicates(subset=['id'])
+            
+            # Data type conversion
+            df_clean['created_date'] = pd.to_datetime(df_clean['created_date'])
+            df_clean['amount'] = pd.to_numeric(df_clean['amount'], errors='coerce')
+            
+            # Add metadata
+            df_clean['etl_timestamp'] = datetime.utcnow()
+            df_clean['source_file'] = os.path.basename(self.source_path)
+            
+            logger.info(f"Transformed data: {len(df_clean)} rows")
+            return df_clean
+        except Exception as e:
+            logger.error(f"Transformation failed: {e}")
+            raise
+    
+    def load(self, df):
+        """Load data to target"""
+        try:
+            logger.info("Starting data load...")
+            
+            table_name = 'processed_data'
+            df.to_sql(
+                table_name, 
+                self.target_engine, 
+                if_exists='append', 
+                index=False,
+                method='multi'
+            )
+            
+            logger.info(f"Loaded {len(df)} rows to {table_name}")
+        except Exception as e:
+            logger.error(f"Load failed: {e}")
+            raise
+    
+    def run(self):
+        """Run complete ETL pipeline"""
+        try:
+            logger.info("Starting ETL pipeline...")
+            
+            # Extract
+            df = self.extract()
+            
+            # Transform
+            df_transformed = self.transform(df)
+            
+            # Load
+            self.load(df_transformed)
+            
+            logger.info("ETL pipeline completed successfully!")
+            return True
+        except Exception as e:
+            logger.error(f"ETL pipeline failed: {e}")
+            return False</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>ETL pipeline class với extract, transform, load methods.</p>
+
+            <h3>Sử dụng ETL Pipeline</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15"># Sử dụng ETL pipeline
+if __name__ == "__main__":
+    # Setup connections
+    source_path = "data/raw_data.csv"
+    target_engine = create_engine("postgresql://user:pass@localhost/db")
+    
+    # Create và run pipeline
+    pipeline = ETLPipeline(source_path, target_engine)
+    success = pipeline.run()
+    
+    if success:
+        print("ETL pipeline completed successfully!")
+    else:
+        print("ETL pipeline failed!")</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Chạy ETL pipeline với error handling.</p>
+        </section>
+
+        <section id="automation" class="section">
+            <h2>🤖 Automation & Scheduling</h2>
+            
+            <h3>Airflow DAG cơ bản</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="35">from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
+from airflow.operators.email_operator import EmailOperator
+from datetime import datetime, timedelta
+import sys
+import os
+
+# Add project path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from etl_pipeline import ETLPipeline
+
+# Default arguments
+default_args = {
+    'owner': 'data_engineer',
+    'depends_on_past': False,
+    'start_date': datetime(2024, 1, 1),
+    'email_on_failure': True,
+    'email_on_retry': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
+
+# Define DAG
+dag = DAG(
+    'daily_data_pipeline',
+    default_args=default_args,
+    description='Daily ETL pipeline for data processing',
+    schedule_interval='0 2 * * *',  # Chạy lúc 2 AM mỗi ngày
+    catchup=False
+)
+
+def run_etl_pipeline():
+    """Run ETL pipeline"""
+    source_path = "/data/raw/daily_data.csv"
+    target_engine = "postgresql://user:pass@localhost/db"
+    
+    pipeline = ETLPipeline(source_path, target_engine)
+    return pipeline.run()
+
+# Define tasks
+extract_transform_load = PythonOperator(
+    task_id='extract_transform_load',
+    python_callable=run_etl_pipeline,
+    dag=dag
+)
+
+send_notification = EmailOperator(
+    task_id='send_notification',
+    to=['team@company.com'],
+    subject='Daily ETL Pipeline Completed',
+    html_content='<p>Daily data processing has been completed successfully.</p>',
+    dag=dag
+)
+
+# Set task dependencies
+extract_transform_load >> send_notification</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Airflow DAG để schedule ETL pipeline hàng ngày.</p>
+
+            <h3>Error Handling và Monitoring</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">import logging
+import time
+from functools import wraps
+
+def monitor_pipeline(func):
+    """Decorator để monitor pipeline performance"""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        logger = logging.getLogger(func.__name__)
+        
+        try:
+            logger.info(f"Starting {func.__name__}")
+            result = func(*args, **kwargs)
+            
+            execution_time = time.time() - start_time
+            logger.info(f"{func.__name__} completed in {execution_time:.2f} seconds")
+            
+            return result
+        except Exception as e:
+            execution_time = time.time() - start_time
+            logger.error(f"{func.__name__} failed after {execution_time:.2f} seconds: {e}")
+            raise
+    
+    return wrapper
+
+# Sử dụng decorator
+@monitor_pipeline
+def process_data():
+    # Simulate data processing
+    time.sleep(2)
+    return "Data processed successfully"
+
+# Run với monitoring
+result = process_data()
+print(result)</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Error handling và monitoring cho pipelines.</p>
+        </section>
+
+        <div class="tip">
+            <strong>💡 Lời khuyên:</strong> Luôn sử dụng virtual environments để quản lý dependencies. Implement proper logging và error handling trong ETL pipelines. Sử dụng environment variables cho sensitive information như database credentials. Test pipelines với small datasets trước khi chạy production.
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        function copyCode(button) {
+            const codeInput = button.previousElementSibling;
+            const textToCopy = codeInput.value;
+            
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.borderColor = '#3776ab';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#3776ab';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = 'transparent';
+                    link.style.color = '#3776ab';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

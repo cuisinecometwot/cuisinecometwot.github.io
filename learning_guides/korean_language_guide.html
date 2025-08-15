@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Tiếng Hàn - Bảng Chữ Cái & Ngữ Pháp Cơ Bản - Yutoku Tech</title>
+    <meta name="description" content="Hướng dẫn học tiếng Hàn với bảng chữ cái Hangul, ngữ pháp cơ bản và câu giao tiếp. Có phiên âm Latin và Web Speech API để nghe phát âm.">
+    <meta name="keywords" content="Tiếng Hàn, Hangul, Bảng chữ cái, Ngữ pháp, Giao tiếp, Web Speech API, Phát âm">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: #0066cc;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #0066cc;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #0066cc;
+            color: white;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #0066cc;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            color: #555;
+            margin: 25px 0 15px 0;
+        }
+        
+        .hangul-card {
+            background: #f8f9fa;
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .korean-char {
+            font-size: 3rem;
+            color: #0066cc;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .romanization {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .meaning {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+        
+        .btn:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn.success {
+            background: #27ae60;
+        }
+        
+        .btn.warning {
+            background: #f39c12;
+        }
+        
+        .alphabet-table {
+            width: 100%;
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 120px repeat(8, 1fr);
+            background: #0066cc;
+            color: white;
+        }
+        
+        .header-cell {
+            padding: 15px 8px;
+            text-align: center;
+            font-weight: bold;
+            border-right: 1px solid #0052a3;
+            font-size: 14px;
+        }
+        
+        .header-cell:last-child {
+            border-right: none;
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 120px repeat(8, 1fr);
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .consonant-cell {
+            background: #f8f9fa;
+            padding: 15px 8px;
+            text-align: center;
+            font-weight: bold;
+            color: #0066cc;
+            border-right: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .char-cell {
+            padding: 15px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-right: 1px solid #e0e0e0;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .char-cell:last-child {
+            border-right: none;
+        }
+        
+        .char-cell:hover {
+            background: #e3f2fd;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .char-cell .korean-char {
+            font-size: 1.5rem;
+            color: #0066cc;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .char-cell .roman {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .tip {
+            background: #c6f6d5;
+            border-left: 4px solid #38a169;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .audio-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .alphabet-table {
+                font-size: 12px;
+                overflow-x: auto;
+            }
+            
+            .table-header,
+            .table-row {
+                grid-template-columns: 100px repeat(8, 80px);
+                min-width: 740px;
+            }
+            
+            .header-cell,
+            .consonant-cell,
+            .char-cell {
+                padding: 10px 5px;
+                font-size: 12px;
+            }
+            
+            .char-cell .korean-char {
+                font-size: 1.2rem;
+            }
+            
+            .char-cell .roman {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🇰🇷 Học Tiếng Hàn</h1>
+            <p>Bảng chữ cái Hangul, ngữ pháp cơ bản và câu giao tiếp</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#hangul">Bảng Chữ Cái</a></li>
+                <li><a href="#consonants">Bảng Đầy Đủ</a></li>
+                <li><a href="#grammar">Ngữ Pháp</a></li>
+                <li><a href="#sentences">Câu Cơ Bản</a></li>
+            </ul>
+        </nav>
+
+        <section id="hangul" class="section">
+            <h2>🚀 Bảng Chữ Cái Hangul (한글)</h2>
+            
+            <h3>Hangul là gì?</h3>
+            <p>Hangul (한글) là bảng chữ cái chính thức của tiếng Hàn, được vua Sejong Đại Đế sáng tạo vào năm 1443. Hangul được thiết kế để dễ học và sử dụng, với 24 chữ cái cơ bản (14 phụ âm và 10 nguyên âm).</p>
+
+            <h3>Đặc điểm của Hangul</h3>
+            <div class="hangul-card">
+                <div class="korean-char">안녕하세요</div>
+                <div class="romanization">Annyeonghaseyo</div>
+                <div class="meaning">Xin chào</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('안녕하세요', 'ko-KR')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+            <p>Hangul được viết theo từng âm tiết, mỗi âm tiết được đặt trong một khung hình vuông hoặc chữ nhật.</p>
+        </section>
+
+        <section id="consonants" class="section">
+            <h2>🔤 Bảng Chữ Cái Hangul Đầy Đủ</h2>
+            
+            <h3>Bảng phụ âm và nguyên âm kết hợp</h3>
+            <p>Bảng dưới đây hiển thị tất cả các ký tự Hangul được tạo thành từ sự kết hợp giữa phụ âm và nguyên âm:</p>
+            
+            <div class="alphabet-table">
+                <div class="table-header">
+                    <div class="header-cell">Phụ Âm</div>
+                    <div class="header-cell">ㅏ (a)</div>
+                    <div class="header-cell">ㅓ (eo)</div>
+                    <div class="header-cell">ㅗ (o)</div>
+                    <div class="header-cell">ㅜ (u)</div>
+                    <div class="header-cell">ㅡ (eu)</div>
+                    <div class="header-cell">ㅣ (i)</div>
+                    <div class="header-cell">ㅐ (ae)</div>
+                    <div class="header-cell">ㅔ (e)</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㄱ (g/k)</div>
+                    <div class="char-cell" onclick="speakText('가', 'ko-KR')">가<br><span class="roman">ga</span></div>
+                    <div class="char-cell" onclick="speakText('거', 'ko-KR')">거<br><span class="roman">geo</span></div>
+                    <div class="char-cell" onclick="speakText('고', 'ko-KR')">고<br><span class="roman">go</span></div>
+                    <div class="char-cell" onclick="speakText('구', 'ko-KR')">구<br><span class="roman">gu</span></div>
+                    <div class="char-cell" onclick="speakText('그', 'ko-KR')">그<br><span class="roman">geu</span></div>
+                    <div class="char-cell" onclick="speakText('기', 'ko-KR')">기<br><span class="roman">gi</span></div>
+                    <div class="char-cell" onclick="speakText('개', 'ko-KR')">개<br><span class="roman">gae</span></div>
+                    <div class="char-cell" onclick="speakText('게', 'ko-KR')">게<br><span class="roman">ge</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㄴ (n)</div>
+                    <div class="char-cell" onclick="speakText('나', 'ko-KR')">나<br><span class="roman">na</span></div>
+                    <div class="char-cell" onclick="speakText('너', 'ko-KR')">너<br><span class="roman">neo</span></div>
+                    <div class="char-cell" onclick="speakText('노', 'ko-KR')">노<br><span class="roman">no</span></div>
+                    <div class="char-cell" onclick="speakText('누', 'ko-KR')">누<br><span class="roman">nu</span></div>
+                    <div class="char-cell" onclick="speakText('느', 'ko-KR')">느<br><span class="roman">neu</span></div>
+                    <div class="char-cell" onclick="speakText('니', 'ko-KR')">니<br><span class="roman">ni</span></div>
+                    <div class="char-cell" onclick="speakText('내', 'ko-KR')">내<br><span class="roman">nae</span></div>
+                    <div class="char-cell" onclick="speakText('네', 'ko-KR')">네<br><span class="roman">ne</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㄷ (d/t)</div>
+                    <div class="char-cell" onclick="speakText('다', 'ko-KR')">다<br><span class="roman">da</span></div>
+                    <div class="char-cell" onclick="speakText('더', 'ko-KR')">더<br><span class="roman">deo</span></div>
+                    <div class="char-cell" onclick="speakText('도', 'ko-KR')">도<br><span class="roman">do</span></div>
+                    <div class="char-cell" onclick="speakText('두', 'ko-KR')">두<br><span class="roman">du</span></div>
+                    <div class="char-cell" onclick="speakText('드', 'ko-KR')">드<br><span class="roman">deu</span></div>
+                    <div class="char-cell" onclick="speakText('디', 'ko-KR')">디<br><span class="roman">di</span></div>
+                    <div class="char-cell" onclick="speakText('대', 'ko-KR')">대<br><span class="roman">dae</span></div>
+                    <div class="char-cell" onclick="speakText('데', 'ko-KR')">데<br><span class="roman">de</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㄹ (r/l)</div>
+                    <div class="char-cell" onclick="speakText('라', 'ko-KR')">라<br><span class="roman">ra</span></div>
+                    <div class="char-cell" onclick="speakText('러', 'ko-KR')">러<br><span class="roman">reo</span></div>
+                    <div class="char-cell" onclick="speakText('로', 'ko-KR')">로<br><span class="roman">ro</span></div>
+                    <div class="char-cell" onclick="speakText('루', 'ko-KR')">루<br><span class="roman">ru</span></div>
+                    <div class="char-cell" onclick="speakText('르', 'ko-KR')">르<br><span class="roman">reu</span></div>
+                    <div class="char-cell" onclick="speakText('리', 'ko-KR')">리<br><span class="roman">ri</span></div>
+                    <div class="char-cell" onclick="speakText('래', 'ko-KR')">래<br><span class="roman">rae</span></div>
+                    <div class="char-cell" onclick="speakText('레', 'ko-KR')">레<br><span class="roman">re</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅁ (m)</div>
+                    <div class="char-cell" onclick="speakText('마', 'ko-KR')">마<br><span class="roman">ma</span></div>
+                    <div class="char-cell" onclick="speakText('머', 'ko-KR')">머<br><span class="roman">meo</span></div>
+                    <div class="char-cell" onclick="speakText('모', 'ko-KR')">모<br><span class="roman">mo</span></div>
+                    <div class="char-cell" onclick="speakText('무', 'ko-KR')">무<br><span class="roman">mu</span></div>
+                    <div class="char-cell" onclick="speakText('므', 'ko-KR')">므<br><span class="roman">meu</span></div>
+                    <div class="char-cell" onclick="speakText('미', 'ko-KR')">미<br><span class="roman">mi</span></div>
+                    <div class="char-cell" onclick="speakText('매', 'ko-KR')">매<br><span class="roman">mae</span></div>
+                    <div class="char-cell" onclick="speakText('메', 'ko-KR')">메<br><span class="roman">me</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅂ (b/p)</div>
+                    <div class="char-cell" onclick="speakText('바', 'ko-KR')">바<br><span class="roman">ba</span></div>
+                    <div class="char-cell" onclick="speakText('버', 'ko-KR')">버<br><span class="roman">beo</span></div>
+                    <div class="char-cell" onclick="speakText('보', 'ko-KR')">보<br><span class="roman">bo</span></div>
+                    <div class="char-cell" onclick="speakText('부', 'ko-KR')">부<br><span class="roman">bu</span></div>
+                    <div class="char-cell" onclick="speakText('브', 'ko-KR')">브<br><span class="roman">beu</span></div>
+                    <div class="char-cell" onclick="speakText('비', 'ko-KR')">비<br><span class="roman">bi</span></div>
+                    <div class="char-cell" onclick="speakText('배', 'ko-KR')">배<br><span class="roman">bae</span></div>
+                    <div class="char-cell" onclick="speakText('베', 'ko-KR')">베<br><span class="roman">be</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅅ (s)</div>
+                    <div class="char-cell" onclick="speakText('사', 'ko-KR')">사<br><span class="roman">sa</span></div>
+                    <div class="char-cell" onclick="speakText('서', 'ko-KR')">서<br><span class="roman">seo</span></div>
+                    <div class="char-cell" onclick="speakText('소', 'ko-KR')">소<br><span class="roman">so</span></div>
+                    <div class="char-cell" onclick="speakText('수', 'ko-KR')">수<br><span class="roman">su</span></div>
+                    <div class="char-cell" onclick="speakText('스', 'ko-KR')">스<br><span class="roman">seu</span></div>
+                    <div class="char-cell" onclick="speakText('시', 'ko-KR')">시<br><span class="roman">si</span></div>
+                    <div class="char-cell" onclick="speakText('새', 'ko-KR')">새<br><span class="roman">sae</span></div>
+                    <div class="char-cell" onclick="speakText('세', 'ko-KR')">세<br><span class="roman">se</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅇ (ng/không)</div>
+                    <div class="char-cell" onclick="speakText('아', 'ko-KR')">아<br><span class="roman">a</span></div>
+                    <div class="char-cell" onclick="speakText('어', 'ko-KR')">어<br><span class="roman">eo</span></div>
+                    <div class="char-cell" onclick="speakText('오', 'ko-KR')">오<br><span class="roman">o</span></div>
+                    <div class="char-cell" onclick="speakText('우', 'ko-KR')">우<br><span class="roman">u</span></div>
+                    <div class="char-cell" onclick="speakText('으', 'ko-KR')">으<br><span class="roman">eu</span></div>
+                    <div class="char-cell" onclick="speakText('이', 'ko-KR')">이<br><span class="roman">i</span></div>
+                    <div class="char-cell" onclick="speakText('애', 'ko-KR')">애<br><span class="roman">ae</span></div>
+                    <div class="char-cell" onclick="speakText('에', 'ko-KR')">에<br><span class="roman">e</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅈ (j)</div>
+                    <div class="char-cell" onclick="speakText('자', 'ko-KR')">자<br><span class="roman">ja</span></div>
+                    <div class="char-cell" onclick="speakText('저', 'ko-KR')">저<br><span class="roman">jeo</span></div>
+                    <div class="char-cell" onclick="speakText('조', 'ko-KR')">조<br><span class="roman">jo</span></div>
+                    <div class="char-cell" onclick="speakText('주', 'ko-KR')">주<br><span class="roman">ju</span></div>
+                    <div class="char-cell" onclick="speakText('즈', 'ko-KR')">즈<br><span class="roman">jeu</span></div>
+                    <div class="char-cell" onclick="speakText('지', 'ko-KR')">지<br><span class="roman">ji</span></div>
+                    <div class="char-cell" onclick="speakText('재', 'ko-KR')">재<br><span class="roman">jae</span></div>
+                    <div class="char-cell" onclick="speakText('제', 'ko-KR')">제<br><span class="roman">je</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅊ (ch)</div>
+                    <div class="char-cell" onclick="speakText('차', 'ko-KR')">차<br><span class="roman">cha</span></div>
+                    <div class="char-cell" onclick="speakText('처', 'ko-KR')">처<br><span class="roman">cheo</span></div>
+                    <div class="char-cell" onclick="speakText('초', 'ko-KR')">초<br><span class="roman">cho</span></div>
+                    <div class="char-cell" onclick="speakText('추', 'ko-KR')">추<br><span class="roman">chu</span></div>
+                    <div class="char-cell" onclick="speakText('츠', 'ko-KR')">츠<br><span class="roman">cheu</span></div>
+                    <div class="char-cell" onclick="speakText('치', 'ko-KR')">치<br><span class="roman">chi</span></div>
+                    <div class="char-cell" onclick="speakText('채', 'ko-KR')">채<br><span class="roman">chae</span></div>
+                    <div class="char-cell" onclick="speakText('체', 'ko-KR')">체<br><span class="roman">che</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅋ (k)</div>
+                    <div class="char-cell" onclick="speakText('카', 'ko-KR')">카<br><span class="roman">ka</span></div>
+                    <div class="char-cell" onclick="speakText('커', 'ko-KR')">커<br><span class="roman">keo</span></div>
+                    <div class="char-cell" onclick="speakText('코', 'ko-KR')">코<br><span class="roman">ko</span></div>
+                    <div class="char-cell" onclick="speakText('쿠', 'ko-KR')">쿠<br><span class="roman">ku</span></div>
+                    <div class="char-cell" onclick="speakText('크', 'ko-KR')">크<br><span class="roman">keu</span></div>
+                    <div class="char-cell" onclick="speakText('키', 'ko-KR')">키<br><span class="roman">ki</span></div>
+                    <div class="char-cell" onclick="speakText('캐', 'ko-KR')">캐<br><span class="roman">kae</span></div>
+                    <div class="char-cell" onclick="speakText('케', 'ko-KR')">케<br><span class="roman">ke</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅌ (t)</div>
+                    <div class="char-cell" onclick="speakText('타', 'ko-KR')">타<br><span class="roman">ta</span></div>
+                    <div class="char-cell" onclick="speakText('터', 'ko-KR')">터<br><span class="roman">teo</span></div>
+                    <div class="char-cell" onclick="speakText('토', 'ko-KR')">토<br><span class="roman">to</span></div>
+                    <div class="char-cell" onclick="speakText('투', 'ko-KR')">투<br><span class="roman">tu</span></div>
+                    <div class="char-cell" onclick="speakText('트', 'ko-KR')">트<br><span class="roman">teu</span></div>
+                    <div class="char-cell" onclick="speakText('티', 'ko-KR')">티<br><span class="roman">ti</span></div>
+                    <div class="char-cell" onclick="speakText('태', 'ko-KR')">태<br><span class="roman">tae</span></div>
+                    <div class="char-cell" onclick="speakText('테', 'ko-KR')">테<br><span class="roman">te</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅍ (p)</div>
+                    <div class="char-cell" onclick="speakText('파', 'ko-KR')">파<br><span class="roman">pa</span></div>
+                    <div class="char-cell" onclick="speakText('퍼', 'ko-KR')">퍼<br><span class="roman">peo</span></div>
+                    <div class="char-cell" onclick="speakText('포', 'ko-KR')">포<br><span class="roman">po</span></div>
+                    <div class="char-cell" onclick="speakText('푸', 'ko-KR')">푸<br><span class="roman">pu</span></div>
+                    <div class="char-cell" onclick="speakText('프', 'ko-KR')">프<br><span class="roman">peu</span></div>
+                    <div class="char-cell" onclick="speakText('피', 'ko-KR')">피<br><span class="roman">pi</span></div>
+                    <div class="char-cell" onclick="speakText('패', 'ko-KR')">패<br><span class="roman">pae</span></div>
+                    <div class="char-cell" onclick="speakText('페', 'ko-KR')">페<br><span class="roman">pe</span></div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="consonant-cell">ㅎ (h)</div>
+                    <div class="char-cell" onclick="speakText('하', 'ko-KR')">하<br><span class="roman">ha</span></div>
+                    <div class="char-cell" onclick="speakText('허', 'ko-KR')">허<br><span class="roman">heo</span></div>
+                    <div class="char-cell" onclick="speakText('호', 'ko-KR')">호<br><span class="roman">ho</span></div>
+                    <div class="char-cell" onclick="speakText('후', 'ko-KR')">후<br><span class="roman">hu</span></div>
+                    <div class="char-cell" onclick="speakText('흐', 'ko-KR')">흐<br><span class="roman">heu</span></div>
+                    <div class="char-cell" onclick="speakText('히', 'ko-KR')">히<br><span class="roman">hi</span></div>
+                    <div class="char-cell" onclick="speakText('해', 'ko-KR')">해<br><span class="roman">hae</span></div>
+                    <div class="char-cell" onclick="speakText('헤', 'ko-KR')">헤<br><span class="roman">he</span></div>
+                </div>
+            </div>
+            
+            <div class="tip">
+                <strong>💡 Hướng dẫn sử dụng:</strong> Click vào bất kỳ ô nào trong bảng để nghe phát âm của ký tự đó. Bảng này hiển thị tất cả các kết hợp cơ bản giữa phụ âm và nguyên âm trong tiếng Hàn.
+            </div>
+        </section>
+
+        <section id="grammar" class="section">
+            <h2>📚 Ngữ Pháp Cơ Bản</h2>
+            
+            <h3>Cấu trúc câu cơ bản</h3>
+            <p>Tiếng Hàn có cấu trúc câu: Chủ ngữ + Tân ngữ + Động từ (SOV)</p>
+
+            <div class="hangul-card">
+                <div class="korean-char">나는 한국어를 공부합니다</div>
+                <div class="romanization">Naneun hangugeoreul gongbuhamnida</div>
+                <div class="meaning">Tôi học tiếng Hàn</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('나는 한국어를 공부합니다', 'ko-KR')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="sentences" class="section">
+            <h2>💬 Câu Giao Tiếp Cơ Bản</h2>
+            
+            <h3>Chào hỏi</h3>
+            <div class="hangul-card">
+                <div class="korean-char">안녕하세요</div>
+                <div class="romanization">Annyeonghaseyo</div>
+                <div class="meaning">Xin chào (lịch sự)</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('안녕하세요', 'ko-KR')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="hangul-card">
+                <div class="korean-char">감사합니다</div>
+                <div class="romanization">Kamsahamnida</div>
+                <div class="meaning">Cảm ơn bạn</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('감사합니다', 'ko-KR')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="tip">
+            <strong>💡 Lời khuyên:</strong> Học tiếng Hàn cần thời gian và kiên nhẫn. Hãy bắt đầu với bảng chữ cái Hangul, sau đó dần dần học ngữ pháp và câu cơ bản. Sử dụng Web Speech API để luyện phát âm và kiểm tra độ chính xác.
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        // Web Speech API variables
+        let recognition;
+        let synthesis;
+        let isListening = false;
+
+        // Initialize Web Speech API
+        function initSpeechAPI() {
+            // Check if browser supports Speech Recognition
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'ko-KR';
+                
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    const confidence = event.results[0][0].confidence;
+                    
+                    alert(`Kết quả nhận dạng: ${transcript}\nĐộ chính xác: ${(confidence * 100).toFixed(1)}%`);
+                    
+                    isListening = false;
+                    updateListeningButton();
+                };
+                
+                recognition.onerror = function(event) {
+                    console.error('Speech recognition error:', event.error);
+                    alert(`Lỗi nhận dạng: ${event.error}`);
+                    
+                    isListening = false;
+                    updateListeningButton();
+                };
+                
+                recognition.onend = function() {
+                    isListening = false;
+                    updateListeningButton();
+                };
+            } else {
+                console.log('Speech recognition not supported');
+            }
+            
+            // Check if browser supports Speech Synthesis
+            if ('speechSynthesis' in window) {
+                synthesis = window.speechSynthesis;
+                
+                // Handle voice loading
+                if (synthesis.getVoices().length === 0) {
+                    synthesis.addEventListener('voiceschanged', function() {
+                        console.log('Voices loaded:', synthesis.getVoices().length);
+                    });
+                }
+            } else {
+                console.log('Speech synthesis not supported');
+            }
+        }
+
+        // Speak text using Web Speech API
+        function speakText(text, lang) {
+            if (synthesis) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.8; // Slower speed for learning
+                
+                // Get available voices and select a male Korean voice
+                const voices = synthesis.getVoices();
+                const maleKoreanVoice = voices.find(voice => 
+                    voice.lang === 'ko-KR' && 
+                    (voice.name.includes('Male') || voice.name.includes('남성') || voice.name.includes('남자'))
+                ) || voices.find(voice => voice.lang === 'ko-KR') || voices[0];
+                
+                if (maleKoreanVoice) {
+                    utterance.voice = maleKoreanVoice;
+                }
+                
+                synthesis.speak(utterance);
+            } else {
+                alert('Speech synthesis not supported in this browser');
+            }
+        }
+
+        // Start listening for speech input
+        function startListening() {
+            if (recognition && !isListening) {
+                try {
+                    recognition.start();
+                    isListening = true;
+                    updateListeningButton();
+                    
+                    alert('🎤 Đang lắng nghe... Hãy nói rõ ràng!');
+                } catch (error) {
+                    console.error('Error starting recognition:', error);
+                }
+            }
+        }
+
+        // Update listening button state
+        function updateListeningButton() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                if (button.textContent.includes('🎤')) {
+                    if (isListening) {
+                        button.textContent = '⏹️ Dừng';
+                        button.classList.add('warning');
+                    } else {
+                        button.textContent = '🎤 Thử Phát Âm';
+                        button.classList.remove('warning');
+                    }
+                }
+            });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize Speech API when page loads
+        window.addEventListener('load', initSpeechAPI);
+    </script>
+</body>
+</html> 

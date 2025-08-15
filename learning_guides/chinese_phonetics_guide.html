@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Phiên Âm Tiếng Trung - Yutoku Tech</title>
+    <meta name="description" content="Hướng dẫn học phiên âm tiếng Trung với Web Speech API. Nghe phát âm mẫu và kiểm tra phát âm của bạn.">
+    <meta name="keywords" content="Tiếng Trung, Phiên âm, Pinyin, Web Speech API, Phát âm, Học ngoại ngữ">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: #e74c3c;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #e74c3c;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            color: #555;
+            margin: 25px 0 15px 0;
+        }
+        
+        .phonetic-card {
+            background: #f8f9fa;
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .chinese-char {
+            font-size: 3rem;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        
+        .pinyin {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .meaning {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn.success {
+            background: #27ae60;
+        }
+        
+        .btn.warning {
+            background: #f39c12;
+        }
+        
+        .practice-section {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .speech-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        
+        .result-display {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .tone-guide {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tone-example {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .audio-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🇨🇳 Học Phiên Âm Tiếng Trung</h1>
+            <p>Hướng dẫn phiên âm Pinyin với Web Speech API</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#basics">Cơ Bản</a></li>
+                <li><a href="#initials">Thanh Mẫu</a></li>
+                <li><a href="#finals">Vận Mẫu</a></li>
+                <li><a href="#tones">Thanh Điệu</a></li>
+                <li><a href="#practice">Thực Hành</a></li>
+                <li><a href="#advanced">Nâng Cao</a></li>
+            </ul>
+        </nav>
+
+        <section id="basics" class="section">
+            <h2>🚀 Cơ Bản về Pinyin</h2>
+            
+            <h3>Pinyin là gì?</h3>
+            <p>Pinyin (拼音) là hệ thống phiên âm tiếng Trung sử dụng chữ cái Latin để biểu thị cách phát âm của các ký tự Hán. Pinyin giúp người học tiếng Trung phát âm chính xác và tra từ điển dễ dàng.</p>
+
+            <h3>Cấu trúc Pinyin</h3>
+            <div class="phonetic-card">
+                <div class="chinese-char">你</div>
+                <div class="pinyin">nǐ</div>
+                <div class="meaning">bạn, anh, chị</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('你', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+            <p>Trong "nǐ": "n" là thanh mẫu (initial), "ǐ" là vận mẫu (final) với thanh điệu thứ 3.</p>
+
+            <h3>Bảng chữ cái Pinyin</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15"># Bảng chữ cái Pinyin:
+
+a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+
+# Lưu ý:
+- c phát âm như "ts" trong "cats"
+- q phát âm như "ch" trong "cheese" (nhẹ hơn)
+- x phát âm như "sh" trong "she" (nhẹ hơn)
+- zh, ch, sh, r: âm retroflex (cuốn lưỡi)
+- j, q, x: âm palatal (vòm miệng)</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </section>
+
+        <section id="initials" class="section">
+            <h2>🔤 Thanh Mẫu (Initials)</h2>
+            
+            <h3>Thanh mẫu đơn</h3>
+            <div class="phonetic-card">
+                <div class="chinese-char">妈</div>
+                <div class="pinyin">mā</div>
+                <div class="meaning">mẹ</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('妈', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">爸</div>
+                <div class="pinyin">bà</div>
+                <div class="meaning">bố</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('爸', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <h3>Thanh mẫu kép</h3>
+            <div class="phonetic-card">
+                <div class="chinese-char">茶</div>
+                <div class="pinyin">chá</div>
+                <div class="meaning">trà</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('茶', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">书</div>
+                <div class="pinyin">shū</div>
+                <div class="meaning">sách</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('书', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <h3>Bảng thanh mẫu</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Thanh mẫu đơn:
+b, p, m, f, d, t, n, l, g, k, h, j, q, x, z, c, s
+
+# Thanh mẫu kép:
+zh, ch, sh, r, ng
+
+# Thanh mẫu zero (không có):
+a, o, e, ai, ei, ao, ou, an, en, ang, eng, er
+
+# Cách phát âm:
+- b, p: như tiếng Việt
+- m, f: như tiếng Việt
+- d, t, n, l: như tiếng Việt
+- g, k, h: như tiếng Việt
+- j, q, x: âm palatal (nhẹ, mềm)
+- zh, ch, sh, r: âm retroflex (cuốn lưỡi)</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </section>
+
+        <section id="finals" class="section">
+            <h2>🎵 Vận Mẫu (Finals)</h2>
+            
+            <h3>Vận mẫu đơn</h3>
+            <div class="phonetic-card">
+                <div class="chinese-char">啊</div>
+                <div class="pinyin">ā</div>
+                <div class="meaning">à, ơ (thán từ)</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('啊', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">哦</div>
+                <div class="pinyin">ō</div>
+                <div class="meaning">ồ, ờ (thán từ)</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('哦', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <h3>Vận mẫu kép</h3>
+            <div class="phonetic-card">
+                <div class="chinese-char">爱</div>
+                <div class="pinyin">ài</div>
+                <div class="meaning">yêu</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('爱', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">好</div>
+                <div class="pinyin">hǎo</div>
+                <div class="meaning">tốt, hay</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('好', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <h3>Bảng vận mẫu</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25"># Vận mẫu đơn:
+a, o, e, i, u, ü
+
+# Vận mẫu kép:
+ai, ei, ao, ou, an, en, ang, eng, er
+
+# Vận mẫu kép với i:
+ia, ie, iao, iu, ian, in, iang, ing
+
+# Vận mẫu kép với u:
+ua, uo, uai, ui, uan, un, uang, ong
+
+# Vận mẫu kép với ü:
+üe, üan, ün, iong
+
+# Cách phát âm:
+- a: như "a" trong "father"
+- o: như "o" trong "go"
+- e: như "e" trong "her"
+- i: như "ee" trong "see"
+- u: như "oo" trong "moon"
+- ü: như "ü" trong tiếng Đức</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </section>
+
+        <section id="tones" class="section">
+            <h2>🎶 Thanh Điệu (Tones)</h2>
+            
+            <h3>Bốn thanh điệu cơ bản</h3>
+            <div class="tone-guide">
+                <h4>Thanh điệu tiếng Trung:</h4>
+                <div class="tone-example">ā (thanh 1)</div>
+                <div class="tone-example">á (thanh 2)</div>
+                <div class="tone-example">ǎ (thanh 3)</div>
+                <div class="tone-example">à (thanh 4)</div>
+                <div class="tone-example">a (thanh 0)</div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">妈</div>
+                <div class="pinyin">mā (thanh 1)</div>
+                <div class="meaning">mẹ - thanh cao và bằng</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('妈', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">麻</div>
+                <div class="pinyin">má (thanh 2)</div>
+                <div class="meaning">gai - thanh cao lên</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('麻', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">马</div>
+                <div class="pinyin">mǎ (thanh 3)</div>
+                <div class="meaning">ngựa - thanh xuống rồi lên</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('马', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">骂</div>
+                <div class="pinyin">mà (thanh 4)</div>
+                <div class="meaning">mắng - thanh xuống nhanh</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('骂', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <h3>Quy tắc thanh điệu</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Quy tắc thanh điệu:
+
+1. Thanh 1 (ā): Cao và bằng, giữ nguyên độ cao
+2. Thanh 2 (á): Từ thấp lên cao, như câu hỏi
+3. Thanh 3 (ǎ): Xuống thấp rồi lên cao
+4. Thanh 4 (à): Từ cao xuống thấp nhanh
+5. Thanh 0 (a): Không có dấu, đọc nhẹ
+
+# Biến điệu:
+- Hai thanh 3 liền nhau: thanh đầu thành thanh 2
+- Thanh 3 + thanh 1/2/4: thanh 3 thành thanh 0
+- "不" (bù) + thanh 4: "不" thành thanh 2
+- "一" (yī) + thanh 4: "一" thành thanh 2</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </section>
+
+        <section id="practice" class="section">
+            <h2>🎯 Thực Hành Phát Âm</h2>
+            
+            <h3>Luyện tập với Web Speech API</h3>
+            <div class="practice-section">
+                <h4>🎤 Thử phát âm từ sau:</h4>
+                <div class="phonetic-card">
+                    <div class="chinese-char">你好</div>
+                    <div class="pinyin">nǐ hǎo</div>
+                    <div class="meaning">xin chào</div>
+                    <div class="audio-controls">
+                        <button class="btn" onclick="speakText('你好', 'zh-CN')">🔊 Nghe Mẫu</button>
+                        <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                    </div>
+                </div>
+                
+                <div id="speechResult" class="result-display" style="display: none;">
+                    Kết quả nhận dạng sẽ hiển thị ở đây...
+                </div>
+            </div>
+
+            <h3>Luyện tập từ vựng cơ bản</h3>
+            <div class="phonetic-card">
+                <div class="chinese-char">谢谢</div>
+                <div class="pinyin">xiè xie</div>
+                <div class="meaning">cảm ơn</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('谢谢', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">再见</div>
+                <div class="pinyin">zài jiàn</div>
+                <div class="meaning">tạm biệt</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('再见', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">对不起</div>
+                <div class="pinyin">duì bu qǐ</div>
+                <div class="meaning">xin lỗi</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('对不起', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="advanced" class="section">
+            <h2>🚀 Kỹ Thuật Nâng Cao</h2>
+            
+            <h3>Luyện tập câu hoàn chỉnh</h3>
+            <div class="phonetic-card">
+                <div class="chinese-char">我叫小明</div>
+                <div class="pinyin">wǒ jiào xiǎo míng</div>
+                <div class="meaning">tôi tên là Tiểu Minh</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('我叫小明', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <div class="phonetic-card">
+                <div class="chinese-char">我很高兴认识你</div>
+                <div class="pinyin">wǒ hěn gāo xìng rèn shi nǐ</div>
+                <div class="meaning">tôi rất vui được gặp bạn</div>
+                <div class="audio-controls">
+                    <button class="btn" onclick="speakText('我很高兴认识你', 'zh-CN')">🔊 Nghe</button>
+                    <button class="btn" onclick="startListening()">🎤 Thử Phát Âm</button>
+                </div>
+            </div>
+
+            <h3>Tips luyện phát âm</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20"># Tips luyện phát âm:
+
+1. Nghe nhiều:
+   - Nghe audio mẫu nhiều lần
+   - Bắt chước chính xác
+   - Ghi âm và so sánh
+
+2. Luyện từng âm:
+   - Tập trung vào thanh mẫu khó
+   - Luyện vận mẫu riêng biệt
+   - Thực hành thanh điệu
+
+3. Luyện câu:
+   - Bắt đầu với câu ngắn
+   - Tăng dần độ phức tạp
+   - Chú ý ngữ điệu
+
+4. Sử dụng công cụ:
+   - Web Speech API
+   - App học tiếng Trung
+   - Ghi âm và so sánh</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+        </section>
+
+        <div class="tip">
+            <strong>💡 Lời khuyên:</strong> Học phiên âm tiếng Trung cần thời gian và kiên nhẫn. Hãy bắt đầu với các âm cơ bản, sau đó dần dần học các âm phức tạp hơn. Sử dụng Web Speech API để luyện phát âm và kiểm tra độ chính xác. Thực hành thường xuyên và đừng ngại mắc lỗi - đó là cách học hiệu quả nhất!
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        // Web Speech API variables
+        let recognition;
+        let synthesis;
+        let isListening = false;
+
+        // Initialize Web Speech API
+        function initSpeechAPI() {
+            // Check if browser supports Speech Recognition
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'zh-CN';
+                
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    const confidence = event.results[0][0].confidence;
+                    
+                    document.getElementById('speechResult').style.display = 'block';
+                    document.getElementById('speechResult').innerHTML = `
+                        <strong>Kết quả nhận dạng:</strong><br>
+                        Văn bản: ${transcript}<br>
+                        Độ chính xác: ${(confidence * 100).toFixed(1)}%
+                    `;
+                    
+                    isListening = false;
+                    updateListeningButton();
+                };
+                
+                recognition.onerror = function(event) {
+                    console.error('Speech recognition error:', event.error);
+                    document.getElementById('speechResult').style.display = 'block';
+                    document.getElementById('speechResult').innerHTML = `
+                        <strong>Lỗi nhận dạng:</strong> ${event.error}
+                    `;
+                    
+                    isListening = false;
+                    updateListeningButton();
+                };
+                
+                recognition.onend = function() {
+                    isListening = false;
+                    updateListeningButton();
+                };
+            } else {
+                console.log('Speech recognition not supported');
+            }
+            
+            // Check if browser supports Speech Synthesis
+            if ('speechSynthesis' in window) {
+                synthesis = window.speechSynthesis;
+            } else {
+                console.log('Speech synthesis not supported');
+            }
+        }
+
+        // Speak text using Web Speech API
+        function speakText(text, lang) {
+            if (synthesis) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.8; // Slower speed for learning
+                synthesis.speak(utterance);
+            } else {
+                alert('Speech synthesis not supported in this browser');
+            }
+        }
+
+        // Start listening for speech input
+        function startListening() {
+            if (recognition && !isListening) {
+                try {
+                    recognition.start();
+                    isListening = true;
+                    updateListeningButton();
+                    
+                    document.getElementById('speechResult').style.display = 'block';
+                    document.getElementById('speechResult').innerHTML = '🎤 Đang lắng nghe... Hãy nói rõ ràng!';
+                } catch (error) {
+                    console.error('Error starting recognition:', error);
+                }
+            }
+        }
+
+        // Update listening button state
+        function updateListeningButton() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                if (button.textContent.includes('🎤')) {
+                    if (isListening) {
+                        button.textContent = '⏹️ Dừng';
+                        button.classList.add('warning');
+                    } else {
+                        button.textContent = '🎤 Thử Phát Âm';
+                        button.classList.remove('warning');
+                    }
+                }
+            });
+        }
+
+        // Copy code function
+        function copyCode(button) {
+            const codeInput = button.previousElementSibling;
+            const textToCopy = codeInput.value;
+            
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            button.textContent = 'Copied!';
+            button.classList.add('success');
+            
+            setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('success');
+            }, 2000);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.borderColor = '#e74c3c';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#e74c3c';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = 'transparent';
+                    link.style.color = '#e74c3c';
+                }
+            });
+        });
+
+        // Initialize Speech API when page loads
+        window.addEventListener('load', initSpeechAPI);
+    </script>
+</body>
+</html> 

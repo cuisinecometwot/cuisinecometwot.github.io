@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Lập Trình Web PHP+MySQL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: #4a5568;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2d3748;
+            font-size: 2rem;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #4a5568;
+            font-size: 1.5rem;
+            margin: 25px 0 15px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #4a5568;
+        }
+
+        .code-title {
+            color: #a0aec0;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #48bb78;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+        }
+
+        .info-box {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .success-box {
+            background: rgba(72, 187, 120, 0.1);
+            border-left: 4px solid #48bb78;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            font-weight: bold;
+        }
+
+        .step-list li {
+            padding-left: 40px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-card h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 Hướng Dẫn Lập Trình Web PHP+MySQL</h1>
+            <p class="subtitle">Xây dựng ứng dụng web động với PHP và cơ sở dữ liệu MySQL</p>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <a href="#overview">Tổng Quan</a>
+                <a href="#setup">Cài Đặt</a>
+                <a href="#basics">Cơ Bản PHP</a>
+                <a href="#database">MySQL & Database</a>
+                <a href="#web-app">Ứng Dụng Web</a>
+                <a href="#security">Bảo Mật</a>
+                <a href="#deployment">Triển Khai</a>
+            </div>
+        </nav>
+
+        <div class="content">
+            <section id="overview">
+                <h2>🚀 Tổng Quan PHP+MySQL</h2>
+                <p>PHP (Hypertext Preprocessor) là ngôn ngữ lập trình server-side mạnh mẽ, kết hợp với MySQL để tạo ra các ứng dụng web động và tương tác.</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>✅ Ưu Điểm</h4>
+                        <ul>
+                            <li>Dễ học và sử dụng</li>
+                            <li>Cộng đồng lớn</li>
+                            <li>Nhiều framework</li>
+                            <li>Tương thích tốt với hosting</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔧 Ứng Dụng</h4>
+                        <ul>
+                            <li>Website động</li>
+                            <li>E-commerce</li>
+                            <li>CMS</li>
+                            <li>Web API</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="setup">
+                <h2>⚙️ Cài Đặt Môi Trường</h2>
+                
+                <h3>1. XAMPP (Windows/Mac/Linux)</h3>
+                <p>XAMPP là gói cài đặt đơn giản nhất bao gồm Apache, MySQL, PHP và phpMyAdmin.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Tải XAMPP</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre># Tải từ: https://www.apachefriends.org/
+# Cài đặt và khởi động Apache + MySQL
+# Truy cập: http://localhost/phpmyadmin</pre>
+                </div>
+
+                <h3>2. Cài Đặt Riêng Lẻ</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Ubuntu/Debian</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>sudo apt update
+sudo apt install apache2 php mysql-server php-mysql
+sudo systemctl start apache2
+sudo systemctl start mysql</pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Tip:</strong> Sử dụng XAMPP nếu bạn mới bắt đầu. Cài đặt riêng lẻ cho production server.
+                </div>
+            </section>
+
+            <section id="basics">
+                <h2>📚 Cơ Bản PHP</h2>
+                
+                <h3>Cú Pháp Cơ Bản</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">hello.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+// Comment một dòng
+/* Comment nhiều dòng */
+
+// Khai báo biến
+$name = "World";
+$age = 25;
+
+// In ra màn hình
+echo "Hello, " . $name . "!";
+echo "Tuổi: $age";
+
+// Mảng
+$fruits = ["apple", "banana", "orange"];
+foreach ($fruits as $fruit) {
+    echo $fruit . "&lt;br&gt;";
+}
+?&gt;</pre>
+                </div>
+
+                <h3>Hàm và Logic</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">functions.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+// Định nghĩa hàm
+function calculateArea($width, $height) {
+    return $width * $height;
+}
+
+// Sử dụng hàm
+$area = calculateArea(10, 5);
+echo "Diện tích: $area";
+
+// Điều kiện
+if ($area > 20) {
+    echo "&lt;p&gt;Diện tích lớn&lt;/p&gt;";
+} elseif ($area > 10) {
+    echo "&lt;p&gt;Diện tích trung bình&lt;/p&gt;";
+} else {
+    echo "&lt;p&gt;Diện tích nhỏ&lt;/p&gt;";
+}
+
+// Vòng lặp
+for ($i = 1; $i <= 5; $i++) {
+    echo "Số: $i&lt;br&gt;";
+}
+?&gt;</pre>
+                </div>
+            </section>
+
+            <section id="database">
+                <h2>🗄️ MySQL & Database</h2>
+                
+                <h3>Kết Nối Database</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">database.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+// Thông tin kết nối
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "mywebsite";
+
+// Tạo kết nối
+$conn = new mysqli($host, $username, $password, $database);
+
+// Kiểm tra kết nối
+if ($conn->connect_error) {
+    die("Kết nối thất bại: " . $conn->connect_error);
+}
+
+echo "Kết nối thành công!";
+$conn->close();
+?&gt;</pre>
+                </div>
+
+                <h3>Tạo Bảng và Thêm Dữ Liệu</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">create_table.sql</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>-- Tạo database
+CREATE DATABASE mywebsite;
+USE mywebsite;
+
+-- Tạo bảng users
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tạo bảng posts
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    content TEXT,
+    user_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);</pre>
+                </div>
+
+                <h3>Thao Tác CRUD</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">crud_operations.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+// CREATE - Thêm user mới
+$sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("sss", $username, $email, $hashed_password);
+$stmt->execute();
+
+// READ - Lấy danh sách users
+$sql = "SELECT * FROM users ORDER BY created_at DESC";
+$result = $conn->query($sql);
+while ($row = $result->fetch_assoc()) {
+    echo "Username: " . $row["username"] . "&lt;br&gt;";
+}
+
+// UPDATE - Cập nhật user
+$sql = "UPDATE users SET email = ? WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("si", $new_email, $user_id);
+$stmt->execute();
+
+// DELETE - Xóa user
+$sql = "DELETE FROM users WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+?&gt;</pre>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Lưu ý:</strong> Luôn sử dụng Prepared Statements để tránh SQL Injection!
+                </div>
+            </section>
+
+            <section id="web-app">
+                <h2>🌐 Ứng Dụng Web</h2>
+                
+                <h3>Form Đăng Ký</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">register.html</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;form action="register.php" method="POST"&gt;
+    &lt;div&gt;
+        &lt;label for="username"&gt;Username:&lt;/label&gt;
+        &lt;input type="text" id="username" name="username" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input type="email" id="email" name="email" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+        &lt;label for="password"&gt;Password:&lt;/label&gt;
+        &lt;input type="password" id="password" name="password" required&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit"&gt;Đăng Ký&lt;/button&gt;
+&lt;/form&gt;</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">register.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST["username"]);
+    $email = trim($_POST["email"]);
+    $password = $_POST["password"];
+    
+    // Validate dữ liệu
+    if (empty($username) || empty($email) || empty($password)) {
+        $error = "Vui lòng điền đầy đủ thông tin";
+    } else {
+        // Hash password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        
+        // Thêm vào database
+        $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss", $username, $email, $hashed_password);
+        
+        if ($stmt->execute()) {
+            $_SESSION["message"] = "Đăng ký thành công!";
+            header("Location: login.php");
+            exit();
+        } else {
+            $error = "Có lỗi xảy ra, vui lòng thử lại";
+        }
+    }
+}
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Đăng Ký&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Đăng Ký Tài Khoản&lt;/h1&gt;
+    
+    &lt;?php if (isset($error)): ?&gt;
+        &lt;p style="color: red;"&gt;&lt;?php echo $error; ?&gt;&lt;/p&gt;
+    &lt;?php endif; ?&gt;
+    
+    &lt;?php include 'register.html'; ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+
+                <h3>Hệ Thống Session</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">login.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    
+    $sql = "SELECT id, username, password FROM users WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user["password"])) {
+            $_SESSION["user_id"] = $user["id"];
+            $_SESSION["username"] = $user["username"];
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            $error = "Password không đúng";
+        }
+    } else {
+        $error = "Username không tồn tại";
+    }
+}
+?&gt;</pre>
+                </div>
+            </section>
+
+            <section id="security">
+                <h2>🔒 Bảo Mật</h2>
+                
+                <h3>Bảo Vệ Chống SQL Injection</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">security_bad.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+// ❌ KHÔNG BAO GIỜ làm như này
+$username = $_GET['username'];
+$sql = "SELECT * FROM users WHERE username = '$username'";
+$result = $conn->query($sql);
+?&gt;</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">security_good.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+// ✅ LUÔN sử dụng Prepared Statements
+$username = $_GET['username'];
+$sql = "SELECT * FROM users WHERE username = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+?&gt;</pre>
+                </div>
+
+                <h3>Bảo Vệ Chống XSS</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">xss_protection.php</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre>&lt;?php
+// Bảo vệ chống XSS
+function escapeHtml($data) {
+    return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+}
+
+// Sử dụng
+$user_input = "&lt;script&gt;alert('XSS')&lt;/script&gt;";
+$safe_output = escapeHtml($user_input);
+echo $safe_output; // Sẽ hiển thị text thay vì chạy script
+?&gt;</pre>
+                </div>
+
+                <div class="success-box">
+                    <strong>✅ Best Practices:</strong>
+                    <ul>
+                        <li>Sử dụng Prepared Statements</li>
+                        <li>Validate và sanitize input</li>
+                        <li>Hash passwords với password_hash()</li>
+                        <li>Sử dụng HTTPS</li>
+                        <li>Giữ PHP và extensions cập nhật</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="deployment">
+                <h2>🚀 Triển Khai</h2>
+                
+                <h3>Upload Lên Hosting</h3>
+                <ol class="step-list">
+                    <li>
+                        <strong>Chuẩn bị file</strong>
+                        <p>Đảm bảo tất cả file PHP, CSS, JS đã sẵn sàng</p>
+                    </li>
+                    <li>
+                        <strong>Export database</strong>
+                        <p>Sử dụng phpMyAdmin để export SQL file</p>
+                    </li>
+                    <li>
+                        <strong>Upload file</strong>
+                        <p>Sử dụng FTP hoặc File Manager của hosting</p>
+                    </li>
+                    <li>
+                        <strong>Import database</strong>
+                        <p>Import SQL file vào database của hosting</p>
+                    </li>
+                    <li>
+                        <strong>Cập nhật config</strong>
+                        <p>Thay đổi thông tin kết nối database</p>
+                    </li>
+                </ol>
+
+                <h3>File .htaccess</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">.htaccess</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre># Bảo mật
+Options -Indexes
+ServerSignature Off
+
+# Rewrite URL
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Bảo vệ file nhạy cảm
+&lt;Files "config.php"&gt;
+    Order allow,deny
+    Deny from all
+&lt;/Files&gt;
+
+# Cache static files
+&lt;IfModule mod_expires.c&gt;
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+&lt;/IfModule&gt;</pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Tip:</strong> Test website trên local trước khi upload lên hosting. Sử dụng hosting có hỗ trợ PHP 8.0+ và MySQL 8.0+.
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Yutoku Tech</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.parentElement.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                button.textContent = 'Error!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+
+        // Smooth scrolling cho navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.background = 'rgba(102, 126, 234, 0.1)';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = 'rgba(102, 126, 234, 0.2)';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

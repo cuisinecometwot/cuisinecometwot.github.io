@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Guide - Yutoku Tech</title>
+    <meta name="description" content="Hướng dẫn cơ bản về Vue.js cho người mới học. Components, reactivity, và best practices.">
+    <meta name="keywords" content="Vue.js, JavaScript, Frontend, Framework, Components, Reactivity">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #42b883 0%, #35495e 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: #42b883;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #42b883;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #42b883;
+            color: white;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #42b883;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            color: #555;
+            margin: 25px 0 15px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .code-input {
+            background: transparent;
+            border: none;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+            white-space: pre;
+            line-height: 1.4;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #42b883;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #369870;
+        }
+        
+        .copy-btn.copied {
+            background: #e53e3e;
+        }
+        
+        .warning {
+            background: #fed7d7;
+            border-left: 4px solid #e53e3e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip {
+            background: #c6f6d5;
+            border-left: 4px solid #42b883;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .code {
+            background: #f7fafc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e53e3e;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>⚡ Vue.js Guide</h1>
+            <p>Hướng dẫn cơ bản về Vue.js cho người mới học</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#basics">Cơ Bản</a></li>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#reactivity">Reactivity</a></li>
+                <li><a href="#lifecycle">Lifecycle</a></li>
+                <li><a href="#routing">Routing</a></li>
+                <li><a href="#state">State Management</a></li>
+            </ul>
+        </nav>
+
+        <section id="basics" class="section">
+            <h2>🚀 Cơ Bản</h2>
+            
+            <h3>Khởi tạo dự án Vue.js</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="3">npm create vue@latest my-vue-app
+cd my-vue-app
+npm install</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Tạo dự án Vue.js mới với Vite build tool.</p>
+
+            <h3>Cấu trúc cơ bản của component</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15">&lt;template&gt;
+  &lt;div class="app"&gt;
+    &lt;h1&gt;{{ message }}&lt;/h1&gt;
+    &lt;button @click="increment"&gt;Count: {{ count }}&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+
+const message = ref('Hello Vue!')
+const count = ref(0)
+
+const increment = () => {
+  count.value++
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+.app {
+  text-align: center;
+  padding: 20px;
+}
+&lt;/style&gt;</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Component Vue.js cơ bản với Composition API.</p>
+
+            <h3>Reactive Data với ref()</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="8">import { ref } from 'vue'
+
+const name = ref('John')
+const age = ref(25)
+const isActive = ref(true)
+
+// Truy cập giá trị
+console.log(name.value) // 'John'
+console.log(age.value)  // 25</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Sử dụng ref() để tạo reactive data.</p>
+        </section>
+
+        <section id="components" class="section">
+            <h2>🧩 Components</h2>
+            
+            <h3>Tạo component con</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">&lt;!-- ChildComponent.vue --&gt;
+&lt;template&gt;
+  &lt;div class="child"&gt;
+    &lt;h3&gt;{{ title }}&lt;/h3&gt;
+    &lt;p&gt;{{ description }}&lt;/p&gt;
+    &lt;button @click="$emit('update', newValue)"&gt;
+      Update
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+defineProps(['title', 'description'])
+defineEmits(['update'])
+
+const newValue = 'Updated Value'
+&lt;/script&gt;</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Component con với props và events.</p>
+
+            <h3>Sử dụng component trong component cha</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">&lt;template&gt;
+  &lt;div class="parent"&gt;
+    &lt;h2&gt;Parent Component&lt;/h2&gt;
+    &lt;ChildComponent 
+      title="Welcome"
+      description="This is a child component"
+      @update="handleUpdate"
+    /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import ChildComponent from './ChildComponent.vue'
+
+const handleUpdate = (value) => {
+  console.log('Received update:', value)
+}
+&lt;/script&gt;</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Import và sử dụng component con.</p>
+
+            <h3>Dynamic Components</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15">&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click="currentComponent = 'ComponentA'"&gt;Show A&lt;/button&gt;
+    &lt;button @click="currentComponent = 'ComponentB'"&gt;Show B&lt;/button&gt;
+    
+    &lt;component :is="currentComponent" /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+import ComponentA from './ComponentA.vue'
+import ComponentB from './ComponentB.vue'
+
+const currentComponent = ref('ComponentA')
+&lt;/script&gt;</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Chuyển đổi giữa các component động.</p>
+        </section>
+
+        <section id="reactivity" class="section">
+            <h2>⚡ Reactivity</h2>
+            
+            <h3>Reactive Objects với reactive()</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15">import { reactive } from 'vue'
+
+const user = reactive({
+  name: 'John',
+  age: 25,
+  address: {
+    city: 'New York',
+    country: 'USA'
+  }
+})
+
+// Cập nhật trực tiếp
+user.name = 'Jane'
+user.address.city = 'Los Angeles'
+
+// Không cần .value như ref()</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Sử dụng reactive() cho objects phức tạp.</p>
+
+            <h3>Computed Properties</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15">import { ref, computed } from 'vue'
+
+const firstName = ref('John')
+const lastName = ref('Doe')
+
+const fullName = computed(() => {
+  return `${firstName.value} ${lastName.value}`
+})
+
+const nameLength = computed(() => {
+  return fullName.value.length
+})</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Computed properties tự động cập nhật khi dependencies thay đổi.</p>
+
+            <h3>Watchers</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="15">import { ref, watch } from 'vue'
+
+const count = ref(0)
+const message = ref('')
+
+watch(count, (newValue, oldValue) => {
+  message.value = `Count changed from ${oldValue} to ${newValue}`
+  
+  if (newValue > 10) {
+    message.value += ' - High count!'
+  }
+})</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Watch thay đổi của reactive data.</p>
+        </section>
+
+        <section id="lifecycle" class="section">
+            <h2>🔄 Lifecycle Hooks</h2>
+            
+            <h3>Lifecycle Hooks cơ bản</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">import { onMounted, onUnmounted, onUpdated } from 'vue'
+
+// Khi component được mount
+onMounted(() => {
+  console.log('Component mounted')
+  // Khởi tạo API calls, event listeners
+})
+
+// Khi component được update
+onUpdated(() => {
+  console.log('Component updated')
+  // Xử lý sau khi DOM được update
+})
+
+// Khi component được unmount
+onUnmounted(() => {
+  console.log('Component unmounted')
+  // Cleanup: remove event listeners, timers
+})</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Các lifecycle hooks chính trong Vue 3.</p>
+
+            <h3>Async Operations trong onMounted</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">import { ref, onMounted } from 'vue'
+
+const data = ref(null)
+const loading = ref(true)
+const error = ref(null)
+
+onMounted(async () => {
+  try {
+    loading.value = true
+    const response = await fetch('/api/data')
+    data.value = await response.json()
+  } catch (err) {
+    error.value = err.message
+  } finally {
+    loading.value = false
+  }
+})</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Xử lý async operations khi component mount.</p>
+        </section>
+
+        <section id="routing" class="section">
+            <h2>🛣️ Routing</h2>
+            
+            <h3>Cài đặt Vue Router</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="3">npm install vue-router@4</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Cài đặt Vue Router cho Vue 3.</p>
+
+            <h3>Cấu hình Router</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">// router/index.js
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../views/Home.vue'
+import About from '../views/About.vue'
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
+  },
+  {
+    path: '/user/:id',
+    name: 'User',
+    component: () => import('../views/User.vue')
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+export default router</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Cấu hình routes và lazy loading.</p>
+
+            <h3>Sử dụng Router trong component</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">&lt;template&gt;
+  &lt;div&gt;
+    &lt;nav&gt;
+      &lt;router-link to="/"&gt;Home&lt;/router-link&gt; |
+      &lt;router-link to="/about"&gt;About&lt;/router-link&gt;
+    &lt;/nav&gt;
+    
+    &lt;router-view /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
+
+const goToAbout = () => {
+  router.push('/about')
+}
+&lt;/script&gt;</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Navigation và routing trong component.</p>
+        </section>
+
+        <section id="state" class="section">
+            <h2>📊 State Management</h2>
+            
+            <h3>Pinia Store cơ bản</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="25">// stores/counter.js
+import { defineStore } from 'pinia'
+
+export const useCounterStore = defineStore('counter', {
+  state: () => ({
+    count: 0,
+    name: 'Counter Store'
+  }),
+  
+  getters: {
+    doubleCount: (state) => state.count * 2,
+    countPlusOne: (state) => state.count + 1
+  },
+  
+  actions: {
+    increment() {
+      this.count++
+    },
+    decrement() {
+      this.count--
+    },
+    reset() {
+      this.count = 0
+    }
+  }
+})</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Tạo Pinia store với state, getters và actions.</p>
+
+            <h3>Sử dụng Store trong component</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">&lt;template&gt;
+  &lt;div&gt;
+    &lt;h2&gt;{{ counter.name }}&lt;/h2&gt;
+    &lt;p&gt;Count: {{ counter.count }}&lt;/p&gt;
+    &lt;p&gt;Double: {{ counter.doubleCount }}&lt;/p&gt;
+    
+    &lt;button @click="counter.increment()"&gt;+&lt;/button&gt;
+    &lt;button @click="counter.decrement()"&gt;-&lt;/button&gt;
+    &lt;button @click="counter.reset()"&gt;Reset&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { useCounterStore } from '../stores/counter'
+
+const counter = useCounterStore()
+&lt;/script&gt;</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Sử dụng Pinia store trong component.</p>
+
+            <h3>Composition API với Store</h3>
+            <div class="code-block">
+                <textarea class="code-input" readonly rows="20">import { useCounterStore } from '../stores/counter'
+import { storeToRefs } from 'pinia'
+
+const counter = useCounterStore()
+
+// Destructure với storeToRefs để giữ reactivity
+const { count, name } = storeToRefs(counter)
+const { increment, decrement } = counter
+
+// Sử dụng trực tiếp
+const handleIncrement = () => {
+  increment()
+}
+
+const handleDecrement = () => {
+  decrement()
+}</textarea>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <p>Sử dụng storeToRefs để destructure store.</p>
+        </section>
+
+        <div class="tip">
+            <strong>💡 Lời khuyên:</strong> Sử dụng Composition API với <code>&lt;script setup&gt;</code> để code ngắn gọn và dễ hiểu hơn. Luôn nhớ cleanup trong onUnmounted để tránh memory leaks.
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        function copyCode(button) {
+            const codeInput = button.previousElementSibling;
+            const textToCopy = codeInput.value;
+            
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            
+            setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.borderColor = '#42b883';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = '#42b883';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = 'transparent';
+                    link.style.color = '#42b883';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

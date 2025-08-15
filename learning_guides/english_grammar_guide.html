@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Guide - Tenses & Structures</title>
+    <meta name="description" content="Complete guide to English grammar tenses and structures with technical examples.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 0; text-align: center; margin-bottom: 30px; border-radius: 15px; }
+        .header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .header p { font-size: 1.2rem; opacity: 0.9; }
+        .nav-tabs { display: flex; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; gap: 10px; }
+        .nav-tab { padding: 12px 24px; background: white; border: 2px solid #e0e0e0; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; }
+        .nav-tab:hover { border-color: #667eea; transform: translateY(-2px); }
+        .nav-tab.active { background: #667eea; color: white; border-color: #667eea; }
+        .content-section { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; }
+        .content-section.active { display: block; }
+        .content-section h2 { color: #667eea; margin-bottom: 20px; font-size: 1.8rem; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        .content-section h3 { color: #555; margin: 25px 0 15px 0; font-size: 1.4rem; }
+        .grammar-item { background: #f8f9fa; border-left: 4px solid #667eea; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .grammar-item h4 { color: #667eea; margin-bottom: 10px; font-size: 1.2rem; }
+        .structure { background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; font-family: 'Courier New', monospace; font-weight: bold; }
+        .example { background: #f1f8e9; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #4caf50; }
+        .example h5 { color: #2e7d32; margin-bottom: 8px; }
+        .code-example { background: #263238; color: #fff; padding: 15px; border-radius: 8px; margin: 10px 0; font-family: 'Courier New', monospace; overflow-x: auto; }
+        .copy-btn { background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; margin: 10px 0; transition: background 0.3s ease; }
+        .copy-btn:hover { background: #5a6fd8; }
+        .copy-btn.copied { background: #4caf50; }
+        .usage-note { background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .footer { text-align: center; padding: 30px; color: #666; border-top: 1px solid #e0e0e0; margin-top: 50px; }
+        @media (max-width: 768px) { .nav-tabs { flex-direction: column; align-items: center; } .nav-tab { width: 100%; text-align: center; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>📚 English Grammar Guide</h1>
+            <p>Complete guide to English tenses and grammar structures with technical examples</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="tenses">Tenses</div>
+            <div class="nav-tab" data-tab="structures">Grammar Structures</div>
+            <div class="nav-tab" data-tab="technical">Technical Examples</div>
+            <div class="nav-tab" data-tab="practice">Practice Exercises</div>
+        </div>
+
+        <!-- Tenses Section -->
+        <div class="content-section active" id="tenses">
+            <h2>📅 English Tenses</h2>
+            
+            <h3>Present Tenses</h3>
+            
+            <div class="grammar-item">
+                <h4>Present Simple</h4>
+                <div class="structure">Subject + Base Verb (+ s/es for 3rd person singular)</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p><strong>General Truths:</strong> "The CPU processes data sequentially."</p>
+                    <p><strong>Habits/Routines:</strong> "I usually commit code before pushing to the repository."</p>
+                    <p><strong>Scheduled Events:</strong> "The server maintenance starts at 2 AM every Sunday."</p>
+                </div>
+                <div class="code-example">
+// Database connection example
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'password'
+});
+
+// Present Simple usage in comments
+// This function always returns a promise
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        // Implementation here
+    });
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+
+            <div class="grammar-item">
+                <h4>Present Continuous</h4>
+                <div class="structure">Subject + am/is/are + Verb-ing</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p><strong>Actions in Progress:</strong> "I am currently debugging the authentication module."</p>
+                    <p><strong>Temporary Actions:</strong> "The system is running a backup process right now."</p>
+                    <p><strong>Future Arrangements:</strong> "We are deploying the new version next week."</p>
+                </div>
+                <div class="code-example">
+// Present Continuous in technical context
+class SystemMonitor {
+    constructor() {
+        this.isRunning = false;
+        this.currentProcess = null;
+    }
+    
+    startMonitoring() {
+        if (this.isRunning) {
+            console.log("Monitoring is already running");
+            return;
+        }
+        
+        this.isRunning = true;
+        console.log("System monitoring is starting...");
+        
+        // Start monitoring process
+        this.currentProcess = setInterval(() => {
+            this.checkSystemHealth();
+        }, 5000);
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+
+            <div class="grammar-item">
+                <h4>Present Perfect</h4>
+                <div class="structure">Subject + have/has + Past Participle</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p><strong>Completed Actions with Present Relevance:</strong> "I have implemented the new API endpoint."</p>
+                    <p><strong>Experience:</strong> "She has worked with React for three years."</p>
+                    <p><strong>Unfinished Time Periods:</strong> "We have deployed five updates this month."</p>
+                </div>
+                <div class="code-example">
+// Present Perfect in technical documentation
+class UserService {
+    constructor() {
+        this.users = [];
+        this.totalUsers = 0;
+    }
+    
+    addUser(user) {
+        // Check if user already exists
+        if (this.users.find(u => u.email === user.email)) {
+            throw new Error("User already exists");
+        }
+        
+        this.users.push(user);
+        this.totalUsers++;
+        
+        // Log the action
+        console.log(`User ${user.email} has been added successfully`);
+        console.log(`Total users: ${this.totalUsers}`);
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+
+            <h3>Past Tenses</h3>
+            
+            <div class="grammar-item">
+                <h4>Past Simple</h4>
+                <div class="structure">Subject + Past Tense Verb</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p><strong>Completed Actions:</strong> "I deployed the application yesterday."</p>
+                    <p><strong>Sequential Actions:</strong> "First, I cloned the repository, then I created a new branch."</p>
+                    <p><strong>Past Habits:</strong> "We used to deploy manually before implementing CI/CD."</p>
+                </div>
+                <div class="code-example">
+// Past Simple in error handling
+async function processData() {
+    try {
+        // Attempt to fetch data
+        const response = await fetch('/api/data');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
+        
+    } catch (error) {
+        // Log what happened
+        console.log(`Error occurred: ${error.message}`);
+        console.log(`Timestamp: ${new Date().toISOString()}`);
+        
+        // Return fallback data
+        return getDefaultData();
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+
+            <h3>Future Tenses</h3>
+            
+            <div class="grammar-item">
+                <h4>Will Future</h4>
+                <div class="structure">Subject + will + Base Verb</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p><strong>Predictions:</strong> "The new algorithm will improve performance by 30%."</p>
+                    <p><strong>Spontaneous Decisions:</strong> "I'll help you debug that issue."</p>
+                    <p><strong>Promises/Offers:</strong> "I will review your pull request by tomorrow."</p>
+                </div>
+                <div class="code-example">
+// Will Future in promise handling
+class TaskScheduler {
+    constructor() {
+        this.tasks = [];
+        this.isRunning = false;
+    }
+    
+    addTask(task) {
+        this.tasks.push(task);
+        console.log(`Task "${task.name}" will be executed at ${task.scheduledTime}`);
+    }
+    
+    async executeTasks() {
+        if (this.isRunning) {
+            console.log("Task execution is already in progress");
+            return;
+        }
+        
+        this.isRunning = true;
+        
+        for (const task of this.tasks) {
+            try {
+                console.log(`Executing task: ${task.name}`);
+                await task.execute();
+                console.log(`Task "${task.name}" will be marked as completed`);
+            } catch (error) {
+                console.error(`Task "${task.name}" will be retried due to error: ${error.message}`);
+            }
+        }
+        
+        this.isRunning = false;
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+        </div>
+
+        <!-- Grammar Structures Section -->
+        <div class="content-section" id="structures">
+            <h2>🏗️ Grammar Structures</h2>
+            
+            <h3>Conditional Sentences</h3>
+            
+            <div class="grammar-item">
+                <h4>Zero Conditional</h4>
+                <div class="structure">If + Present Simple, Present Simple</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p>"If you restart the service, it clears the cache."</p>
+                    <p>"If the database connection fails, the application logs an error."</p>
+                </div>
+                <div class="code-example">
+// Zero Conditional in system behavior
+class CacheManager {
+    constructor() {
+        this.cache = new Map();
+        this.maxSize = 1000;
+    }
+    
+    set(key, value) {
+        // If cache is full, remove oldest entry
+        if (this.cache.size >= this.maxSize) {
+            const firstKey = this.cache.keys().next().value;
+            this.cache.delete(firstKey);
+        }
+        
+        this.cache.set(key, value);
+    }
+    
+    get(key) {
+        // If key exists, return value; if not, return null
+        if (this.cache.has(key)) {
+            return this.cache.get(key);
+        }
+        return null;
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+
+            <div class="grammar-item">
+                <h4>First Conditional</h4>
+                <div class="structure">If + Present Simple, will + Base Verb</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p>"If the test passes, I will merge the branch."</p>
+                    <p>"If the server responds, the client will process the data."</p>
+                </div>
+                <div class="code-example">
+// First Conditional in error handling
+class APIClient {
+    constructor(baseURL) {
+        this.baseURL = baseURL;
+        this.retryCount = 0;
+        this.maxRetries = 3;
+    }
+    
+    async makeRequest(endpoint) {
+        try {
+            const response = await fetch(`${this.baseURL}${endpoint}`);
+            
+            if (response.ok) {
+                this.retryCount = 0; // Reset retry count on success
+                return await response.json();
+            } else {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+        } catch (error) {
+            if (this.retryCount < this.maxRetries) {
+                this.retryCount++;
+                console.log(`Request failed, will retry (${this.retryCount}/${this.maxRetries})`);
+                return this.makeRequest(endpoint); // Retry
+            } else {
+                throw new Error(`Max retries exceeded: ${error.message}`);
+            }
+        }
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+
+            <h3>Passive Voice</h3>
+            
+            <div class="grammar-item">
+                <h4>Present Passive</h4>
+                <div class="structure">Subject + am/is/are + Past Participle</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p>"The data is processed by the algorithm."</p>
+                    <p>"New features are developed by the team."</p>
+                </div>
+                <div class="code-example">
+// Present Passive in system architecture
+class DataProcessor {
+    constructor() {
+        this.processors = [];
+    }
+    
+    addProcessor(processor) {
+        this.processors.push(processor);
+    }
+    
+    processData(data) {
+        let processedData = data;
+        
+        // Data is processed by each processor in sequence
+        for (const processor of this.processors) {
+            processedData = processor.process(processedData);
+        }
+        
+        return processedData;
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+
+            <h3>Modal Verbs</h3>
+            
+            <div class="grammar-item">
+                <h4>Can/Could (Ability/Possibility)</h4>
+                <div class="structure">Subject + can/could + Base Verb</div>
+                <div class="example">
+                    <h5>Technical Examples:</h5>
+                    <p>"The system can handle 1000 concurrent users."</p>
+                    <p>"This algorithm could be optimized further."</p>
+                </div>
+                <div class="code-example">
+// Can/Could in system capabilities
+class SystemCapabilities {
+    constructor() {
+        this.maxConcurrentUsers = 1000;
+        this.currentUsers = 0;
+    }
+    
+    canAcceptNewUser() {
+        return this.currentUsers < this.maxConcurrentUsers;
+    }
+    
+    acceptUser() {
+        if (this.canAcceptNewUser()) {
+            this.currentUsers++;
+            return true;
+        }
+        return false;
+    }
+    
+    optimizePerformance() {
+        // The system could be optimized by implementing caching
+        if (this.currentUsers > this.maxConcurrentUsers * 0.8) {
+            console.log("System load is high, performance could be optimized");
+            this.enableCaching();
+        }
+    }
+    
+    enableCaching() {
+        console.log("Caching enabled to improve performance");
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+        </div>
+
+        <!-- Technical Examples Section -->
+        <div class="content-section" id="technical">
+            <h2>💻 Technical Examples</h2>
+            
+            <h3>API Documentation</h3>
+            
+            <div class="grammar-item">
+                <h4>Present Simple for API Endpoints</h4>
+                <div class="example">
+                    <h5>Documentation Examples:</h5>
+                    <p>"This endpoint returns user data in JSON format."</p>
+                    <p>"The API accepts POST requests with user credentials."</p>
+                    <p>"Authentication requires a valid JWT token."</p>
+                </div>
+                <div class="code-example">
+/**
+ * User API Endpoints
+ * 
+ * This API provides user management functionality.
+ * All endpoints require authentication via JWT token.
+ */
+
+// GET /api/users
+// This endpoint returns a list of all users
+// The response includes pagination metadata
+app.get('/api/users', authenticateToken, async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        
+        const users = await User.find()
+            .limit(limit)
+            .skip((page - 1) * limit);
+        
+        const total = await User.countDocuments();
+        
+        res.json({
+            users: users,
+            pagination: {
+                page: page,
+                limit: limit,
+                total: total,
+                pages: Math.ceil(total / limit)
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+
+            <h3>Error Messages</h3>
+            
+            <div class="grammar-item">
+                <h4>Present Simple for Error Descriptions</h4>
+                <div class="example">
+                    <h5>Error Message Examples:</h5>
+                    <p>"The file does not exist in the specified directory."</p>
+                    <p>"Authentication fails when the token expires."</p>
+                    <p>"The database connection times out after 30 seconds."</p>
+                </div>
+                <div class="code-example">
+// Error handling with clear grammar
+class ErrorHandler {
+    constructor() {
+        this.errorMessages = {
+            'FILE_NOT_FOUND': 'The requested file does not exist in the system.',
+            'AUTHENTICATION_FAILED': 'Authentication fails when credentials are invalid.',
+            'DATABASE_TIMEOUT': 'The database connection times out after 30 seconds.',
+            'INVALID_INPUT': 'The input data does not match the expected format.',
+            'PERMISSION_DENIED': 'Access is denied due to insufficient permissions.'
+        };
+    }
+    
+    handleError(errorCode, context = {}) {
+        const baseMessage = this.errorMessages[errorCode];
+        
+        if (!baseMessage) {
+            return 'An unexpected error occurs during operation.';
+        }
+        
+        // Add context-specific information
+        let detailedMessage = baseMessage;
+        
+        if (context.filePath) {
+            detailedMessage += ` File path: ${context.filePath}`;
+        }
+        
+        if (context.userId) {
+            detailedMessage += ` User ID: ${context.userId}`;
+        }
+        
+        return detailedMessage;
+    }
+}
+                </div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+            </div>
+        </div>
+
+        <!-- Practice Exercises Section -->
+        <div class="content-section" id="practice">
+            <h2>✍️ Practice Exercises</h2>
+            
+            <h3>Exercise 1: Fill in the Correct Tense</h3>
+            
+            <div class="grammar-item">
+                <h4>Complete the sentences with the correct verb form:</h4>
+                <div class="example">
+                    <p>1. The server _____ (run) continuously since last Monday.</p>
+                    <p>2. I _____ (work) on this bug when the system crashed.</p>
+                    <p>3. The new feature _____ (be) deployed next week.</p>
+                    <p>4. If the test passes, I _____ (merge) the code.</p>
+                    <p>5. The API _____ (return) JSON data by default.</p>
+                </div>
+                <div class="usage-note">
+                    <strong>Answers:</strong><br>
+                    1. has been running (Present Perfect Continuous)<br>
+                    2. was working (Past Continuous)<br>
+                    3. will be (Future Simple Passive)<br>
+                    4. will merge (First Conditional)<br>
+                    5. returns (Present Simple)
+                </div>
+            </div>
+
+            <h3>Exercise 2: Convert to Passive Voice</h3>
+            
+            <div class="grammar-item">
+                <h4>Rewrite these sentences in passive voice:</h4>
+                <div class="example">
+                    <p>1. The developer writes the code.</p>
+                    <p>2. The system processes the data.</p>
+                    <p>3. The team will deploy the application.</p>
+                    <p>4. The algorithm has optimized the performance.</p>
+                    <p>5. The user must provide valid credentials.</p>
+                </div>
+                <div class="usage-note">
+                    <strong>Answers:</strong><br>
+                    1. The code is written by the developer.<br>
+                    2. The data is processed by the system.<br>
+                    3. The application will be deployed by the team.<br>
+                    4. The performance has been optimized by the algorithm.<br>
+                    5. Valid credentials must be provided by the user.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Yutoku Tech</p>
+    </footer>
+
+    <script>
+        // Tab navigation
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and sections
+                navTabs.forEach(t => t.classList.remove('active'));
+                contentSections.forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding section
+                tab.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.previousElementSibling;
+            const textToCopy = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = 'Copy Code';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                button.textContent = 'Failed to copy';
+                
+                setTimeout(() => {
+                    button.textContent = 'Copy Code';
+                }, 2000);
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in effect for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        contentSections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html> 
