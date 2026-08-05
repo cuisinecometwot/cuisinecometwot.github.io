@@ -85,10 +85,12 @@ html {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  word-break: break-all; }
+  word-break: normal;
+  overflow-wrap: break-word; }
 
 p {
-  line-break: strict; }
+  line-break: auto;
+  word-break: normal; }
 
 a {
   -webkit-transition: opacity 0.3s ease-out;
