@@ -1,6 +1,6 @@
 # Yutoku Tech (cuisinecometwot.github.io)
 
-Personal portfolio of Huu Duc Nguyen (Field Engineer, iOS dev), served on GitHub Pages at yutokutech.id.vn. Also hosts self-written learning guides in `learning_guides/`.
+Personal portfolio of Huu Duc Nguyen (Field Engineer, iOS dev), served on GitHub Pages at cuisinecometwot.github.io (custom domain yutokutech.id.vn dropped). Also hosts self-written learning guides in `learning_guides/`.
 
 ## Stack
 - Static HTML + one stylesheet (`res/site.css`) + small vanilla JS (`res/site.js`). No build step, no frameworks, no jQuery.
