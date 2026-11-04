@@ -1,254 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<title>Homepage | Yutoku Tech</title>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="keywords" content="Huu Duc Nguyen,yutokutech,IT,Field Engineer,iOS,about">
-		<meta name="description" content="Field Engineer · iOS apps · games & good food. Portfolio of Huu Duc Nguyen.">
-		<meta property="og:title" content="Yutoku Tech">
-		<meta property="og:description" content="Field Engineer · iOS apps · games & good food. Portfolio of Huu Duc Nguyen.">
-		<meta property="og:type" content="website">
-		<meta property="og:image" content="https://yutokutech.id.vn/res/logo.png">
-		<meta property="og:url" content="https://yutokutech.id.vn/">
-		<link rel="stylesheet" href="res/style.css">
-		<link rel="icon" type="image/x-icon" href="res/logo.svg">
-		<script src="res/jquery.min.js"></script>
-		<script src="res/common.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Huu Duc Nguyen · Field Engineer &amp; iOS Developer | Yutoku Tech</title>
+	<meta name="keywords" content="Huu Duc Nguyen,yutokutech,IT,Field Engineer,iOS,about">
+	<meta name="description" content="Field Engineer · iOS apps · games & good food. Portfolio of Huu Duc Nguyen.">
+	<meta name="theme-color" content="#0b0d10">
+	<meta property="og:title" content="Yutoku Tech">
+	<meta property="og:description" content="Field Engineer · iOS apps · games & good food. Portfolio of Huu Duc Nguyen.">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="https://yutokutech.id.vn/res/logo.png">
+	<meta property="og:url" content="https://yutokutech.id.vn/">
+	<link rel="icon" type="image/svg+xml" href="res/logo.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Russo+One&display=swap">
+	<link rel="preload" as="image" href="res/img-main.webp" type="image/webp" fetchpriority="high">
+	<link rel="stylesheet" href="res/site.css">
+	<script>document.documentElement.classList.add("js")</script>
+	<script src="res/site.js" defer></script>
 </head>
 
 <body>
-<article class="page interview i01">
+<svg class="sprite" aria-hidden="true" focusable="false">
+	<symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+	<symbol id="i-youtube" viewBox="0 0 24 24"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></symbol>
+	<symbol id="i-game" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258A4 4 0 0 0 17.32 5z"/></symbol>
+	<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+	<symbol id="i-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+	<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+	<symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
 <header class="header">
-	<div class="header--inner clearfix">
-		<div class="header--inner--logo">
-			<a href="https://yutokutech.id.vn/"><h1><img src="res/logo.png" alt="Yutoku Tech"></h1></a>
-		</div>
-		<nav class="header--inner--gnav">
-			<ul class="clearfix">
-				<li><a href="#"><span>HOMEPAGE</span></a></li>
-				<li class="navtrigger index-none"><a href="#"><span>PROJECTS</span></a>
-					<div class="largemenu">
-						<div class="largemenu--inner">
-							<dl>
-								<dt>PROJECTS</dt>
-								<dd>Browse my Github for more!</dd>
-							</dl>
-							<div class="largemenu--inner--wrap clearfix">
-								<div class="largemenu--inner--wrap--box">
-									<a href="https://github.com/cuisinecometwot/CareerConnectingProject">
-										<div class="image"><img src="res/preview01.jpg" alt=""></div>
-										<p>Career Connecting Website</p>
-									</a>
-								</div>
-								<div class="largemenu--inner--wrap--box">
-									<a href="https://github.com/cuisinecometwot/freenet">
-										<div class="image"><img src="res/preview01.jpg" alt=""></div>
-										<p>FreeNet Software</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="navtrigger index-none"><a href="#"><span>RESOURCES</span></a>
-					<div class="largemenu">
-						<div class="largemenu--inner">
-							<dl>
-								<dt>RESOURCES</dt>
-								<dd>Learning notes & guides</dd>
-							</dl>
-							<div class="largemenu--inner--wrap clearfix">
-								<div class="largemenu--inner--wrap--box">
-									<a href="learning_guides/git_conventions.html">
-										<div class="image"><img src="res/preview01.jpg" alt=""></div>
-										<p>Git CLI Guide</p>
-									</a>
-								</div>
-								<div class="largemenu--inner--wrap--box">
-									<a href="learning_guides/learning_resources.html">
-										<div class="image"><img src="res/preview01.jpg" alt=""></div>
-										<p>Learning Resources</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="navtrigger index-none"><a href="#"><span>BLOGS</span></a>
-					<div class="largemenu">
-						<div class="largemenu--inner">
-							<dl>
-								<dt>BLOGS</dt>
-								<dd>Coming soon!</dd>
-							</dl>
-						</div>
-					</div>
-				</li>
+	<div class="header__inner wrap">
+		<a class="brand" href="#top" aria-label="Yutoku Tech, back to top">
+			<img src="res/logo.svg" alt="" width="32" height="32">
+			<span>YUTOKU<span class="brand__accent">TECH</span></span>
+		</a>
+		<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+			<svg class="icon icon--open"><use href="#i-menu"/></svg>
+			<svg class="icon icon--close"><use href="#i-close"/></svg>
+		</button>
+		<nav id="nav" class="nav" aria-label="Main">
+			<ul>
+				<li><a href="#about">About</a></li>
+				<li><a href="#work">Work</a></li>
+				<li><a href="#path">Path</a></li>
+				<li><a href="#projects">Projects</a></li>
+				<li><a href="#guides">Guides</a></li>
+				<li><a href="#interests">Interests</a></li>
 			</ul>
 		</nav>
 	</div>
 </header>
 
-<main>
-	<section id="main" class="main">
-		<div class="main--inner">
-			<div class="main--inner--image"><img src="res/img-main.png" alt=""></div>
-			<div class="main--inner--profile">
-				<div class="main--inner--profile--contents">
-					<div class="tri">
-						<dl>
-							<dt>Huu Duc Nguyen</dt>
-						</dl>
-					</div>
-				</div>
+<main id="main">
+	<section id="top" class="hero" aria-labelledby="hero-title">
+		<picture>
+			<source srcset="res/img-main.webp" type="image/webp">
+			<img class="hero__img" src="res/img-main.png" alt="Anime-style tank commander resting against a tank gun under a cloudy sky" width="1920" height="1100" fetchpriority="high">
+		</picture>
+		<div class="hero__content wrap">
+			<p class="tag">// Field Engineer · iOS Developer</p>
+			<h1 id="hero-title">Huu Duc Nguyen</h1>
+			<p class="hero__lead">Field work by day. iOS apps by night.</p>
+			<div class="hero__cta">
+				<a class="btn btn--primary" href="https://github.com/cuisinecometwot" target="_blank" rel="noopener">
+					<svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> GitHub
+				</a>
+				<a class="btn btn--ghost" href="#guides">Browse guides</a>
 			</div>
 		</div>
 	</section>
 
-	<section id="lead" class="lead">
-		<div class="lead--inner">
-			<h2>Field work by day. iOS apps by night.</h2>
-			<dl>
-				<dt>PROFILE</dt>
-				<dd>
-					<p><i>A Field Engineer who ships reliable systems — and ships iOS apps for fun.</i></p>
+	<section id="about" class="section" aria-labelledby="about-title">
+		<div class="wrap">
+			<header class="section__head reveal">
+				<p class="tag">00 // Profile</p>
+				<h2 id="about-title">A Field Engineer who ships reliable systems, and iOS apps for fun.</h2>
+			</header>
+			<div class="cards cards--3">
+				<article class="card reveal">
+					<h3 class="card__label">Profile</h3>
 					<p>I'm working as a <strong>Field Engineer</strong>, solving real-world tech problems on site and keeping systems running smoothly.</p>
-					<p>Outside work I build <strong>iOS applications</strong> with Swift &amp; SwiftUI — learning by shipping.</p>
+					<p>Outside work I build <strong>iOS applications</strong> with Swift &amp; SwiftUI, learning by shipping.</p>
 					<p>I like <strong>playing games</strong>, hunting <strong>good food</strong>, and turning ideas into apps people can hold in their pocket.</p>
-				</dd>
-			</dl>
-			<dl>
-				<dt>PHILOSOPHY</dt>
-				<dd>
-					<p>Show up, fix what matters, keep learning. Good systems — and good meals — are worth the effort.</p>
-				</dd>
-			</dl>
-			<dl>
-				<dt>SOCIAL ACCOUNTS</dt>
-				<dd>
-					<p><a href="https://github.com/cuisinecometwot" target="_blank" rel="noopener">Github</a></p>
-					<p><a href="https://www.youtube.com/@cuisinecometwot" target="_blank" rel="noopener">Youtube</a></p>
-					<p><a href="https://worldoftanks.asia/en/community/accounts/2012214090-LuckyDuck2109/" target="_blank" rel="noopener">WoT ASIA</a></p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-
-	<section id="interview01" class="iv iv01">
-		<div class="iv--inner clearfix">
-			<div class="iv--inner--image"><img src="res/img-pic01.png" alt=""></div>
-			<div class="iv--inner--text">
-				<div class="iv--inner--text--block">
-					<div class="num">01</div>
-					<div class="iv--inner--text--block--contents">
-						<h3>Field Engineering</h3>
-						<p>As a Field Engineer I work close to the hardware, the network, and the people who depend on them. My job is to diagnose issues on site, keep infrastructure healthy, and turn chaos into something stable and documented.</p>
-						<p>That hands-on mindset — listen, isolate, fix, verify — is the foundation I bring to every technical problem, whether it's a broken deployment or a flaky device in the field.</p>
-					</div>
-				</div>
+				</article>
+				<article class="card reveal">
+					<h3 class="card__label">Philosophy</h3>
+					<p class="quote">Show up, fix what matters, keep learning. Good systems, and good meals, are worth the effort.</p>
+				</article>
+				<article class="card reveal">
+					<h3 class="card__label">Find me</h3>
+					<ul class="links">
+						<li><a href="https://github.com/cuisinecometwot" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a></li>
+						<li><a href="https://www.youtube.com/@cuisinecometwot" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-youtube"/></svg>YouTube</a></li>
+						<li><a href="https://worldoftanks.asia/en/community/accounts/2012214090-LuckyDuck2109/" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-game"/></svg>World of Tanks ASIA</a></li>
+					</ul>
+				</article>
 			</div>
 		</div>
 	</section>
 
-	<section id="interview02" class="iv iv02">
-		<div class="iv--inner clearfix">
-			<div class="iv--inner--image"><img src="res/img-pic02.png" alt=""></div>
-			<div class="iv--inner--text">
-				<div class="iv--inner--text--block">
-					<div class="num">02</div>
-					<div class="iv--inner--text--block--contents">
-						<h3>Building iOS Apps</h3>
-						<p>When I'm not on site, I'm building iOS apps. Swift and SwiftUI let me move from idea to something you can tap in a weekend — and that's addictive.</p>
-						<p>Shipping small apps teaches product sense, UI craft, and the discipline of finishing. Each project is practice for bigger products and for leading teams that build them.</p>
-					</div>
+	<section id="work" class="section section--alt" aria-label="What I do">
+		<div class="wrap chapters">
+			<article class="chapter reveal">
+				<picture class="chapter__media">
+					<source srcset="res/img-pic01.webp" type="image/webp">
+					<img src="res/img-pic01.png" alt="Close-up of a calm, focused tank commander inside a turret" width="1230" height="1000" loading="lazy" decoding="async">
+				</picture>
+				<div class="chapter__text">
+					<p class="tag">01 // On site</p>
+					<h2>Field Engineering</h2>
+					<p>As a Field Engineer I work close to the hardware, the network, and the people who depend on them. My job is to diagnose issues on site, keep infrastructure healthy, and turn chaos into something stable and documented.</p>
+					<p>That hands-on mindset (listen, isolate, fix, verify) is the foundation I bring to every technical problem, whether it's a broken deployment or a flaky device in the field.</p>
 				</div>
-			</div>
+			</article>
+			<article class="chapter chapter--flip reveal">
+				<picture class="chapter__media">
+					<source srcset="res/img-pic02.webp" type="image/webp">
+					<img src="res/img-pic02.png" alt="Tank commander thinking, hand on chin, inside a turret" width="1255" height="1080" loading="lazy" decoding="async">
+				</picture>
+				<div class="chapter__text">
+					<p class="tag">02 // After hours</p>
+					<h2>Building iOS Apps</h2>
+					<p>When I'm not on site, I'm building iOS apps. Swift and SwiftUI let me move from idea to something you can tap in a weekend, and that's addictive.</p>
+					<p>Shipping small apps teaches product sense, UI craft, and the discipline of finishing. Each project is practice for bigger products and for leading teams that build them.</p>
+				</div>
+			</article>
+			<article class="chapter reveal">
+				<picture class="chapter__media">
+					<source srcset="res/img-pic03.webp" type="image/webp">
+					<img src="res/img-pic03.png" alt="Tank commander cheering with both fists raised" width="1320" height="1080" loading="lazy" decoding="async">
+				</picture>
+				<div class="chapter__text">
+					<p class="tag">03 // Direction</p>
+					<h2>Toward Management</h2>
+					<p>My career path points toward management. I want to grow from solving tickets and shipping features into leading people: setting direction, unblocking teams, and raising the bar on quality.</p>
+					<p>Field experience keeps me grounded in reality; building apps keeps me close to product. Together they are the base for becoming a manager who still understands the work.</p>
+				</div>
+			</article>
 		</div>
 	</section>
 
-	<section id="interview03" class="iv iv03">
-		<div class="iv--inner clearfix">
-			<div class="iv--inner--image"><img src="res/img-pic03.png" alt=""></div>
-			<div class="iv--inner--text">
-				<div class="iv--inner--text--block">
-					<div class="num">03</div>
-					<div class="iv--inner--text--block--contents">
-						<h3>Toward Management</h3>
-						<p>My career path points toward management. I want to grow from solving tickets and shipping features into leading people — setting direction, unblocking teams, and raising the bar on quality.</p>
-						<p>Field experience keeps me grounded in reality; building apps keeps me close to product. Together they are the base for becoming a manager who still understands the work.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<div class="banner" role="presentation">
+		<picture>
+			<source srcset="res/img-pic04.webp" type="image/webp">
+			<img src="res/img-pic04.png" alt="" width="1920" height="1100" loading="lazy" decoding="async">
+		</picture>
+	</div>
 
-	<section id="under-image" class="under-image">
-		<img src="res/img-pic04.png" alt="">
-	</section>
-
-	<section id="schedule" class="schedule">
-		<div class="schedule--inner">
-			<div class="schedule--inner--title">My Career Path</div>
-			<div class="schedule--inner--day">
-				<div class="schedule--inner--day--box">
-					<div class="time">Current</div>
-					<p>Field Engineer</p>
+	<section id="path" class="section" aria-labelledby="path-title">
+		<div class="wrap">
+			<header class="section__head reveal">
+				<p class="tag">04 // Roadmap</p>
+				<h2 id="path-title">My Career Path</h2>
+			</header>
+			<ol class="timeline">
+				<li class="timeline__step is-current reveal">
+					<span class="timeline__when">Current</span>
+					<h3>Field Engineer</h3>
 					<p>On-site systems &amp; support</p>
-				</div>
-				<div class="schedule--inner--day--box">
-					<div class="time">Next</div>
-					<p>Senior / Lead Engineer</p>
+				</li>
+				<li class="timeline__step reveal">
+					<span class="timeline__when">Next</span>
+					<h3>Senior / Lead Engineer</h3>
 					<p>iOS + field expertise</p>
-				</div>
-				<div class="schedule--inner--day--box">
-					<div class="time">Future</div>
-					<p>Engineering Manager</p>
+				</li>
+				<li class="timeline__step reveal">
+					<span class="timeline__when">Future</span>
+					<h3>Engineering Manager</h3>
 					<p>Lead people &amp; delivery</p>
-				</div>
-				<div class="schedule--inner--day--box">
-					<div class="time">Vision</div>
-					<p>Management leadership</p>
+				</li>
+				<li class="timeline__step reveal">
+					<span class="timeline__when">Vision</span>
+					<h3>Management Leadership</h3>
 					<p>Build great teams &amp; products</p>
+				</li>
+			</ol>
+		</div>
+	</section>
+
+	<section id="projects" class="section section--alt" aria-labelledby="projects-title">
+		<div class="wrap">
+			<header class="section__head reveal">
+				<p class="tag">05 // Builds</p>
+				<h2 id="projects-title">Projects</h2>
+			</header>
+			<div class="cards cards--3">
+				<article class="card project reveal">
+					<span class="card__label">Web app · Live</span>
+					<h3>Zi Wei Chart</h3>
+					<p>Builds a 12-palace Zi Wei Dou Shu astrology chart in the browser, with readings served from an API so the interpretation data stays private. Vietnamese, English and Japanese.</p>
+					<ul class="chips" aria-label="Tech">
+						<li>React</li><li>TypeScript</li><li>Cloudflare Workers</li>
+					</ul>
+					<div class="project__links">
+						<a href="https://cuisinecometwot.github.io/ziwei-chart/" target="_blank" rel="noopener">Live demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+						<a href="https://github.com/cuisinecometwot/ziwei-chart" target="_blank" rel="noopener">Source <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+					</div>
+				</article>
+				<article class="card project reveal">
+					<span class="card__label">Web tool · Live</span>
+					<h3>Two Dollars</h3>
+					<p>Make your own pixel-art "begging bowl" badge for a GitHub README, website or stream. Never touches money.</p>
+					<ul class="chips" aria-label="Tech">
+						<li>TypeScript</li><li>Pixel art</li>
+					</ul>
+					<div class="project__links">
+						<a href="https://cuisinecometwot.github.io/twodollars/" target="_blank" rel="noopener">Live demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+						<a href="https://github.com/cuisinecometwot/twodollars" target="_blank" rel="noopener">Source <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+					</div>
+				</article>
+				<article class="card project reveal">
+					<span class="card__label">CLI tool</span>
+					<h3>Image Upscaler</h3>
+					<p>Local AI image upscaling with Real-ESRGAN. Runs on any Vulkan GPU, including Intel integrated graphics. Upscales single files or whole folders to 2K/4K.</p>
+					<ul class="chips" aria-label="Tech">
+						<li>Python</li><li>Real-ESRGAN</li><li>Vulkan</li>
+					</ul>
+					<div class="project__links">
+						<a href="https://github.com/cuisinecometwot/image-upscaler" target="_blank" rel="noopener">Source <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+					</div>
+				</article>
+				<article class="card project reveal">
+					<span class="card__label">Web app · Live</span>
+					<h3>Battle Map Visualizer</h3>
+					<p>Plan tactics on an infinite map: drop custom pieces, draw freely, upload a map image, and save or load the board as JSON. Runs entirely in the browser.</p>
+					<ul class="chips" aria-label="Tech">
+						<li>JavaScript</li><li>Canvas</li>
+					</ul>
+					<div class="project__links">
+						<a href="https://cuisinecometwot.github.io/battle-map-visualizer/" target="_blank" rel="noopener">Live demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+						<a href="https://github.com/cuisinecometwot/battle-map-visualizer" target="_blank" rel="noopener">Source <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+					</div>
+				</article>
+				<article class="card project reveal">
+					<span class="card__label">Game</span>
+					<h3>Riichi Mahjong</h3>
+					<p>A 4-player Riichi Mahjong game (East round only): you against three AI players, with a GTK desktop interface and click-to-discard tiles.</p>
+					<ul class="chips" aria-label="Tech">
+						<li>C</li><li>GTK</li>
+					</ul>
+					<div class="project__links">
+						<a href="https://github.com/cuisinecometwot/riichi-c" target="_blank" rel="noopener">Source <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+					</div>
+				</article>
+				<article class="card project reveal">
+					<span class="card__label">Desktop · Team project</span>
+					<h3>FreeNet</h3>
+					<p>An internet cafe management system built by a five-person student team, covering the day-to-day operations of running a cafe.</p>
+					<ul class="chips" aria-label="Tech">
+						<li>Java</li><li>JavaFX</li><li>PostgreSQL</li>
+					</ul>
+					<div class="project__links">
+						<a href="https://github.com/cuisinecometwot/freenet" target="_blank" rel="noopener">Source <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+					</div>
+				</article>
+			</div>
+			<p class="projects__more reveal">
+				<a class="btn btn--ghost" href="https://github.com/cuisinecometwot?tab=repositories" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> All repositories</a>
+			</p>
+		</div>
+	</section>
+
+	<section id="guides" class="section" aria-labelledby="guides-title">
+		<div class="wrap">
+			<header class="section__head reveal">
+				<p class="tag">06 // Resources</p>
+				<h2 id="guides-title">Learning guides</h2>
+				<p class="section__sub">Notes I wrote while learning. Most are in Vietnamese.</p>
+			</header>
+
+			<div class="guides">
+				<div class="guides__group reveal">
+					<h3>Dev &amp; tools</h3>
+					<ul>
+						<li><a href="learning_guides/git_conventions.html">Git CLI Guide <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/bash_essentials.html">Bash Essentials <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/docker_guide.html">Docker: Why &amp; How <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/aspnet_core_api.html">ASP.NET Core API + SQL Server <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/php_mysql_guide.html">Web with PHP + MySQL <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/vuejs_guide.html">Vue.js Guide <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/competitive_programming.html">Competitive Programming <span class="lang">VI</span></a></li>
+					</ul>
+				</div>
+				<div class="guides__group reveal">
+					<h3>Data &amp; AI</h3>
+					<ul>
+						<li><a href="learning_guides/python_data_engineering.html">Python for Data Engineers <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/ai_models_guide.html">AI Models Guide <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/prompting_guide.html">Prompting Guide <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/excel_guide.html">Excel Guide <span class="lang">VI</span></a></li>
+					</ul>
+					<h3>Design</h3>
+					<ul>
+						<li><a href="learning_guides/photoshop_cs6_guide.html">Photoshop CS6 <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/gimp_inkscape_guide.html">GIMP &amp; Inkscape <span class="lang">VI</span></a></li>
+					</ul>
+				</div>
+				<div class="guides__group reveal">
+					<h3>Languages</h3>
+					<ul>
+						<li><a href="learning_guides/english_grammar_guide.html">English Grammar <span class="lang">EN</span></a></li>
+						<li><a href="learning_guides/korean_language_guide.html">Korean Basics <span class="lang">VI</span></a></li>
+						<li><a href="learning_guides/chinese_phonetics_guide.html">Chinese Phonetics <span class="lang">VI</span></a></li>
+					</ul>
+					<h3>Cheat sheets</h3>
+					<ul>
+						<li><a href="learning_guides/git_commands.html">Git commands</a></li>
+						<li><a href="learning_guides/docker.html">Docker commands</a></li>
+						<li><a href="learning_guides/dotnet.html">dotnet CLI</a></li>
+						<li><a href="learning_guides/learning_resources.html">Learning resources <span class="lang">VI</span></a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<section id="private" class="private">
-		<div class="private--inner clearfix">
-			<div class="private--inner--image"><img src="res/img-pic05.png" alt=""></div>
-			<div class="private--inner--text">
-				<div class="private--inner--text--block">
-					<div class="title">PERSONAL INTERESTS</div>
-					<div class="private--inner--text--block--contents">
-						<h3>Games, good food, and apps</h3>
-						<p>I love <strong>playing games</strong> — strategy, multiplayer, whatever eats a good evening. Gaming keeps my problem-solving sharp and is just plain fun.</p>
-						<p>I'm always chasing <strong>good food</strong>: new restaurants, home cooking, the kind of meal that makes the week worth it. Eat well, work well.</p>
-						<p>And I build <strong>iOS apps</strong> in my free time — small tools and experiments that scratch an itch. Code by day in the field; code by night for the App Store dream.</p>
-					</div>
+	<section id="interests" class="section section--alt" aria-labelledby="interests-title">
+		<div class="wrap">
+			<article class="chapter chapter--flip reveal">
+				<picture class="chapter__media">
+					<source srcset="res/img-pic05.webp" type="image/webp">
+					<img src="res/img-pic05.png" alt="Tank commander calling out orders from inside a turret" width="1314" height="1080" loading="lazy" decoding="async">
+				</picture>
+				<div class="chapter__text">
+					<p class="tag">07 // Off duty</p>
+					<h2 id="interests-title">Games, good food, and apps</h2>
+					<p>I love <strong>playing games</strong>: strategy, multiplayer, whatever eats a good evening. Gaming keeps my problem-solving sharp and is just plain fun.</p>
+					<p>I'm always chasing <strong>good food</strong>: new restaurants, home cooking, the kind of meal that makes the week worth it. Eat well, work well.</p>
+					<p>And I build <strong>iOS apps</strong> in my free time, small tools and experiments that scratch an itch. Code by day in the field; code by night for the App Store dream.</p>
 				</div>
-			</div>
+			</article>
 		</div>
 	</section>
 </main>
 
 <footer class="footer">
-	<div class="footer--under">
-		<div class="footer--under--inner">
-			<div class="footer--under--inner--left">
-				<div class="footer--under--inner--left--logo">
-					<a href="https://yutokutech.id.vn">
-						<h1><img src="res/logo.png" alt="Yutoku Tech"></h1>
-						<p>テクノロジーで、持続可能な未来を。</p>
-					</a>
-				</div>
-			</div>
-			<address>2023–2026 Huu Duc Nguyen</address>
+	<div class="wrap footer__inner">
+		<div>
+			<a class="brand" href="#top">
+				<img src="res/logo.svg" alt="" width="32" height="32">
+				<span>YUTOKU<span class="brand__accent">TECH</span></span>
+			</a>
+			<p class="footer__tagline" lang="ja">テクノロジーで、持続可能な未来を。</p>
 		</div>
+		<ul class="footer__social">
+			<li><a href="https://github.com/cuisinecometwot" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a></li>
+			<li><a href="https://www.youtube.com/@cuisinecometwot" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="#i-youtube"/></svg></a></li>
+			<li><a href="https://worldoftanks.asia/en/community/accounts/2012214090-LuckyDuck2109/" target="_blank" rel="noopener" aria-label="World of Tanks ASIA profile"><svg class="icon" aria-hidden="true"><use href="#i-game"/></svg></a></li>
+		</ul>
+		<p class="footer__copy">&copy; 2023–2026 Huu Duc Nguyen</p>
 	</div>
 </footer>
-</article>
-<div id="pagetop" style="bottom: 20px;"><a href="#"></a></div>
+
+<a class="to-top" href="#top" aria-label="Back to top"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></a>
 </body>
 </html>
