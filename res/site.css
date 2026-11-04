@@ -320,25 +320,45 @@ a { color: inherit; }
 }
 .card .quote { font-size: 1.25rem; line-height: 1.5; color: var(--text); }
 
-.card--link {
-	text-decoration: none;
-	cursor: pointer;
-	transition: border-color var(--fast) linear, transform var(--fast) var(--ease);
+/* Project cards */
+.project { transition: border-color var(--fast) linear; }
+.project:hover, .project:focus-within { border-color: var(--accent); }
+.project p { font-size: .9688rem; }
+
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: var(--space-2) 0; }
+.chips li {
+	font-size: .75rem;
+	font-weight: 600;
+	letter-spacing: .06em;
+	padding: .2rem .55rem;
+	border: 1px solid var(--border);
+	color: var(--muted);
 }
-.card--link:hover { border-color: var(--accent); transform: translateY(-2px); }
-.card--dashed { border-style: dashed; }
-.card__more {
+
+.project__links {
 	margin-top: auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-3);
 	padding-top: var(--space-2);
+	border-top: 1px solid var(--border);
+}
+.project__links a {
 	display: inline-flex;
 	align-items: center;
 	gap: .4rem;
+	min-height: 44px;
 	font-weight: 600;
 	font-size: .9375rem;
+	text-decoration: none;
 	color: var(--text);
+	transition: color var(--fast) linear;
 }
-.card--link:hover .card__more .icon { transform: translate(2px, -2px); }
-.card__more .icon { width: 1em; height: 1em; transition: transform var(--fast) var(--ease); }
+.project__links a:first-child { color: var(--accent-text); }
+.project__links a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.project__links .icon { width: 1em; height: 1em; }
+
+.projects__more { margin-top: var(--space-4); text-align: center; }
 
 .links li + li { margin-top: var(--space-1); }
 .links a {

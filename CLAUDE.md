@@ -16,4 +16,5 @@ Personal portfolio of Huu Duc Nguyen (Field Engineer, iOS dev), served on GitHub
 
 ## Progress
 - Done: homepage rebuilt (dark theme, working mobile menu, accessibility fixes, WebP images, all guides linked).
-- Next: real project thumbnails/descriptions; optionally a shared header/back link for guide pages.
+- Done: Projects section shows 6 picked repos (ziwei-chart, twodollars, image-upscaler, battle-map-visualizer, riichi-c, freenet) with demo + source links.
+- Next: project screenshots/thumbnails; optionally a shared header/back link for guide pages.
