@@ -476,6 +476,64 @@ a { color: inherit; }
 	color: var(--muted);
 }
 
+/* Blog list (homepage) */
+.post-card { text-decoration: none; transition: border-color var(--fast) linear; }
+.post-card:hover, .post-card:focus-visible { border-color: var(--accent); }
+.post-card h3 { font-size: 1.5rem; }
+.post-card__more {
+	display: inline-flex;
+	align-items: center;
+	gap: .4rem;
+	margin-top: auto;
+	padding-top: var(--space-2);
+	font-weight: 600;
+	font-size: .9375rem;
+	color: var(--accent-text);
+}
+.post-card__more .icon { width: 1em; height: 1em; }
+
+/* Blog post page */
+.post { padding: calc(var(--header-h) + var(--space-5)) 0 var(--space-6); }
+.post__wrap { max-width: 44rem; } /* ~70 characters per line at body size */
+.post__head { padding-bottom: var(--space-4); margin-bottom: var(--space-4); border-bottom: 1px solid var(--border); }
+.post__head h1 { font-size: clamp(2.25rem, 6vw, 3.5rem); margin-bottom: var(--space-3); }
+.post__back {
+	display: inline-flex;
+	align-items: center;
+	gap: .4rem;
+	min-height: 44px;
+	margin-bottom: var(--space-3);
+	font-weight: 600;
+	font-size: .875rem;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--muted);
+	transition: color var(--fast) linear;
+}
+.post__back:hover { color: var(--text); }
+.post__back .icon { width: 1em; height: 1em; }
+.post__meta { display: flex; flex-wrap: wrap; gap: .25rem 0; color: var(--muted); font-size: .9375rem; }
+.post__meta > * + *::before { content: "//"; margin: 0 .6rem; color: var(--accent-text); }
+
+.post__body { font-size: 1.1875rem; line-height: 1.75; }
+.post__body p { margin-bottom: var(--space-3); }
+.post__lead { font-size: 1.3125rem; color: #fff; }
+.post__closing {
+	position: relative;
+	margin-top: var(--space-5);
+	padding: var(--space-3) var(--space-3) var(--space-3) calc(var(--space-3) + 4px);
+	font-family: var(--font-display);
+	font-size: clamp(1.375rem, 3.2vw, 1.75rem);
+	line-height: 1.35;
+	color: var(--text);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	clip-path: polygon(0 0, calc(100% - var(--notch)) 0, 100% var(--notch), 100% 100%, 0 100%);
+}
+.post__closing::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+.post__foot { margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--border); }
+
 /* Footer */
 .footer { padding: var(--space-5) 0 var(--space-4); border-top: 1px solid var(--border); }
 .footer__inner { display: grid; gap: var(--space-3); align-items: center; }

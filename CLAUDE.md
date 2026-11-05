@@ -1,10 +1,11 @@
 # Yutoku Tech (cuisinecometwot.github.io)
 
-Personal portfolio of Huu Duc Nguyen (Field Engineer, iOS dev), served on GitHub Pages at cuisinecometwot.github.io (custom domain yutokutech.id.vn dropped). Also hosts self-written learning guides in `learning_guides/`.
+Personal portfolio of Huu Duc Nguyen (Field Engineer, iOS dev), served on GitHub Pages at cuisinecometwot.github.io (custom domain yutokutech.id.vn dropped). Also hosts self-written learning guides in `learning_guides/` and blog posts in `blog/`.
 
 ## Stack
 - Static HTML + one stylesheet (`res/site.css`) + small vanilla JS (`res/site.js`). No build step, no frameworks, no jQuery.
 - Images: WebP served via `<picture>`, original PNG/JPEG kept as fallback.
+- `blog/*.html` posts reuse `res/site.css` + `res/site.js` (relative `../` paths); list each new post as a card in the homepage `#blog` section.
 - `learning_guides/*.html` are standalone pages with their own inline styles; they don't use `res/site.css`.
 
 ## Design system (homepage)
@@ -17,4 +18,5 @@ Personal portfolio of Huu Duc Nguyen (Field Engineer, iOS dev), served on GitHub
 ## Progress
 - Done: homepage rebuilt (dark theme, working mobile menu, accessibility fixes, WebP images, all guides linked).
 - Done: Projects section shows 6 picked repos (ziwei-chart, twodollars, image-upscaler, battle-map-visualizer, riichi-c, freenet) with demo + source links.
+- Done: Blog section + first post ("Still My Hands, Still My Mind").
 - Next: project screenshots/thumbnails; optionally a shared header/back link for guide pages.
