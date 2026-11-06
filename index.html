@@ -4,14 +4,44 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Huu Duc Nguyen · Field Engineer &amp; iOS Developer | Yutoku Tech</title>
-	<meta name="keywords" content="Huu Duc Nguyen,yutokutech,IT,Field Engineer,iOS,about">
-	<meta name="description" content="Field Engineer · iOS apps · games & good food. Portfolio of Huu Duc Nguyen.">
+	<meta name="description" content="Huu Duc Nguyen (cuisinecometwot): Field Engineer and iOS developer. Projects (free online Zi Wei chart, AI image upscaler), blog, and free learning guides for Docker, Git, .NET, Python and more.">
+	<meta name="author" content="Huu Duc Nguyen">
+	<link rel="canonical" href="https://cuisinecometwot.github.io/">
 	<meta name="theme-color" content="#0b0d10">
-	<meta property="og:title" content="Yutoku Tech">
-	<meta property="og:description" content="Field Engineer · iOS apps · games & good food. Portfolio of Huu Duc Nguyen.">
-	<meta property="og:type" content="website">
-	<meta property="og:image" content="https://cuisinecometwot.github.io/res/logo.png">
+	<meta property="og:site_name" content="Yutoku Tech">
+	<meta property="og:title" content="Huu Duc Nguyen · Field Engineer &amp; iOS Developer">
+	<meta property="og:description" content="Field Engineer · iOS apps · games &amp; good food. Projects, blog and free learning guides.">
+	<meta property="og:type" content="profile">
+	<meta property="og:image" content="https://cuisinecometwot.github.io/res/img-main.png">
 	<meta property="og:url" content="https://cuisinecometwot.github.io/">
+	<meta name="twitter:card" content="summary_large_image">
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "Person",
+				"@id": "https://cuisinecometwot.github.io/#me",
+				"name": "Huu Duc Nguyen",
+				"alternateName": "cuisinecometwot",
+				"jobTitle": "Field Engineer",
+				"url": "https://cuisinecometwot.github.io/",
+				"image": "https://cuisinecometwot.github.io/res/logo.png",
+				"knowsAbout": ["iOS development", "Swift", "SwiftUI", "Field engineering"],
+				"sameAs": [
+					"https://github.com/cuisinecometwot",
+					"https://www.youtube.com/@cuisinecometwot"
+				]
+			},
+			{
+				"@type": "WebSite",
+				"name": "Yutoku Tech",
+				"url": "https://cuisinecometwot.github.io/",
+				"author": { "@id": "https://cuisinecometwot.github.io/#me" }
+			}
+		]
+	}
+	</script>
 	<link rel="icon" type="image/svg+xml" href="res/logo.svg">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -219,13 +249,14 @@
 					</div>
 				</article>
 				<article class="card project reveal">
-					<span class="card__label">CLI tool</span>
+					<span class="card__label">Web app · CLI · Live</span>
 					<h3>Image Upscaler</h3>
-					<p>Local AI image upscaling with Real-ESRGAN. Runs on any Vulkan GPU, including Intel integrated graphics. Upscales single files or whole folders to 2K/4K.</p>
+					<p>Free AI image upscaler with Real-ESRGAN. The online version runs in your browser (WebGPU), so images are never uploaded; the CLI upscales whole folders to 2K/4K on any Vulkan GPU.</p>
 					<ul class="chips" aria-label="Tech">
-						<li>Python</li><li>Real-ESRGAN</li><li>Vulkan</li>
+						<li>Python</li><li>Real-ESRGAN</li><li>WebGPU</li><li>Vulkan</li>
 					</ul>
 					<div class="project__links">
+						<a href="https://cuisinecometwot.github.io/image-upscaler/" target="_blank" rel="noopener">Live demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 						<a href="https://github.com/cuisinecometwot/image-upscaler" target="_blank" rel="noopener">Source <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
 					</div>
 				</article>
