@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Google only reads robots.txt at the domain root, so the project sites
+# (separate repos served under this domain) list their sitemaps here too.
+Sitemap: https://cuisinecometwot.github.io/sitemap.xml
+Sitemap: https://cuisinecometwot.github.io/ziwei-chart/sitemap.xml
+Sitemap: https://cuisinecometwot.github.io/image-upscaler/sitemap.xml
