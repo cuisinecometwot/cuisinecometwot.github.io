@@ -6,3 +6,4 @@ Allow: /
 Sitemap: https://cuisinecometwot.github.io/sitemap.xml
 Sitemap: https://cuisinecometwot.github.io/ziwei-chart/sitemap.xml
 Sitemap: https://cuisinecometwot.github.io/image-upscaler/sitemap.xml
+Sitemap: https://cuisinecometwot.github.io/anime-bg-remover/sitemap.xml
