@@ -17,7 +17,7 @@ Personal portfolio of Huu Duc Nguyen (Field Engineer, iOS dev), served on GitHub
 
 ## Progress
 - Done: homepage rebuilt (dark theme, working mobile menu, accessibility fixes, WebP images, all guides linked).
-- Done: Projects section shows 6 picked repos (ziwei-chart, twodollars, image-upscaler, battle-map-visualizer, riichi-c, freenet) with demo + source links.
+- Done: Projects section shows 7 picked repos (ziwei-chart, twodollars, image-upscaler, anime-bg-remover, battle-map-visualizer, riichi-c, freenet) with demo + source links.
 - Done: Blog section + first post ("Still My Hands, Still My Mind").
-- Done: SEO pass — root `robots.txt` (also lists the ziwei-chart and image-upscaler sitemaps, since Google only reads robots.txt at the domain root), `sitemap.xml`, canonical/OG/JSON-LD Person on home, descriptions on all guides. Add new pages to `sitemap.xml`.
+- Done: SEO pass — root `robots.txt` (also lists the ziwei-chart, image-upscaler and anime-bg-remover sitemaps, since Google only reads robots.txt at the domain root), `sitemap.xml`, canonical/OG/JSON-LD Person on home, descriptions on all guides. Add new pages to `sitemap.xml`.
 - Next: project screenshots/thumbnails; optionally a shared header/back link for guide pages.
